@@ -1,0 +1,3 @@
+# Core scripts currently use Python 3.10+ standard library only.
+# Optional local test runner:
+# pytest>=8.0
