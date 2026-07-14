@@ -18,7 +18,7 @@
 | Novita | novita | third_party_inference_provider | 1 | 0 | provider | not_free_or_unverified | yes | no |
 | NVIDIA Build / API Catalog | nvidia-build | third_party_inference_provider | 1 | 0 | provider | not_free_or_unverified | yes | no |
 | OpenAI API | openai-api | official_model_vendor | 1 | 0 | provider | not_free_or_unverified | yes | no |
-| OpenRouter | openrouter | third_party_router | 26 | 26 | model | free_model | yes | unknown |
+| OpenRouter | openrouter | third_party_router | 23 | 23 | model | free_model | yes | unknown |
 | Replicate | replicate | third_party_inference_provider | 1 | 0 | provider | not_free_or_unverified | partial | no |
 | SiliconFlow | siliconflow | third_party_inference_provider | 1 | 0 | provider | not_free_or_unverified | yes | no |
 | Tencent Cloud TokenHub / Hunyuan | tencent-tokenhub-hunyuan | official_cloud_platform | 1 | 0 | provider | not_free_or_unverified | unknown | unknown |

@@ -1,6 +1,6 @@
 # 免费 API 使用指南
 
-更新时间：2026-07-13
+更新时间：2026-07-14
 
 ## 推荐原则
 
@@ -27,8 +27,6 @@ _暂无符合条件的记录。_
 | OpenRouter | model | google/gemma-4-31b-it:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | google/lyria-3-clip-preview | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | google/lyria-3-pro-preview | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | liquid/lfm-2.5-1.2b-instruct:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | liquid/lfm-2.5-1.2b-thinking:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | meta-llama/llama-3.2-3b-instruct:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | meta-llama/llama-3.3-70b-instruct:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nousresearch/hermes-3-llama-3.1-405b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
@@ -39,7 +37,6 @@ _暂无符合条件的记录。_
 | OpenRouter | model | nvidia/nemotron-3.5-content-safety:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-nano-12b-v2-vl:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-nano-9b-v2:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | openai/gpt-oss-120b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | openai/gpt-oss-20b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | openrouter/free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | poolside/laguna-m.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
