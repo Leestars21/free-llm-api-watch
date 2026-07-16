@@ -124,5 +124,19 @@
     },
     "hash": "f150a44eee10f55394d4782af94626b74ad94f994736599a150723a6d189db98",
     "parser_status": "ok"
+  },
+  {
+    "source_url": "https://openrouter.ai/api/v1/models",
+    "fetched_at": "2026-07-16T03:19:16+00:00",
+    "http_status": 200,
+    "page_title": "OpenRouter models API",
+    "relevant_excerpt": "Official JSON API parsed for model metadata and pricing. Only summary metadata is stored; the full response body is not committed.",
+    "extracted_fields": {
+      "total_model_count": 342,
+      "free_model_count": 23,
+      "selector": "id suffix :free OR prompt/completion pricing equal 0"
+    },
+    "hash": "dd52a2ee296d1849ddd4b23590073308ee07d912465e223cb164335e90f14a5b",
+    "parser_status": "ok"
   }
 ]
