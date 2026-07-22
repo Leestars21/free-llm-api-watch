@@ -1,6 +1,6 @@
 # 免费 API 使用指南
 
-更新时间：2026-07-21
+更新时间：2026-07-22
 
 ## 推荐原则
 
@@ -36,6 +36,7 @@ _暂无符合条件的记录。_
 | OpenRouter | model | openai/gpt-oss-20b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | openrouter/free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | poolside/laguna-m.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | poolside/laguna-s-2.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | poolside/laguna-xs-2.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 
 ## 新用户试用额度
