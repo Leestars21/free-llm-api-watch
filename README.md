@@ -4,7 +4,7 @@
 
 本项目持续追踪可以通过 API 调用的免费、试用或低成本前沿大模型渠道，包括官方模型厂商 API、官方云平台、第三方模型聚合平台和第三方推理平台。项目只统计可通过 API 使用的渠道，不统计单纯网页或 App 免费模型。
 
-最近一次数据更新时间：2026-07-22
+最近一次数据更新时间：2026-07-23
 
 当前 catalog 记录数：39
 
@@ -55,23 +55,23 @@ _暂无符合条件的记录。_
 
 | Provider | Level | Model/Offer | Free type | OpenAI | Anthropic | Confidence | Checked | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| OpenRouter | model | cohere/north-mini-code:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/gemma-4-26b-a4b-it:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/gemma-4-31b-it:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/lyria-3-clip-preview | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/lyria-3-pro-preview | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-nano-30b-a3b:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-super-120b-a12b:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-ultra-550b-a55b:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3.5-content-safety:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-nano-12b-v2-vl:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-nano-9b-v2:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | openai/gpt-oss-20b:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | openrouter/free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | poolside/laguna-m.1:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | poolside/laguna-s-2.1:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | poolside/laguna-xs-2.1:free | free_model | yes | unknown | high | 2026-07-22 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | cohere/north-mini-code:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | google/gemma-4-26b-a4b-it:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | google/gemma-4-31b-it:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | google/lyria-3-clip-preview | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | google/lyria-3-pro-preview | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-3-nano-30b-a3b:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-3-super-120b-a12b:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-3-ultra-550b-a55b:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-3.5-content-safety:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-nano-12b-v2-vl:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | nvidia/nemotron-nano-9b-v2:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | openai/gpt-oss-20b:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | openrouter/free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | poolside/laguna-m.1:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | poolside/laguna-s-2.1:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | poolside/laguna-xs-2.1:free | free_model | yes | unknown | high | 2026-07-23 | https://openrouter.ai/api/v1/models |
 
 ## 新用户试用额度
 
@@ -85,35 +85,35 @@ _暂无符合条件的记录。_
 
 | Provider | Level | Model/Offer | Free type | Confidence | Reason / Note | Checked | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Alibaba Cloud Model Studio / Qwen | provider | alibaba-model-studio | not_free_or_unverified | low | candidate source; verify credit, validity period, identity and region requirements | 2026-07-22 | https://help.aliyun.com/zh/model-studio/models |
-| Anthropic Claude API | provider | anthropic-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-22 | https://docs.anthropic.com/en/api/messages |
-| Baidu Qianfan / ERNIE | provider | baidu-qianfan | not_free_or_unverified | low | candidate source; verify free quota, identity, region and billing rules | 2026-07-22 | https://cloud.baidu.com/doc/WENXINWORKSHOP/ |
-| Cerebras Inference | provider | cerebras | not_free_or_unverified | low | candidate source; verify free or trial quota before recommending | 2026-07-22 | https://inference-docs.cerebras.ai/ |
-| Cloudflare Workers AI | provider | cloudflare-workers-ai | not_free_or_unverified | low | candidate source; verify free allocation, account requirements, and model pricing | 2026-07-22 | https://developers.cloudflare.com/workers-ai/platform/pricing/ |
-| DeepSeek API | provider | deepseek | not_free_or_unverified | low | candidate low-cost source; do not recommend as free without official free quota evidence | 2026-07-22 | https://api-docs.deepseek.com/quick_start/pricing |
-| Fireworks AI | provider | fireworks-ai | not_free_or_unverified | low | P1 candidate source; verify trial credit and pricing | 2026-07-22 | https://docs.fireworks.ai/ |
-| Google Gemini API / Google AI Studio | provider | google-gemini | not_free_or_unverified | low | candidate source; verify official Free Tier, rate limits, region and card requirements | 2026-07-22 | https://ai.google.dev/gemini-api/docs/pricing |
-| GroqCloud | provider | groqcloud | not_free_or_unverified | low | candidate source; verify developer free limits and supported model list | 2026-07-22 | https://console.groq.com/docs/rate-limits |
-| Hugging Face Inference Providers | provider | huggingface-inference-providers | not_free_or_unverified | low | candidate source; distinguish open weights from free hosted API | 2026-07-22 | https://huggingface.co/docs/inference-providers |
-| Mistral La Plateforme | provider | mistral | not_free_or_unverified | low | candidate source; verify whether any free or trial API quota is currently available | 2026-07-22 | https://docs.mistral.ai/ |
-| Moonshot / Kimi API | provider | moonshot-kimi | not_free_or_unverified | low | candidate source; do not recommend without official free API quota evidence | 2026-07-22 | https://platform.moonshot.cn/docs/pricing/chat |
-| Nebius AI Studio | provider | nebius-ai | not_free_or_unverified | low | P1 candidate source; verify API access, credit and pricing | 2026-07-22 | https://docs.nebius.com/studio/ |
-| Novita | provider | novita | not_free_or_unverified | low | P1 candidate source; verify model pricing and credits | 2026-07-22 | https://novita.ai/docs |
-| NVIDIA Build / API Catalog | provider | nvidia-build | not_free_or_unverified | low | P1 candidate source; verify free credits, endpoint and model terms | 2026-07-22 | https://build.nvidia.com/ |
-| OpenAI API | provider | openai-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-22 | https://platform.openai.com/docs/api-reference |
-| Replicate | provider | replicate | not_free_or_unverified | low | P1 candidate source; model pricing varies and must be checked per model | 2026-07-22 | https://replicate.com/docs |
-| SiliconFlow | provider | siliconflow | not_free_or_unverified | low | candidate source; verify official free models, trial credit and account requirements | 2026-07-22 | https://docs.siliconflow.cn/ |
-| Tencent Cloud TokenHub / Hunyuan | provider | tencent-tokenhub-hunyuan | not_free_or_unverified | low | candidate source; verify API base, compatibility, free quota and identity requirements | 2026-07-22 | https://cloud.tencent.com/document/product/1729 |
-| Together AI | provider | together-ai | not_free_or_unverified | low | P1 candidate source; verify new-user credit and low-cost models | 2026-07-22 | https://docs.together.ai/ |
-| Volcengine Ark / Doubao | provider | volcengine-ark | not_free_or_unverified | low | candidate source; verify trial/new-user credit, model IDs and endpoint | 2026-07-22 | https://www.volcengine.com/docs/82379 |
-| Zhipu BigModel / GLM | provider | zhipu-bigmodel | not_free_or_unverified | low | candidate source; do not recommend without official free API quota evidence | 2026-07-22 | https://docs.bigmodel.cn/ |
+| Alibaba Cloud Model Studio / Qwen | provider | alibaba-model-studio | not_free_or_unverified | low | candidate source; verify credit, validity period, identity and region requirements | 2026-07-23 | https://help.aliyun.com/zh/model-studio/models |
+| Anthropic Claude API | provider | anthropic-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-23 | https://docs.anthropic.com/en/api/messages |
+| Baidu Qianfan / ERNIE | provider | baidu-qianfan | not_free_or_unverified | low | candidate source; verify free quota, identity, region and billing rules | 2026-07-23 | https://cloud.baidu.com/doc/WENXINWORKSHOP/ |
+| Cerebras Inference | provider | cerebras | not_free_or_unverified | low | candidate source; verify free or trial quota before recommending | 2026-07-23 | https://inference-docs.cerebras.ai/ |
+| Cloudflare Workers AI | provider | cloudflare-workers-ai | not_free_or_unverified | low | candidate source; verify free allocation, account requirements, and model pricing | 2026-07-23 | https://developers.cloudflare.com/workers-ai/platform/pricing/ |
+| DeepSeek API | provider | deepseek | not_free_or_unverified | low | candidate low-cost source; do not recommend as free without official free quota evidence | 2026-07-23 | https://api-docs.deepseek.com/quick_start/pricing |
+| Fireworks AI | provider | fireworks-ai | not_free_or_unverified | low | P1 candidate source; verify trial credit and pricing | 2026-07-23 | https://docs.fireworks.ai/ |
+| Google Gemini API / Google AI Studio | provider | google-gemini | not_free_or_unverified | low | candidate source; verify official Free Tier, rate limits, region and card requirements | 2026-07-23 | https://ai.google.dev/gemini-api/docs/pricing |
+| GroqCloud | provider | groqcloud | not_free_or_unverified | low | candidate source; verify developer free limits and supported model list | 2026-07-23 | https://console.groq.com/docs/rate-limits |
+| Hugging Face Inference Providers | provider | huggingface-inference-providers | not_free_or_unverified | low | candidate source; distinguish open weights from free hosted API | 2026-07-23 | https://huggingface.co/docs/inference-providers |
+| Mistral La Plateforme | provider | mistral | not_free_or_unverified | low | candidate source; verify whether any free or trial API quota is currently available | 2026-07-23 | https://docs.mistral.ai/ |
+| Moonshot / Kimi API | provider | moonshot-kimi | not_free_or_unverified | low | candidate source; do not recommend without official free API quota evidence | 2026-07-23 | https://platform.moonshot.cn/docs/pricing/chat |
+| Nebius AI Studio | provider | nebius-ai | not_free_or_unverified | low | P1 candidate source; verify API access, credit and pricing | 2026-07-23 | https://docs.nebius.com/studio/ |
+| Novita | provider | novita | not_free_or_unverified | low | P1 candidate source; verify model pricing and credits | 2026-07-23 | https://novita.ai/docs |
+| NVIDIA Build / API Catalog | provider | nvidia-build | not_free_or_unverified | low | P1 candidate source; verify free credits, endpoint and model terms | 2026-07-23 | https://build.nvidia.com/ |
+| OpenAI API | provider | openai-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-23 | https://platform.openai.com/docs/api-reference |
+| Replicate | provider | replicate | not_free_or_unverified | low | P1 candidate source; model pricing varies and must be checked per model | 2026-07-23 | https://replicate.com/docs |
+| SiliconFlow | provider | siliconflow | not_free_or_unverified | low | candidate source; verify official free models, trial credit and account requirements | 2026-07-23 | https://docs.siliconflow.cn/ |
+| Tencent Cloud TokenHub / Hunyuan | provider | tencent-tokenhub-hunyuan | not_free_or_unverified | low | candidate source; verify API base, compatibility, free quota and identity requirements | 2026-07-23 | https://cloud.tencent.com/document/product/1729 |
+| Together AI | provider | together-ai | not_free_or_unverified | low | P1 candidate source; verify new-user credit and low-cost models | 2026-07-23 | https://docs.together.ai/ |
+| Volcengine Ark / Doubao | provider | volcengine-ark | not_free_or_unverified | low | candidate source; verify trial/new-user credit, model IDs and endpoint | 2026-07-23 | https://www.volcengine.com/docs/82379 |
+| Zhipu BigModel / GLM | provider | zhipu-bigmodel | not_free_or_unverified | low | candidate source; do not recommend without official free API quota evidence | 2026-07-23 | https://docs.bigmodel.cn/ |
 
 ## 协议参考源
 
 | Provider | Level | Model/Offer | Free type | Confidence | Reason / Note | Checked | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Anthropic Claude API | provider | anthropic-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-22 | https://docs.anthropic.com/en/api/messages |
-| OpenAI API | provider | openai-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-22 | https://platform.openai.com/docs/api-reference |
+| Anthropic Claude API | provider | anthropic-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-23 | https://docs.anthropic.com/en/api/messages |
+| OpenAI API | provider | openai-api | not_free_or_unverified | medium | protocol reference only; no verified free API quota | 2026-07-23 | https://platform.openai.com/docs/api-reference |
 
 ## 候补监控源与人工判断备注
 
