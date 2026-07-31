@@ -1,20 +1,6 @@
 [
   {
     "source_url": "https://openrouter.ai/api/v1/models",
-    "fetched_at": "2026-07-11T03:23:31+00:00",
-    "http_status": 200,
-    "page_title": "OpenRouter models API",
-    "relevant_excerpt": "Official JSON API parsed for model metadata and pricing. Only summary metadata is stored; the full response body is not committed.",
-    "extracted_fields": {
-      "total_model_count": 345,
-      "free_model_count": 26,
-      "selector": "id suffix :free OR prompt/completion pricing equal 0"
-    },
-    "hash": "fe9826ffeb943eaba1c536f134bc78a9d75d4f6f973b5b3ce9ab88f98ed628dc",
-    "parser_status": "ok"
-  },
-  {
-    "source_url": "https://openrouter.ai/api/v1/models",
     "fetched_at": "2026-07-12T03:35:33+00:00",
     "http_status": 200,
     "page_title": "OpenRouter models API",
@@ -277,6 +263,20 @@
       "selector": "id suffix :free OR prompt/completion pricing equal 0"
     },
     "hash": "97edc80a5e25de0ebb8471a4dabac75acf8e2b7ec963dda93d36c3040e74f9d3",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://openrouter.ai/api/v1/models",
+    "fetched_at": "2026-07-31T03:35:30+00:00",
+    "http_status": 200,
+    "page_title": "OpenRouter models API",
+    "relevant_excerpt": "Official JSON API parsed for model metadata and pricing. Only summary metadata is stored; the full response body is not committed.",
+    "extracted_fields": {
+      "total_model_count": 364,
+      "free_model_count": 17,
+      "selector": "id suffix :free OR prompt/completion pricing equal 0"
+    },
+    "hash": "84830ccada2ee512c02e5ea35d187a495879de2e8cd3a82c8450d6abd320e020",
     "parser_status": "ok"
   }
 ]
