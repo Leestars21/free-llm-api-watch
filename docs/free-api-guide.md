@@ -1,6 +1,6 @@
 # 免费 API 使用指南
 
-更新时间：2026-08-24
+更新时间：2026-08-25
 
 ## 推荐原则
 
@@ -28,14 +28,11 @@ _暂无符合条件的记录。_
 | OpenRouter | model | google/lyria-3-clip-preview | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | google/lyria-3-pro-preview | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | liquid/lfm-2.5-2.6b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-nano-30b-a3b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-3-super-120b-a12b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-3-ultra-550b-a55b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-3.5-content-safety:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | nvidia/nemotron-3.5-lightning:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-nano-12b-v2-vl:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-nano-9b-v2:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | openrouter/free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | poolside/laguna-s-2.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | poolside/laguna-xs-2.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
