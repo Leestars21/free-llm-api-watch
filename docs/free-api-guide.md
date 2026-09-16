@@ -1,6 +1,6 @@
 # 免费 API 使用指南
 
-更新时间：2026-09-15
+更新时间：2026-09-16
 
 ## 推荐原则
 
@@ -43,6 +43,7 @@ _暂无符合条件的记录。_
 | OpenRouter | model | poolside/laguna-xs-2.1:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | thinkingmachines/inkling-small:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | thinkingmachines/inkling:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
+| OpenRouter | model | z-ai/glm-5.2:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 
 ## 新用户试用额度
 
