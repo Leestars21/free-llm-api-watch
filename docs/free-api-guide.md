@@ -1,6 +1,6 @@
 # 免费 API 使用指南
 
-更新时间：2026-09-19
+更新时间：2026-09-20
 
 ## 推荐原则
 
@@ -22,7 +22,6 @@ _暂无符合条件的记录。_
 | Provider | Level | Model/Offer | Free type | Reason | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | OpenRouter | model | cohere/north-mini-code:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | deepseek/deepseek-v4-flash-0731:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | dots-studio/dots-3-note-preview:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | google/gemma-4-26b-a4b-it:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
 | OpenRouter | model | google/gemma-4-31b-it:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
