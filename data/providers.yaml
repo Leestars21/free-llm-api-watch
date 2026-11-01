@@ -1,382 +1,244 @@
-schema_version: 1
+schema_version: 2
 generated_for: free-llm-api-watch
 notes:
-  - This file is the monitoring source list, not proof that a provider has a free API quota.
-  - Use official documentation, official pricing pages, official model list APIs, official rate limits, or official changelogs as final evidence.
-  - Third-party posts are leads only and must not enter recommendation tables without official evidence.
-  - OpenAI API and Anthropic Claude API are protocol references unless a verified official free API quota exists.
+  - This is the provider monitoring inventory. Evidence-backed offer and model records live in manual_catalog.json and free_api_catalog.json.
+  - A free-policy status does not mean every account, region, model or API endpoint is eligible.
+  - Model-list APIs prove model existence only; free access requires separate first-party pricing or policy evidence.
+  - Only check an authenticated inventory when the matching environment variable is already configured; never store credentials here.
+  - API checks store model IDs and hashes, not credentials or full response bodies.
 
 providers:
-  - provider_id: google-gemini
-    name: Google Gemini API / Google AI Studio
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: Global
-    api_base: https://generativelanguage.googleapis.com
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://ai.google.dev/gemini-api/docs
-      pricing: https://ai.google.dev/gemini-api/docs/pricing
-      rate_limits: https://ai.google.dev/gemini-api/docs/rate-limits
-    track_for:
-      - stable_free_tier
-      - trial_credit
-      - model_list
-    notes: Verify free tier, model availability, and region/card requirements from official AI Studio docs before recommending.
-
-  - provider_id: mistral
-    name: Mistral La Plateforme
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: EU/Global
-    api_base: https://api.mistral.ai
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://docs.mistral.ai/
-      pricing: https://mistral.ai/products/la-plateforme#pricing
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Confirm whether any free API quota is currently offered before adding recommended records.
-
-  - provider_id: groqcloud
-    name: GroqCloud
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: US/Global
-    api_base: https://api.groq.com/openai/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://console.groq.com/docs
-      pricing: https://groq.com/pricing/
-      rate_limits: https://console.groq.com/docs/rate-limits
-    track_for:
-      - stable_free_tier
-      - model_list
-    notes: Verify free developer limits and supported model list from Groq official docs.
-
-  - provider_id: cerebras
-    name: Cerebras Inference
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: US/Global
-    api_base: https://api.cerebras.ai/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://inference-docs.cerebras.ai/
-      pricing: https://www.cerebras.ai/pricing
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Verify free or trial quota before recommending.
-
-  - provider_id: cloudflare-workers-ai
-    name: Cloudflare Workers AI
-    priority: P0
-    channel_type: official_cloud_platform
-    country_or_region: Global
-    api_base: https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://developers.cloudflare.com/workers-ai/
-      pricing: https://developers.cloudflare.com/workers-ai/platform/pricing/
-    track_for:
-      - stable_free_tier
-      - low_cost_models
-    notes: Verify free allocation, account requirements, and model-specific pricing.
-
-  - provider_id: alibaba-model-studio
-    name: Alibaba Cloud Model Studio / Qwen
-    priority: P0
-    channel_type: official_cloud_platform
-    country_or_region: China/Global
-    api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://help.aliyun.com/zh/model-studio/
-      pricing: https://help.aliyun.com/zh/model-studio/models
-    track_for:
-      - trial_credit
-      - new_user_credit
-      - low_cost_models
-    notes: Verify region, identity, and credit rules from official Alibaba Cloud docs.
-
-  - provider_id: tencent-tokenhub-hunyuan
-    name: Tencent Cloud TokenHub / Hunyuan
-    priority: P0
-    channel_type: official_cloud_platform
-    country_or_region: China
-    api_base: ""
-    openai_compatible: unknown
-    anthropic_compatible: unknown
-    official_sources:
-      docs: https://cloud.tencent.com/document/product/1729
-      pricing: https://cloud.tencent.com/document/product/1729
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Verify official API base, free quota, identity requirements, and OpenAI compatibility.
-
-  - provider_id: volcengine-ark
-    name: Volcengine Ark / Doubao
-    priority: P0
-    channel_type: official_cloud_platform
-    country_or_region: China
-    api_base: https://ark.cn-beijing.volces.com/api/v3
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://www.volcengine.com/docs/82379
-      pricing: https://www.volcengine.com/pricing
-    track_for:
-      - trial_credit
-      - new_user_credit
-      - low_cost_models
-    notes: Verify official free/trial details and model routing names before recommending.
-
-  - provider_id: zhipu-bigmodel
-    name: Zhipu BigModel / GLM
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: China
-    api_base: https://open.bigmodel.cn/api/paas/v4
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://docs.bigmodel.cn/
-      pricing: https://open.bigmodel.cn/pricing
-    track_for:
-      - new_user_credit
-      - low_cost_models
-    notes: Do not recommend unless official free or trial quota is verified.
-
-  - provider_id: moonshot-kimi
-    name: Moonshot / Kimi API
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: China
-    api_base: https://api.moonshot.cn/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://platform.moonshot.cn/docs
-      pricing: https://platform.moonshot.cn/docs/pricing/chat
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Do not add to free recommendation table unless official free API quota is verified.
-
-  - provider_id: deepseek
-    name: DeepSeek API
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: China/Global
-    api_base: https://api.deepseek.com
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://api-docs.deepseek.com/
-      pricing: https://api-docs.deepseek.com/quick_start/pricing
-    track_for:
-      - low_cost_models
-    notes: Treat as low-cost or unverified unless official free API quota is found.
-
-  - provider_id: baidu-qianfan
-    name: Baidu Qianfan / ERNIE
-    priority: P0
-    channel_type: official_cloud_platform
-    country_or_region: China
-    api_base: https://qianfan.baidubce.com
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://cloud.baidu.com/doc/WENXINWORKSHOP/
-      pricing: https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Slkkydake
-    track_for:
-      - trial_credit
-      - new_user_credit
-      - low_cost_models
-    notes: Verify free quota and identity requirements before recommending.
-
-  - provider_id: openai-api
-    name: OpenAI API
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: Global
-    api_base: https://api.openai.com/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://platform.openai.com/docs/api-reference
-      pricing: https://openai.com/api/pricing/
-    track_for:
-      - protocol_reference
-    notes: Protocol reference only; no verified free API quota should be claimed.
-
-  - provider_id: anthropic-api
-    name: Anthropic Claude API
-    priority: P0
-    channel_type: official_model_vendor
-    country_or_region: Global
-    api_base: https://api.anthropic.com
-    openai_compatible: no
-    anthropic_compatible: yes
-    official_sources:
-      docs: https://docs.anthropic.com/en/api/messages
-      pricing: https://www.anthropic.com/pricing#api
-    track_for:
-      - protocol_reference
-    notes: Protocol reference only; no verified free API quota should be claimed.
-
   - provider_id: openrouter
     name: OpenRouter
-    priority: P0
-    channel_type: third_party_router
-    country_or_region: Global
-    api_base: https://openrouter.ai/api/v1
-    openai_compatible: yes
-    anthropic_compatible: unknown
-    official_sources:
-      docs: https://openrouter.ai/docs
-      models_api: https://openrouter.ai/api/v1/models
-      models: https://openrouter.ai/models
-    track_for:
-      - free_model
-      - free_router
-      - model_list
-    notes: Use the official models API; recommend only models whose official API pricing is zero or id is marked free.
-
+    status: free_offer_confirmed
+    model_list_api: https://openrouter.ai/api/v1/models
+    policy_source: https://openrouter.ai/collections/free-models
+    notes: Public API reports prices; updater requires all reported price fields to be zero.
+  - provider_id: google-gemini
+    name: Google Gemini API / Google AI Studio
+    status: free_offer_confirmed
+    model_list_api: https://generativelanguage.googleapis.com/v1beta/models
+    policy_source: https://ai.google.dev/gemini-api/docs/pricing
+    notes: Optional inventory check uses GEMINI_API_KEY header; free tier and limits vary by model/project/region.
+  - provider_id: groqcloud
+    name: GroqCloud
+    status: free_offer_confirmed
+    model_list_api: https://api.groq.com/openai/v1/models
+    policy_source: https://console.groq.com/docs/rate-limits
+    notes: Official docs list exact Free Plan model IDs and model-specific limits; optional GROQ_API_KEY inventory check proves existence only and does not replace the free-plan table.
+  - provider_id: cerebras
+    name: Cerebras Inference
+    status: free_offer_confirmed
+    model_list_api: https://inference-docs.cerebras.ai/
+    policy_source: https://inference-docs.cerebras.ai/support/pricing
+    notes: Public docs confirm a $0 Free tier; model and rate access can vary.
+  - provider_id: cloudflare-workers-ai
+    name: Cloudflare Workers AI
+    status: free_offer_confirmed
+    model_list_api: https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/models/search
+    policy_source: https://developers.cloudflare.com/workers-ai/platform/pricing/
+    notes: Optional inventory check uses CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID; free allowance is measured in Neurons/day.
+  - provider_id: alibaba-model-studio
+    name: Alibaba Cloud Model Studio / Qwen
+    status: free_offer_confirmed
+    model_list_api: https://help.aliyun.com/zh/model-studio/models
+    policy_source: https://help.aliyun.com/zh/model-studio/new-free-quota/
+    notes: New-user grants are per-model, region-limited and time-limited; exact amounts vary in console.
+  - provider_id: tencent-tokenhub-hunyuan
+    name: Tencent Cloud Hunyuan API (legacy platform)
+    status: historical
+    model_list_api: ""
+    policy_source: https://cloud.tencent.com/announce/detail/2287
+    notes: Old API platform shut down 2026-09-30; see separate TokenHub migration offer.
+  - provider_id: tencent-tokenhub
+    name: Tencent Cloud TokenHub (migration offer)
+    status: free_offer_confirmed
+    model_list_api: https://cloud.tencent.com/document/product/1772
+    policy_source: https://cloud.tencent.com/announce/detail/2287
+    notes: Public announcement only covers eligible migrated users; amount and model IDs require account-console review.
+  - provider_id: volcengine-ark
+    name: Volcengine Ark / Doubao
+    status: free_offer_confirmed
+    model_list_api: https://docs.volcengine.com/docs/ark/model-reference
+    policy_source: https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh
+    notes: Safe Experience mode has eligibility restrictions and a 500,000-token cap; model grants vary.
+  - provider_id: zhipu-bigmodel
+    name: Zhipu BigModel / GLM
+    status: free_offer_confirmed
+    model_list_api: https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash
+    policy_source: https://www.zhipuai.cn/zh/news/148
+    notes: GLM-4.7-Flash is documented as a free API model; GLM-4.5-Flash is historical/retired.
+  - provider_id: baidu-qianfan
+    name: Baidu Qianfan / ERNIE
+    status: historical
+    model_list_api: https://cloud.baidu.com/doc/WENXINWORKSHOP/
+    policy_source: https://cloud.baidu.com/news/news_c7a145b9-5c99-4870-939f-e09ba506aab3
+    notes: Reviewed free bulletin is from 2024; current API model and quota policy need re-verification.
   - provider_id: siliconflow
     name: SiliconFlow
-    priority: P0
-    channel_type: third_party_inference_provider
-    country_or_region: China/Global
-    api_base: https://api.siliconflow.cn/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://docs.siliconflow.cn/
-      pricing: https://siliconflow.cn/pricing
-    track_for:
-      - free_model
-      - trial_credit
-      - low_cost_models
-    notes: Verify free models and account requirements from official pricing/docs.
-
+    status: free_offer_confirmed
+    model_list_api: https://api.siliconflow.cn/v1/models
+    policy_source: https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation
+    notes: Optional inventory check uses SILICONFLOW_API_KEY; current free model IDs are displayed in the live gallery; real-name verification is required.
+  - provider_id: modelscope
+    name: ModelScope Inference / 魔搭社区
+    status: free_offer_confirmed
+    model_list_api: https://api-inference.modelscope.cn/v1/models
+    policy_source: https://www.modelscope.cn/posts/435591
+    notes: Daily MoLi points are shared account balance; exact model inventory and per-call cost are dynamic.
   - provider_id: huggingface-inference-providers
     name: Hugging Face Inference Providers
-    priority: P0
-    channel_type: third_party_inference_provider
-    country_or_region: Global
-    api_base: https://api-inference.huggingface.co
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://huggingface.co/docs/inference-providers
-      pricing: https://huggingface.co/pricing
-    track_for:
-      - free_model
-      - low_cost_models
-    notes: Verify provider-specific price and API support; do not infer free API from open weights alone.
-
-  - provider_id: together-ai
-    name: Together AI
-    priority: P1
-    channel_type: third_party_inference_provider
-    country_or_region: Global
-    api_base: https://api.together.xyz/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://docs.together.ai/
-      pricing: https://www.together.ai/pricing
-    track_for:
-      - new_user_credit
-      - low_cost_models
-    notes: Candidate source; verify current credit and model pricing before cataloging.
-
-  - provider_id: fireworks-ai
-    name: Fireworks AI
-    priority: P1
-    channel_type: third_party_inference_provider
-    country_or_region: Global
-    api_base: https://api.fireworks.ai/inference/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://docs.fireworks.ai/
-      pricing: https://fireworks.ai/pricing
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Candidate source.
-
-  - provider_id: novita
-    name: Novita
-    priority: P1
-    channel_type: third_party_inference_provider
-    country_or_region: Global
-    api_base: https://api.novita.ai/v3/openai
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://novita.ai/docs
-      pricing: https://novita.ai/pricing
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Candidate source.
-
+    status: free_offer_confirmed
+    model_list_api: https://huggingface.co/docs/inference-providers
+    policy_source: https://huggingface.co/docs/inference-providers/en/pricing
+    notes: Free users receive a small shared monthly credit; open weights do not imply hosted inference is free.
+  - provider_id: mistral
+    name: Mistral La Plateforme
+    status: free_offer_confirmed
+    model_list_api: https://docs.mistral.ai/
+    policy_source: https://docs.mistral.ai/admin/billing-usage/usage-limits
+    notes: Free mode requires no card; account-specific usage and model availability are shown in Studio.
+  - provider_id: cohere
+    name: Cohere API
+    status: free_offer_confirmed
+    model_list_api: https://api.cohere.com/v2/models
+    policy_source: https://docs.cohere.com/v2/docs/rate-limits
+    notes: Optional inventory check uses COHERE_API_KEY; evaluation allowance is shared across endpoints.
+  - provider_id: vercel-ai-gateway
+    name: Vercel AI Gateway
+    status: free_offer_confirmed
+    model_list_api: https://vercel.com/ai-gateway/models
+    policy_source: https://vercel.com/docs/ai-gateway/pricing
+    notes: Monthly shared credit and current zero-priced route list are dynamic; check team/payment eligibility.
+  - provider_id: ai-horde
+    name: AI Horde / AI Horde OpenAI API
+    status: free_offer_confirmed
+    model_list_api: https://aihorde.net/api/
+    policy_source: https://oai.aihorde.net/
+    notes: Free volunteer compute; availability, queue time and models depend on active workers.
   - provider_id: replicate
     name: Replicate
-    priority: P1
-    channel_type: third_party_inference_provider
-    country_or_region: Global
-    api_base: https://api.replicate.com/v1
-    openai_compatible: partial
-    anthropic_compatible: no
-    official_sources:
-      docs: https://replicate.com/docs
-      pricing: https://replicate.com/pricing
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Candidate source; model pricing varies.
-
-  - provider_id: nebius-ai
-    name: Nebius AI Studio
-    priority: P1
-    channel_type: third_party_inference_provider
-    country_or_region: Global/EU
-    api_base: https://api.studio.nebius.com/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://docs.nebius.com/studio/
-      pricing: https://nebius.com/prices
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Candidate source.
-
+    status: free_offer_confirmed
+    model_list_api: https://replicate.com/explore
+    policy_source: https://replicate.com/docs/topics/billing
+    notes: Selected models have short evaluation-only free usage; exact quantity and model eligibility are not fixed.
+  - provider_id: reka-ai
+    name: Reka AI Vision API
+    status: free_offer_confirmed
+    model_list_api: https://docs.reka.ai/chat/models
+    policy_source: https://docs.reka.ai/vision/pricing
+    notes: New-user trial is 180 indexed-video minutes for Vision API only; Chat API is separate and paid.
+  - provider_id: github-models
+    name: GitHub Models (retired service)
+    status: historical
+    model_list_api: ""
+    policy_source: https://docs.github.com/en/github-models
+    notes: Service retired 2026-07-30; historical reference only.
+  - provider_id: together-ai
+    name: Together AI
+    status: reviewed_no_current_free_offer
+    model_list_api: https://api.together.xyz/v1/models
+    policy_source: https://support.together.ai/articles/1862638756-changes-to-free-tier-and-billing-july-2025
+    notes: Current support article says no free trial; API requires paid credit purchase.
+  - provider_id: deepseek
+    name: DeepSeek API
+    status: reviewed_no_current_free_offer
+    model_list_api: https://api-docs.deepseek.com/
+    policy_source: https://api-docs.deepseek.com/quick_start/pricing
+    notes: Official API price is paid; open weights and third-party hosting are separate.
+  - provider_id: moonshot-kimi
+    name: Moonshot / Kimi API
+    status: reviewed_no_current_free_offer
+    model_list_api: https://platform.moonshot.cn/docs
+    policy_source: https://platform.moonshot.cn/docs/pricing/chat
+    notes: No current general free API grant confirmed in the reviewed official pricing source.
+  - provider_id: baichuan
+    name: Baichuan AI API
+    status: pending
+    model_list_api: https://platform.baichuan-ai.com/docs
+    policy_source: https://platform.baichuan-ai.com/docs
+    notes: Current free policy and model API evidence not verified.
+  - provider_id: yi-api
+    name: 01.AI Yi API
+    status: pending
+    model_list_api: https://platform.lingyiwanwu.com/docs
+    policy_source: https://platform.lingyiwanwu.com/docs
+    notes: Current hosted API free policy not verified; open weights are not sufficient evidence.
+  - provider_id: iflytek-spark
+    name: iFlytek Spark API
+    status: pending
+    model_list_api: https://www.xfyun.cn/doc/spark/Web.html
+    policy_source: https://www.xfyun.cn/doc/spark/Web.html
+    notes: Current free API quota and exact eligible model IDs not verified.
+  - provider_id: minimax
+    name: MiniMax API
+    status: pending
+    model_list_api: https://platform.minimaxi.com/document/
+    policy_source: https://platform.minimaxi.com/document/
+    notes: Current model-level free credits and account eligibility need verification.
   - provider_id: nvidia-build
     name: NVIDIA Build / API Catalog
-    priority: P1
-    channel_type: third_party_inference_provider
-    country_or_region: Global
-    api_base: https://integrate.api.nvidia.com/v1
-    openai_compatible: yes
-    anthropic_compatible: no
-    official_sources:
-      docs: https://build.nvidia.com/
-      catalog: https://build.nvidia.com/explore/discover
-    track_for:
-      - trial_credit
-      - low_cost_models
-    notes: Candidate source; verify API access, free credits, and model terms.
+    status: pending
+    model_list_api: https://build.nvidia.com/
+    policy_source: https://docs.nvidia.com/nim/large-language-models/latest/get-started/
+    notes: Hosted free API amount/model eligibility not established; self-hosting is not counted.
+  - provider_id: ollama-cloud
+    name: Ollama Cloud
+    status: free_offer_confirmed
+    model_list_api: https://ollama.com/search?c=cloud
+    policy_source: https://www.ollama.com/pricing
+    notes: Free plan includes monthly starter credits for a smaller cloud-model set and one concurrent request; exact amount/model eligibility is shown in account. Local self-hosting is out of scope.
+  - provider_id: sambanova-cloud
+    name: SambaNova Cloud
+    status: reviewed_no_current_free_offer
+    model_list_api: https://cloud.sambanova.ai/dashboard
+    policy_source: https://cloud.sambanova.ai/plans
+    notes: Current plan requires a payment method and purchased credits to run API requests; dashboard access is not a free inference quota.
+  - provider_id: ai21-labs
+    name: AI21 Labs
+    status: pending
+    model_list_api: https://docs.ai21.com/
+    policy_source: https://docs.ai21.com/
+    notes: Current free API quota and model IDs not verified.
+  - provider_id: deepinfra
+    name: DeepInfra
+    status: reviewed_no_current_free_offer
+    model_list_api: https://deepinfra.com/models
+    policy_source: https://deepinfra.com/pricing
+    notes: Current pricing is paid and API use requires a card or prepayment; no general free hosted quota was verified.
+  - provider_id: hyperbolic
+    name: Hyperbolic
+    status: pending
+    model_list_api: https://api.hyperbolic.xyz/v1/models
+    policy_source: https://docs.hyperbolic.xyz/
+    notes: Current free credit amount and eligible hosted model IDs not verified.
+  - provider_id: novita
+    name: Novita AI
+    status: free_offer_confirmed
+    model_list_api: https://novita.ai/models
+    policy_source: https://novita.ai/pricing
+    notes: Direct serverless model pages currently show zero input/output prices for exact model IDs; selected listings and Apodex pricing are time-limited. Referral credits are conditional and not general signup credits.
+  - provider_id: fireworks-ai
+    name: Fireworks AI
+    status: pending
+    model_list_api: https://api.fireworks.ai/inference/v1/models
+    policy_source: https://fireworks.ai/pricing
+    notes: Older $1 credit evidence may be stale; current pricing page does not confirm it.
+  - provider_id: nebius-ai
+    name: Nebius AI Studio
+    status: pending
+    model_list_api: https://docs.nebius.com/studio/
+    policy_source: https://dev.nebius.com/
+    notes: Builder credit amount, eligibility, expiration and model scope need current official terms.
+  - provider_id: openai-api
+    name: OpenAI API (protocol reference)
+    status: protocol_reference
+    model_list_api: https://platform.openai.com/docs/api-reference
+    policy_source: https://platform.openai.com/docs/api-reference
+    notes: Protocol reference only; no general free API offer is claimed.
+  - provider_id: anthropic-api
+    name: Anthropic Claude API (protocol reference)
+    status: protocol_reference
+    model_list_api: https://docs.anthropic.com/en/api/messages
+    policy_source: https://docs.anthropic.com/en/api/messages
+    notes: Protocol reference only; no general free API offer is claimed.

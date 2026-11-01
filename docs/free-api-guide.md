@@ -1,99 +1,111 @@
-# 免费 API 使用指南
+# 免費 API 使用指南
 
-更新时间：2026-11-01
+最近證據核驗日期：2026-11-01
 
-## 推荐原则
+## 如何區分免費類型
 
-推荐表只能展示同时满足以下条件的记录：
+| free_type | 含義 |
+| --- | --- |
+| `free_model` | 官方證據確認特定模型的 API 價格為零，或明確列為免費模型。 |
+| `stable_free_tier` | 平台提供持續免費層；仍可能有每月總量、RPM、TPM 或模型准入限制。 |
+| `new_user_credit` | 新帳號/符合條件的模型領取免費 Token 或用量上限，常有地區與有效期限制。 |
+| `trial_credit` | 一次性或限时评估；不能当作长期、无限调用。 |
+| `limited_time_promotion` | 活动期免费，须明确活动时间和资格。 |
+| `open_weight_only` | 可自行部署开放权重，不代表平台提供免费的托管 API。 |
 
-- 有官方证据；
-- `confidence` 为 `high` 或 `medium`；
-- `is_recommended` 为 `true`；
-- 明确存在 API 免费额度、免费模型、免费路由或试用额度。
+## 已确认的 Offers
 
-`confidence: low`、`not_free_or_unverified`、`protocol reference only` 的记录只能进入候补区或参考区。
+| 平台 | Offer ID | 类型 | 额度 | 适用模型 | 额度范围 | 重置 | 有效期 | 绑卡 | 实名 | 地区/账号资格 | 速率限制（另计） | 来源 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| AI Horde / AI Horde OpenAI API | ai-horde-volunteer-inference | 社区志愿算力（动态排队） | 没有固定 Token / 请求赠额；匿名访问可使用社区志愿算力，排队优先级最低 | 动态 / 账号内确认 | 平台共享 | 队列和志愿者节点动态变化 | 试运行服务，范围可能调整 | 否 | 未知 | 未知 | 没有固定数字限速；匿名 Key 优先级最低，等待时间取决于志愿者和队列 | [AI Horde OpenAI API docs](https://oai.aihorde.net/) |
+| Alibaba Cloud Model Studio / Qwen | model-studio-new-user-model-quota | 新用户赠额 / 免费使用上限 | 符合条件的新账号通常每个模型获得约 100 万 Token；具体额度因模型而异 | qwen3.8-max | 按模型独立 | 符合资格后按模型发放一次；主账号与 RAM 子账号共享 | 按模型激活、发布或审批时间起算 90 天；以控制台为准 | 未知 | 是 | 仅限中国北京地域且账号符合资格 | 速率限制与赠送 Token 分开；请在控制台查看 | [Model Studio new-user free quota](https://help.aliyun.com/zh/model-studio/new-free-quota/) |
+| Cerebras Inference | cerebras-free-tier | 长期免费层（有用量/速率限制） | 提供 $0 免费层；公开页面未列出适用于所有账号/模型的统一数字额度 | zai-glm-4.7 | 账号共享 | 按账号和模型限速；具体窗口与额度见账户文档 | 官方未公布固定结束日期 | 未知 | 未知 | 未知 | 免费层速率较低；具体限值随账号和模型变化，公开定价页未给出统一数字 | [Cerebras pricing and GLM 4.7 model page](https://inference-docs.cerebras.ai/support/pricing) |
+| Cloudflare Workers AI | workers-ai-daily-neurons | 长期免费层（有用量/速率限制） | 每天 10,000 Neurons | @cf/zai-org/glm-4.7-flash, @cf/google/gemma-4-26b-a4b-it | 账号共享 | 每日 UTC 00:00 重置 | 官方未公布固定结束日期 | 未知 | 未知 | 未知 | 另有模型级限制；部分模型不适用免费额度，请查 Workers AI 型号目录 | [Workers AI pricing and changelog](https://developers.cloudflare.com/workers-ai/platform/pricing/) |
+| Cohere API | cohere-evaluation-key | 一次性试用额度 | 评估 Key 每月共 1,000 次 API 调用，多个端点共享 | command-a-03-2025, command-r7b-12-2024, rerank-v4.0-fast, embed-v4.0 | 账号共享 | 按月重置 | 评估 Key 使用；生产环境需申请生产 Key | 未知 | 未知 | 未知 | 文档所列部分聊天模型为 20 RPM；其他端点和模型限制不同 | [Cohere rate limits and models](https://docs.cohere.com/v2/docs/rate-limits) |
+| Google Gemini API / Google AI Studio | gemini-api-free-tier | 长期免费层（有用量/速率限制） | 指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异 | gemini-3.5-flash-lite, gemini-3.8-flash-tts, gemini-3.8-flash-lite-tts | 按模型独立 | 按 AI Studio 项目和模型设置限速；没有适用于全部模型的统一数字额度 | 未公布固定结束日期；模型和地区资格可能变化 | 否 | 未知 | 可用国家 / 地区因模型和账号而异 | RPM / TPM / RPD 依项目与模型而变；请查 AI Studio 控制台 | [Gemini Developer API pricing and rate limits](https://ai.google.dev/gemini-api/docs/pricing) |
+| GroqCloud | groqcloud-free-plan | 长期免费层（有用量/速率限制） | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo | 账号共享 | 按模型使用分钟/日等限额窗口；具体见官方限额表和账号页面 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 未知 | 未知 | 未知 | 官方 Free Plan 限额表列出逐模型 RPM / RPD / TPM / TPD 或音频秒限值；账号实际限值可能不同 | [Groq Free Plan rate limits and supported models](https://console.groq.com/docs/rate-limits) |
+| Hugging Face Inference Providers | hf-monthly-inference-credit | 长期免费层（有用量/速率限制） | 免费账号每月共享 $0.10 推理额度；政策可能调整 | 动态 / 账号内确认 | 账号共享 | 每月发放；查看账号余额 | 按 Hugging Face 当前政策续发；各模型没有独立固定额度 | 未知 | 未知 | 未知 | 限制由推理服务商和模型决定；请查当前 Router 文档 | [Inference Providers pricing](https://huggingface.co/docs/inference-providers/en/pricing) |
+| Mistral La Plateforme | mistral-studio-free-mode | 长期免费层（有用量/速率限制） | Free 模式提供账号级月度用量预算；公开文档没有给出统一数值 | 动态 / 账号内确认 | 账号共享 | 每月；在 Studio / 账单页查看当前预算 | 官方未公布固定结束日期 | 否 | 未知 | 未知 | 月度预算之外还会受组织与模型级限制 | [Mistral free mode and usage limits](https://docs.mistral.ai/admin/billing-usage/usage-limits) |
+| ModelScope Inference / 魔搭社区 | modelscope-daily-moli-points | 长期免费层（有用量/速率限制） | 注册账号每天 200 MoLi 积分；绑定阿里云账号后每天再加 50 分 | 动态 / 账号内确认 | 账号共享 | 按日发放；积分余额页可查当前情况 | 每日额度及累计积分有效期以当前积分规则为准 | 否 | 未知 | 未知 | API-Inference 调用通常按模型大小消耗约 0.5 / 1 / 2 分；其他任务也会共用积分 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
+| Novita AI | novita-apodex-1-1-mini-launch-promotion | 限时活动 | 当前模型页显示输入和输出均为每百万 Token $0，属于上线促销 | apodex/apodex-1.1-mini | 按模型独立 | 模型页未说明额度或重置周期 | 上线促销；已核对页面未注明结束日期 | 未知 | 未知 | 未知 | 模型页未说明固定速率限制 | [Novita Apodex 1.1 Mini launch and pricing](https://blogs.novita.ai/apodex-1-1-mini-on-novita-ai-api-quickstart-pricing/) |
+| Novita AI | novita-ling-3-0-limited-promotion | 限时活动 | 部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费 | inclusionai/ling-3.0-flash-fin, inclusionai/ling-3.0-flash-vl, inclusionai/ling-3.0-flash-sante | 按模型独立 | 模型页未说明额度或重置周期 | 限时活动；已核对页面未注明结束日期 | 未知 | 未知 | 未知 | 模型页未说明固定速率限制 | [Novita Ling 3.0 model details](https://novita.ai/pricing) |
+| Novita AI | novita-ling-3-1-flash-free | 指定免费模型 | 当前模型页显示输入和输出均为每百万 Token $0 | inclusionai/ling-3.1-flash | 按模型独立 | 模型页未说明额度或重置周期 | 价格可能变化；使用前请复核模型页 | 未知 | 未知 | 未知 | 模型页未说明固定速率限制 | [Novita Ling 3.1 Flash model details](https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing) |
+| Novita AI | novita-referral-credit | 新用户赠额 / 免费使用上限 | 成功邀请后，邀请人与受邀人各得 $10；邀请人奖励累计上限 $500 | 动态 / 账号内确认 | 按用户 | 每次成功邀请发放；未说明周期性重置 | 已核对的邀请页面未说明条款和额度有效期 | 未知 | 未知 | 未知 | 邀请奖励需满足邀请条件，不是自动注册赠额 | [Novita referral program](https://novita.ai/referral/) |
+| Ollama Cloud | ollama-cloud-free-starter-usage | 长期免费层（有用量/速率限制） | Free 方案每月包含部分云端模型的起步用量；额度数值未公开，在账号内显示；最多 1 个并发请求 | 动态 / 账号内确认 | 账号共享 | 从注册日起按月重置 | 每月额度；具体规则以账号页面为准 | 未知 | 未知 | 未知 | 免费方案同时最多处理 1 个请求 | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
+| OpenRouter | openrouter-free-model-route | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | cohere/north-mini-code:free, dots-studio/dots-3-note-preview:free, google/gemma-4-26b-a4b-it:free, google/gemma-4-31b-it:free, google/lyria-3-clip-preview, google/lyria-3-pro-preview, liquid/lfm-2.5-2.6b:free, nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free, nvidia/nemotron-3-ultra-550b-a55b:free, nvidia/nemotron-3.5-content-safety:free, nvidia/nemotron-3.5-lightning:free, nvidia/nemotron-3.5-super-vl:free, openrouter/free, recursive/flint-v1.0:free, thinkingmachines/inkling-small:free, thinkingmachines/inkling:free, xingchen-agi/xing4.0-29b-a4b:free | 账号共享 | 免费账号通常为 20 RPM / 50 RPD；实时规则可能调整 | 模型的免费状态可能随时变化 | 未知 | 未知 | 未知 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
+| Reka AI Vision API | reka-vision-new-user-trial | 一次性试用额度 | 符合条件的新用户可试用 180 分钟视频索引 | 动态 / 账号内确认 | 一次性 | 新用户一次性试用 | 注册时显示试用条款；已核对定价页未写明到期日 | 未知 | 未知 | 未知 | 仅适用于 Vision API 视频处理，不适用于 Reka Chat Token API | [Reka Vision API pricing](https://docs.reka.ai/vision/pricing) |
+| Replicate | replicate-model-evaluation-run | 一次性试用额度 | 部分模型可在短期评估期间免费运行；未公布统一额度 | 动态 / 账号内确认 | 一次性 | 按模型和账号的一次性评估 | 模型要求设置账单时，免费评估即结束 | 未知 | 未知 | 未知 | 可用模型与试用限制以 Replicate 当前界面为准 | [Replicate billing documentation](https://replicate.com/docs/topics/billing) |
+| SiliconFlow | siliconflow-live-free-model-catalog | 指定免费模型 | 实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额 | 动态 / 账号内确认 | 按模型独立 | 不是赠额；免费型号有各自的账号速率限制 | 型号资格随实时模型目录变化 | 未知 | 是 | 未知 | 官方范围：聊天 1,000–10,000 RPM / 50,000–5,000,000 TPM；Embedding 2,000–10,000 RPM / 500,000–10,000,000 TPM；重排 2,000 RPM / 500,000 TPM；图像 2 IPM / 400 IPD | [SiliconFlow rate limits and model gallery](https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation) |
+| Tencent Cloud TokenHub (migration offer) | tokenhub-migration-experience-credit | 一次性试用额度 | 公告未公布额度金额；仅符合条件的旧平台迁移用户可领取 | 动态 / 账号内确认 | 一次性 | 符合资格的迁移用户可领取一次 | 公告称领取后 3 个月 | 未知 | 未知 | 未知 | 具体额度和可用模型需在用户控制台确认 | [Tencent Cloud migration announcement](https://cloud.tencent.com/announce/detail/2287) |
+| Vercel AI Gateway | vercel-ai-gateway-monthly-credit | 长期免费层（有用量/速率限制） | 符合条件的 Free 团队账号每月有 $5 AI Gateway 额度 | inclusionai/ling-3.1-flash-1019, nvidia/nemotron-3.5-lightning-free | 账号共享 | 首次请求后开始按月发放；购买额度后免费月额度不再适用 | 购买额度后不再享有免费月额度 | 是 | 未知 | 未知 | 上游服务商和模型自身的免费层速率限制仍然适用 | [Vercel AI Gateway pricing and live model catalog](https://vercel.com/docs/ai-gateway/pricing) |
+| Volcengine Ark / Doubao | ark-safe-experience-mode | 新用户赠额 / 免费使用上限 | 符合条件的账号在安全体验模式下最多可用 500,000 Token；各模型另有额度 | 动态 / 账号内确认 | 账号共享 | 符合条件的账号一次性启用；达到上限后暂停 | 仅限此前未开通模型服务或未使用过安全体验模式的账号 | 未知 | 未知 | 未知 | 模型另有独立速率限制；插件、知识库、批处理可能另行计费 | [Ark Safe Experience mode](https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh) |
+| Zhipu BigModel / GLM | bigmodel-glm-4.7-flash-free | 指定免费模型 | 官方公告称 GLM-4.7-Flash API 输入和输出 Token 免费；公告未说明请求上限 | glm-4.7-flash | 按模型独立 | 公告未说明数字额度或重置周期 | 公告未注明固定结束日期 | 未知 | 未知 | 未知 | 当前请求限制请在 BigModel 控制台查看 | [Zhipu GLM-4.7-Flash announcement](https://www.zhipuai.cn/zh/news/148) |
 
-## 官方免费 API 渠道
+## 明确型号
 
-_暂无符合条件的记录。_
+| 平台 | Model Name | Model ID | 类型 | 关联 Offer | 免费范围 | 上下文 | 模态 | 速率限制 | 工具调用 | API Base | OpenAI 兼容 | 来源 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Alibaba Cloud Model Studio / Qwen | Qwen 3.8 Max | qwen3.8-max | 聊天 | model-studio-new-user-model-quota | 符合条件的新账号通常每个模型获得约 100 万 Token；具体额度因模型而异 | 未知 | 文本 | 速率限制与赠送 Token 分开；请在控制台查看 | 未知 | https://dashscope.aliyuncs.com/compatible-mode/v1 | 是 | [Model Studio new-user free quota example](https://help.aliyun.com/zh/model-studio/new-free-quota/) |
+| Cerebras Inference | Z.ai GLM 4.7 on Cerebras | zai-glm-4.7 | 聊天 | cerebras-free-tier | 提供 $0 免费层；公开页面未列出适用于所有账号/模型的统一数字额度 | 未知 | 文本 | 免费层速率较低；具体限值随账号和模型变化，公开定价页未给出统一数字 | 支持 | https://api.cerebras.ai/v1 | 是 | [Cerebras Z.ai GLM 4.7 model page](https://inference-docs.cerebras.ai/models/zai-glm-47) |
+| Cloudflare Workers AI | Gemma 4 26B A4B IT on Workers AI | @cf/google/gemma-4-26b-a4b-it | 聊天 | workers-ai-daily-neurons | 每天 10,000 Neurons | 未知 | 文本 | 另有模型级限制；部分模型不适用免费额度，请查 Workers AI 型号目录 | 未知 | https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run | 部分兼容 | [Cloudflare Workers AI model catalog](https://developers.cloudflare.com/workers-ai/models/) |
+| Cloudflare Workers AI | GLM-4.7-Flash on Workers AI | @cf/zai-org/glm-4.7-flash | 聊天 | workers-ai-daily-neurons | 每天 10,000 Neurons | 未知 | 文本 | 另有模型级限制；部分模型不适用免费额度，请查 Workers AI 型号目录 | 未知 | https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run | 部分兼容 | [Cloudflare Workers AI model catalog](https://developers.cloudflare.com/workers-ai/models/) |
+| Cohere API | Command A | command-a-03-2025 | 聊天 | cohere-evaluation-key | 评估 Key 每月共 1,000 次 API 调用，多个端点共享 | 未知 | 文本 | 文档所列部分聊天模型为 20 RPM；其他端点和模型限制不同 | 未知 | https://api.cohere.com/v2 | 部分兼容 | [Cohere models catalog](https://docs.cohere.com/v1/docs/models) |
+| Cohere API | Command R7B | command-r7b-12-2024 | 聊天 | cohere-evaluation-key | 评估 Key 每月共 1,000 次 API 调用，多个端点共享 | 未知 | 文本 | 文档所列部分聊天模型为 20 RPM；其他端点和模型限制不同 | 未知 | https://api.cohere.com/v2 | 部分兼容 | [Cohere models catalog](https://docs.cohere.com/v1/docs/models) |
+| Cohere API | Embed 4.0 | embed-v4.0 | Embedding 向量 | cohere-evaluation-key | 评估 Key 每月共 1,000 次 API 调用，多个端点共享 | 未知 | 文本, 图像 | 文档所列部分聊天模型为 20 RPM；其他端点和模型限制不同 | 未知 | https://api.cohere.com/v2 | 部分兼容 | [Cohere models catalog](https://docs.cohere.com/v1/docs/models) |
+| Cohere API | Rerank 4.0 Fast | rerank-v4.0-fast | Rerank 重排 | cohere-evaluation-key | 评估 Key 每月共 1,000 次 API 调用，多个端点共享 | 未知 | 文本 | 文档所列部分聊天模型为 20 RPM；其他端点和模型限制不同 | 未知 | https://api.cohere.com/v2 | 部分兼容 | [Cohere models catalog](https://docs.cohere.com/v1/docs/models) |
+| Google Gemini API / Google AI Studio | Gemini 3.5 Flash-Lite | gemini-3.5-flash-lite | 聊天 | gemini-api-free-tier | 指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异 | 未知 | 文本, 图像, 音频, 视频 | RPM / TPM / RPD 依项目与模型而变；请查 AI Studio 控制台 | 未知 | https://generativelanguage.googleapis.com | 部分兼容 | [Gemini Developer API pricing](https://ai.google.dev/gemini-api/docs/pricing) |
+| Google Gemini API / Google AI Studio | Gemini 3.8 Flash-Lite TTS | gemini-3.8-flash-lite-tts | 语音生成 | gemini-api-free-tier | 指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异 | 未知 | 文本, 音频 | RPM / TPM / RPD 依项目与模型而变；请查 AI Studio 控制台 | 未知 | https://generativelanguage.googleapis.com | 部分兼容 | [Gemini Developer API pricing](https://ai.google.dev/gemini-api/docs/pricing) |
+| Google Gemini API / Google AI Studio | Gemini 3.8 Flash TTS | gemini-3.8-flash-tts | 语音生成 | gemini-api-free-tier | 指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异 | 未知 | 文本, 音频 | RPM / TPM / RPD 依项目与模型而变；请查 AI Studio 控制台 | 未知 | https://generativelanguage.googleapis.com | 部分兼容 | [Gemini Developer API pricing](https://ai.google.dev/gemini-api/docs/pricing) |
+| GroqCloud | Orpheus Arabic Saudi | canopylabs/orpheus-arabic-saudi | 语音生成 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 4,000 Token | 文本, 音频 | RPM 10，RPD 100，TPM 1200，TPD 3600 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | Orpheus V1 English | canopylabs/orpheus-v1-english | 语音生成 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 4,000 Token | 文本, 音频 | RPM 10，RPD 100，TPM 1200，TPD 3600 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | Llama Prompt Guard 2 22M | meta-llama/llama-prompt-guard-2-22m | 内容安全 / 审核 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 512 Token | 文本 | RPM 30，RPD 14400，TPM 15000，TPD 500000 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | Llama Prompt Guard 2 86M | meta-llama/llama-prompt-guard-2-86m | 内容安全 / 审核 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 512 Token | 文本 | RPM 30，RPD 14400，TPM 15000，TPD 500000 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | GPT OSS 120B | openai/gpt-oss-120b | 聊天 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 131,072 Token | 文本 | RPM 30，RPD 1000，TPM 8000，TPD 200000 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | GPT OSS 20B | openai/gpt-oss-20b | 聊天 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 131,072 Token | 文本 | RPM 30，RPD 1000，TPM 8000，TPD 200000 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | GPT OSS Safeguard 20B | openai/gpt-oss-safeguard-20b | 内容安全 / 审核 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 131,072 Token | 文本 | RPM 3，RPD 1000，TPM 2000，TPD 200000 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | Qwen 3.8 27B | qwen/qwen3.8-27b | 聊天 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 131,072 Token | 文本 | RPM 30，RPD 1000，TPM 8000，TPD 200000 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | Whisper Large V3 | whisper-large-v3 | 语音识别 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 未知 | 音频, 文本 | RPM 20，RPD 2000，音频秒/小时 7200，音频秒/日 28800 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| GroqCloud | Whisper Large V3 Turbo | whisper-large-v3-turbo | 语音识别 | groqcloud-free-plan | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 未知 | 音频, 文本 | RPM 20，RPD 2000，音频秒/小时 7200，音频秒/日 28800 | 未知 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
+| Novita AI | Apodex 1.1 Mini | apodex/apodex-1.1-mini | 聊天 | novita-apodex-1-1-mini-launch-promotion | 当前模型页显示输入和输出均为每百万 Token $0，属于上线促销 | 256,000 Token | 文本 | 模型页未说明固定速率限制 | 支持 | https://api.novita.ai/openai | 是 | [Novita Apodex 1.1 Mini model details](https://novita.ai/models/model-detail/apodex-apodex-1.1-mini?from=pricing) |
+| Novita AI | InclusionAI Ling 3.0 Flash Fin | inclusionai/ling-3.0-flash-fin | 聊天 | novita-ling-3-0-limited-promotion | 部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费 | 256,000 Token | 文本 | 模型页未说明固定速率限制 | 支持 | https://api.novita.ai/openai | 是 | [Novita Ling 3.0 Flash Fin model details](https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin) |
+| Novita AI | InclusionAI Ling 3.0 Flash Sante | inclusionai/ling-3.0-flash-sante | 聊天 | novita-ling-3-0-limited-promotion | 部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费 | 256,000 Token | 文本 | 模型页未说明固定速率限制 | 支持 | https://api.novita.ai/openai | 是 | [Novita Ling 3.0 Flash Sante model details](https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante?from=pricing) |
+| Novita AI | InclusionAI Ling 3.0 Flash VL | inclusionai/ling-3.0-flash-vl | 聊天 | novita-ling-3-0-limited-promotion | 部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费 | 256,000 Token | 文本, 图像, 视频 | 模型页未说明固定速率限制 | 支持 | https://api.novita.ai/openai | 是 | [Novita Ling 3.0 Flash VL model details](https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-vl) |
+| Novita AI | InclusionAI Ling 3.1 Flash | inclusionai/ling-3.1-flash | 聊天 | novita-ling-3-1-flash-free | 当前模型页显示输入和输出均为每百万 Token $0 | 256,000 Token | 文本 | 模型页未说明固定速率限制 | 支持 | https://api.novita.ai/openai | 是 | [Novita Ling 3.1 Flash model details](https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing) |
+| OpenRouter | Cohere: North Mini Code (free) | cohere/north-mini-code:free | 聊天 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 256,000 Token | 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Dots Studio: Dots3-Note Preview (free) | dots-studio/dots-3-note-preview:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 512,000 Token | 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Google: Gemma 4 26B A4B  (free) | google/gemma-4-26b-a4b-it:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 262,144 Token | 图像, 文本, 视频 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Google: Gemma 4 31B (free) | google/gemma-4-31b-it:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 262,144 Token | 图像, 文本, 视频 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Google: Lyria 3 Clip Preview | google/lyria-3-clip-preview | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,048,576 Token | 音频, 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Google: Lyria 3 Pro Preview | google/lyria-3-pro-preview | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,048,576 Token | 音频, 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | LiquidAI: LFM2.5-2.6B (free) | liquid/lfm-2.5-2.6b:free | 聊天 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 65,536 Token | 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | NVIDIA: Nemotron 3 Nano Omni (free) | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 256,000 Token | 音频, 图像, 文本, 视频 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | NVIDIA: Nemotron 3 Ultra (free) | nvidia/nemotron-3-ultra-550b-a55b:free | 聊天 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,000,000 Token | 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | NVIDIA: Nemotron 3.5 Content Safety (free) | nvidia/nemotron-3.5-content-safety:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 128,000 Token | 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | NVIDIA: Nemotron 3.5 Lightning (free) | nvidia/nemotron-3.5-lightning:free | 聊天 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,000,000 Token | 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | NVIDIA: Nemotron 3.5 Super VL (free) | nvidia/nemotron-3.5-super-vl:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,000,000 Token | 图像, 文本, 视频 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Free Models Router | openrouter/free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 200,000 Token | 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Recursive: Flint (free) | recursive/flint-v1.0:free | 聊天 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 262,144 Token | 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Thinking Machines: Inkling Small (free) | thinkingmachines/inkling-small:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,048,576 Token | 音频, 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | Thinking Machines: Inkling (free) | thinkingmachines/inkling:free | 多模态 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 1,048,576 Token | 音频, 图像, 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter | XingChen: Xing4.0 29B A4B (free) | xingchen-agi/xing4.0-29b-a4b:free | 聊天 | openrouter-free-model-route | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 262,144 Token | 文本 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 未知 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| Vercel AI Gateway | InclusionAI Ling 3.1 Flash 1019 (Vercel AI Gateway route) | inclusionai/ling-3.1-flash-1019 | 聊天 | vercel-ai-gateway-monthly-credit | 符合条件的 Free 团队账号每月有 $5 AI Gateway 额度 | 未知 | 文本 | 上游服务商和模型自身的免费层速率限制仍然适用 | 未知 | https://ai-gateway.vercel.sh/v1 | 是 | [Vercel AI Gateway model catalog](https://vercel.com/ai-gateway/models?features=free) |
+| Vercel AI Gateway | NVIDIA Nemotron 3.5 Lightning Free (Vercel AI Gateway route) | nvidia/nemotron-3.5-lightning-free | 聊天 | vercel-ai-gateway-monthly-credit | 符合条件的 Free 团队账号每月有 $5 AI Gateway 额度 | 未知 | 文本 | 上游服务商和模型自身的免费层速率限制仍然适用 | 未知 | https://ai-gateway.vercel.sh/v1 | 是 | [Vercel AI Gateway model catalog](https://vercel.com/ai-gateway/models?features=free) |
+| Zhipu BigModel / GLM | GLM-4.7-Flash | glm-4.7-flash | 聊天 | bigmodel-glm-4.7-flash-free | 官方公告称 GLM-4.7-Flash API 输入和输出 Token 免费；公告未说明请求上限 | 未知 | 文本 | 当前请求限制请在 BigModel 控制台查看 | 未知 | https://open.bigmodel.cn/api/paas/v4 | 部分兼容 | [Zhipu GLM-4.7-Flash announcement](https://www.zhipuai.cn/zh/news/148) |
 
-## 第三方免费模型
+## 额度和速率限制
 
-| Provider | Level | Model/Offer | Free type | Reason | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| OpenRouter | model | cohere/north-mini-code:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | dots-studio/dots-3-note-preview:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/gemma-4-26b-a4b-it:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/gemma-4-31b-it:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/lyria-3-clip-preview | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | google/lyria-3-pro-preview | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | liquid/lfm-2.5-2.6b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3-ultra-550b-a55b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3.5-content-safety:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3.5-lightning:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | nvidia/nemotron-3.5-super-vl:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | openrouter/free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | recursive/flint-v1.0:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | thinkingmachines/inkling-small:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | thinkingmachines/inkling:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
-| OpenRouter | model | xingchen-agi/xing4.0-29b-a4b:free | free_model | OpenRouter official models API reports zero prompt/completion price; verify rate limits and upstream terms before production use. | https://openrouter.ai/api/v1/models |
+- `free_quota` 是免费总量、共享余额、免费模型价格或平台专属额度。`rate_limits` 是 RPM/TPM/RPD/TPD/并发等限流，二者不互相替代。
+- 按模型赠送 Token 时查看 `quota_scope=per_model`；平台共享余额通常为 `account_shared`；一次性试用为 `one_time`。
+- Account/Project RPM/TPM 可能针对每个模型单独执行，也可能共享。没有公开规则时保留为 `unknown`，不要推算请求数。
+- 模型 API 返回清单只能证明型号存在。免费状态必须由独立官方价格页、免费层政策或公告确认。
 
-## 新用户试用额度
+## 数据状态
 
-_暂无符合条件的记录。_
+- `active`：来源在核验日期仍支持该范围的结论；不代表实际 API 调用成功。
+- `stale`：最新自动检查失败，旧记录留存供复核，当前不推荐。
+- `withdrawn`：完整且成功的官方目录检查确认型号下架或不再免费。
+- `pending` / `historical` / `unverified`：证据缺口或仅有历史记录，不进入推荐表。
+- `verified_at` 表示政策/型号证据实际核对日期，不会因为更新脚本运行而自动刷新。
 
-## 候补待确认与参考区
-
-| Provider | Level | Model/Offer | Free type | Reason | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| Alibaba Cloud Model Studio / Qwen | provider | alibaba-model-studio | not_free_or_unverified | candidate source; verify credit, validity period, identity and region requirements | https://help.aliyun.com/zh/model-studio/models |
-| Anthropic Claude API | provider | anthropic-api | not_free_or_unverified | protocol reference only; no verified free API quota | https://docs.anthropic.com/en/api/messages |
-| Baidu Qianfan / ERNIE | provider | baidu-qianfan | not_free_or_unverified | candidate source; verify free quota, identity, region and billing rules | https://cloud.baidu.com/doc/WENXINWORKSHOP/ |
-| Cerebras Inference | provider | cerebras | not_free_or_unverified | candidate source; verify free or trial quota before recommending | https://inference-docs.cerebras.ai/ |
-| Cloudflare Workers AI | provider | cloudflare-workers-ai | not_free_or_unverified | candidate source; verify free allocation, account requirements, and model pricing | https://developers.cloudflare.com/workers-ai/platform/pricing/ |
-| DeepSeek API | provider | deepseek | not_free_or_unverified | candidate low-cost source; do not recommend as free without official free quota evidence | https://api-docs.deepseek.com/quick_start/pricing |
-| Fireworks AI | provider | fireworks-ai | not_free_or_unverified | P1 candidate source; verify trial credit and pricing | https://docs.fireworks.ai/ |
-| Google Gemini API / Google AI Studio | provider | google-gemini | not_free_or_unverified | candidate source; verify official Free Tier, rate limits, region and card requirements | https://ai.google.dev/gemini-api/docs/pricing |
-| GroqCloud | provider | groqcloud | not_free_or_unverified | candidate source; verify developer free limits and supported model list | https://console.groq.com/docs/rate-limits |
-| Hugging Face Inference Providers | provider | huggingface-inference-providers | not_free_or_unverified | candidate source; distinguish open weights from free hosted API | https://huggingface.co/docs/inference-providers |
-| Mistral La Plateforme | provider | mistral | not_free_or_unverified | candidate source; verify whether any free or trial API quota is currently available | https://docs.mistral.ai/ |
-| Moonshot / Kimi API | provider | moonshot-kimi | not_free_or_unverified | candidate source; do not recommend without official free API quota evidence | https://platform.moonshot.cn/docs/pricing/chat |
-| Nebius AI Studio | provider | nebius-ai | not_free_or_unverified | P1 candidate source; verify API access, credit and pricing | https://docs.nebius.com/studio/ |
-| Novita | provider | novita | not_free_or_unverified | P1 candidate source; verify model pricing and credits | https://novita.ai/docs |
-| NVIDIA Build / API Catalog | provider | nvidia-build | not_free_or_unverified | P1 candidate source; verify free credits, endpoint and model terms | https://build.nvidia.com/ |
-| OpenAI API | provider | openai-api | not_free_or_unverified | protocol reference only; no verified free API quota | https://platform.openai.com/docs/api-reference |
-| Replicate | provider | replicate | not_free_or_unverified | P1 candidate source; model pricing varies and must be checked per model | https://replicate.com/docs |
-| SiliconFlow | provider | siliconflow | not_free_or_unverified | candidate source; verify official free models, trial credit and account requirements | https://docs.siliconflow.cn/ |
-| Tencent Cloud TokenHub / Hunyuan | provider | tencent-tokenhub-hunyuan | not_free_or_unverified | candidate source; verify API base, compatibility, free quota and identity requirements | https://cloud.tencent.com/document/product/1729 |
-| Together AI | provider | together-ai | not_free_or_unverified | P1 candidate source; verify new-user credit and low-cost models | https://docs.together.ai/ |
-| Volcengine Ark / Doubao | provider | volcengine-ark | not_free_or_unverified | candidate source; verify trial/new-user credit, model IDs and endpoint | https://www.volcengine.com/docs/82379 |
-| Zhipu BigModel / GLM | provider | zhipu-bigmodel | not_free_or_unverified | candidate source; do not recommend without official free API quota evidence | https://docs.bigmodel.cn/ |
-
-## 候补监控源与人工判断备注
-
-| Priority | Provider | Type | Status | Official source |
-| --- | --- | --- | --- | --- |
-| P0 | Google Gemini API / Google AI Studio | official_model_vendor | 待复核官方 Free Tier、rate limits、地区和绑卡要求；确认前不进入推荐表。 | https://ai.google.dev/gemini-api/docs/pricing |
-| P0 | Mistral La Plateforme | official_model_vendor | 待复核是否仍有免费或试用 API 额度；不确定时只作为低价/候补源。 | https://docs.mistral.ai/ |
-| P0 | GroqCloud | official_model_vendor | 待复核开发者免费限制、模型列表和 rate limits；有官方证据后可建 provider/offer 记录。 | https://console.groq.com/docs/rate-limits |
-| P0 | Cerebras Inference | official_model_vendor | 待复核是否提供免费或试用额度；确认前不推荐。 | https://inference-docs.cerebras.ai/ |
-| P0 | Cloudflare Workers AI | official_cloud_platform | 待复核免费分配、账号要求和模型计费；需区分平台免费层和模型价格。 | https://developers.cloudflare.com/workers-ai/platform/pricing/ |
-| P0 | Alibaba Cloud Model Studio / Qwen | official_cloud_platform | 待复核新用户额度、有效期、实名和地区要求；确认前只作候补。 | https://help.aliyun.com/zh/model-studio/models |
-| P0 | Tencent Cloud TokenHub / Hunyuan | official_cloud_platform | 待复核 API base、兼容性、免费额度和实名要求；当前信息不足。 | https://cloud.tencent.com/document/product/1729 |
-| P0 | Volcengine Ark / Doubao | official_cloud_platform | 待复核试用/新用户额度、模型 ID 和 endpoint；确认前不进推荐表。 | https://www.volcengine.com/docs/82379 |
-| P0 | Zhipu BigModel / GLM | official_model_vendor | 待复核官方免费 API 额度；没有证据时不得硬塞进免费表。 | https://docs.bigmodel.cn/ |
-| P0 | Moonshot / Kimi API | official_model_vendor | 待复核官方免费 API 额度；没有证据时只标为候补或低价源。 | https://platform.moonshot.cn/docs/pricing/chat |
-| P0 | DeepSeek API | official_model_vendor | 通常作为低价源候补；无官方免费额度证据时不得进入免费推荐表。 | https://api-docs.deepseek.com/quick_start/pricing |
-| P0 | Baidu Qianfan / ERNIE | official_cloud_platform | 待复核免费额度、实名、地区和计费规则；确认前只作候补。 | https://cloud.baidu.com/doc/WENXINWORKSHOP/ |
-| P0 | OpenAI API | official_model_vendor | 协议参考源；没有官方免费 API 额度时必须标为 not_free_or_unverified。 | https://platform.openai.com/docs/api-reference |
-| P0 | Anthropic Claude API | official_model_vendor | 协议参考源；没有官方免费 API 额度时必须标为 not_free_or_unverified。 | https://docs.anthropic.com/en/api/messages |
-| P0 | OpenRouter | third_party_router | 已接入官方 models API；只推荐 API 返回的免费模型或 :free 模型。 | https://openrouter.ai/api/v1/models |
-| P0 | SiliconFlow | third_party_inference_provider | 待复核官方免费模型、试用额度和账号要求；确认前只作候补。 | https://docs.siliconflow.cn/ |
-| P0 | Hugging Face Inference Providers | third_party_inference_provider | 必须区分 open_weight_only 和免费托管 API；不能把开源权重等同于免费 API。 | https://huggingface.co/docs/inference-providers |
-| P1 | Together AI | third_party_inference_provider | 候补低价/新用户额度源；待官方 pricing 和 credit 证据。 | https://docs.together.ai/ |
-| P1 | Fireworks AI | third_party_inference_provider | 候补试用/低价源；待官方 pricing 和 trial 证据。 | https://docs.fireworks.ai/ |
-| P1 | Novita | third_party_inference_provider | 候补试用/低价源；待官方模型价格和额度证据。 | https://novita.ai/docs |
-| P1 | Replicate | third_party_inference_provider | 候补推理平台；模型价格差异大，需逐模型确认。 | https://replicate.com/docs |
-| P1 | Nebius AI Studio | third_party_inference_provider | 候补试用/低价源；待官方 API、credit 和 pricing 证据。 | https://docs.nebius.com/studio/ |
-| P1 | NVIDIA Build / API Catalog | third_party_inference_provider | 候补 API catalog；待确认免费 credits、endpoint 和模型条款。 | https://build.nvidia.com/ |
+完整统计和中英文表格见 [README](../README.md) 与 [English README](../README.en.md)。
+逐型号的额度、限速、资格、API Base、来源和核验时间见[完整型号清单](free-models.md)。

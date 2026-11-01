@@ -16,6 +16,7 @@ from catalog_schema import (
     SNAPSHOTS_PATH,
     load_catalog,
     load_json,
+    record_key,
 )
 
 
@@ -42,6 +43,15 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
         errors.append(f"{label}.is_recommended: must be boolean")
     if not isinstance(record.get("modalities"), list):
         errors.append(f"{label}.modalities: must be a list")
+    if not isinstance(record.get("model_pricing"), dict):
+        errors.append(f"{label}.model_pricing: must be an object")
+    if not isinstance(record.get("rate_limits"), dict):
+        errors.append(f"{label}.rate_limits: must be an object")
+    applies_to_models = record.get("applies_to_models")
+    if not isinstance(applies_to_models, list) or any(
+        not isinstance(model_id, str) or not model_id for model_id in applies_to_models
+    ):
+        errors.append(f"{label}.applies_to_models: must be an array of non-empty model IDs")
 
     context_window = record.get("context_window")
     if context_window is not None and not isinstance(context_window, int):
@@ -62,6 +72,12 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
         date.fromisoformat(last_checked)
     except ValueError:
         errors.append(f"{label}.last_checked: must be YYYY-MM-DD")
+    verified_at = str(record.get("verified_at", ""))
+    if verified_at:
+        try:
+            date.fromisoformat(verified_at)
+        except ValueError:
+            errors.append(f"{label}.verified_at: must be YYYY-MM-DD or empty when not verified")
 
     if not str(record.get("source_url", "")).startswith(("https://", "http://")):
         errors.append(f"{label}.source_url: must be an HTTP(S) URL")
@@ -73,12 +89,12 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
     if record.get("fetch_status") == "failed":
         if record.get("confidence") != "low":
             errors.append(f"{label}: failed fetch records must have confidence low")
-        if record.get("free_type") != "not_free_or_unverified":
-            errors.append(
-                f"{label}: failed fetch records must use free_type not_free_or_unverified"
-            )
         if not str(record.get("error_summary", "")):
             errors.append(f"{label}: failed fetch records must include error_summary")
+        if record.get("is_recommended") is not False:
+            errors.append(f"{label}: failed fetch records must not be recommended")
+        if record.get("verification_status") not in {"stale", "unverified"}:
+            errors.append(f"{label}: failed fetch records must be stale or unverified")
 
     if record.get("is_recommended") is True:
         if record.get("confidence") not in {"high", "medium"}:
@@ -87,6 +103,10 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
             errors.append(f"{label}: recommended records must have a real free/trial type")
         if record.get("source_type") not in RECOMMENDABLE_SOURCE_TYPES:
             errors.append(f"{label}: recommended records require official evidence source")
+        if record.get("verification_status") != "active":
+            errors.append(f"{label}: only active records may be recommended")
+        if record.get("fetch_status") == "failed":
+            errors.append(f"{label}: failed records may not be recommended")
         if not str(record.get("recommendation_reason", "")):
             errors.append(f"{label}: recommended records need recommendation_reason")
 
@@ -125,6 +145,48 @@ def validate_snapshots(path: Path = SNAPSHOTS_PATH) -> list[str]:
     return errors
 
 
+def validate_relationships(records: list[dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+    keys: dict[tuple[str, str, str, str], int] = {}
+    providers: set[str] = set()
+    offers: set[tuple[str, str]] = set()
+    models: set[tuple[str, str]] = set()
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            continue
+        key = record_key(record)
+        if key in keys:
+            errors.append(f"record[{index}]: duplicate record key also used by record[{keys[key]}]")
+        else:
+            keys[key] = index
+        if record.get("record_level") == "provider":
+            providers.add(str(record.get("provider_id", "")))
+        elif record.get("record_level") == "offer":
+            offers.add((str(record.get("provider_id", "")), str(record.get("offer_id", ""))))
+        elif record.get("record_level") == "model":
+            models.add((str(record.get("provider_id", "")), str(record.get("model_id", ""))))
+
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            continue
+        provider_id = str(record.get("provider_id", ""))
+        level = record.get("record_level")
+        if level != "provider" and provider_id not in providers:
+            errors.append(f"record[{index}]: provider_id {provider_id!r} has no provider record")
+        offer_id = str(record.get("offer_id", ""))
+        if level == "model" and offer_id and (provider_id, offer_id) not in offers:
+            errors.append(f"record[{index}]: model references missing offer {provider_id}/{offer_id}")
+        if level == "model" and not offer_id:
+            errors.append(f"record[{index}]: model record must reference an offer_id")
+        if level == "offer":
+            for model_id in record.get("applies_to_models", []):
+                if (provider_id, model_id) not in models:
+                    errors.append(
+                        f"record[{index}]: offer applies_to_models references missing model {provider_id}/{model_id}"
+                    )
+    return errors
+
+
 def validate_catalog(path: Path = CATALOG_PATH) -> list[str]:
     records = load_catalog(path)
     errors: list[str] = []
@@ -133,6 +195,7 @@ def validate_catalog(path: Path = CATALOG_PATH) -> list[str]:
             errors.append(f"record[{index}]: must be an object")
             continue
         errors.extend(validate_record(record, index))
+    errors.extend(validate_relationships(records))
     errors.extend(validate_snapshots())
     return errors
 

@@ -34,9 +34,14 @@ REQUIRED_FIELDS = [
     "requires_phone_region",
     "model_id",
     "model_name",
+    "model_type",
     "model_family",
     "context_window",
     "modalities",
+    "model_pricing",
+    "rate_limits",
+    "quota_scope",
+    "applies_to_models",
     "tool_calling",
     "structured_output",
     "reasoning",
@@ -54,7 +59,10 @@ REQUIRED_FIELDS = [
     "source_url",
     "evidence_summary",
     "last_checked",
+    "verified_at",
     "confidence",
+    "verification_status",
+    "data_origin",
     "is_recommended",
     "recommendation_reason",
     "fetch_status",
@@ -78,7 +86,9 @@ ENUMS = {
         "trial_credit",
         "free_model",
         "free_router",
+        "community_volunteer",
         "open_weight_only",
+        "limited_time_promotion",
         "not_free_or_unverified",
     },
     "requires_card": {"yes", "no", "unknown"},
@@ -98,11 +108,15 @@ ENUMS = {
         "official_api",
         "official_pricing",
         "official_changelog",
+        "official_announcement",
         "independent_benchmark",
         "manual",
     },
     "confidence": {"high", "medium", "low"},
     "fetch_status": {"ok", "failed", "manual", "pending"},
+    "verification_status": {"active", "stale", "withdrawn", "pending", "historical", "unverified"},
+    "data_origin": {"manual", "official_api"},
+    "quota_scope": {"provider_shared", "account_shared", "per_model", "per_user", "one_time", "unknown"},
 }
 
 RECOMMENDABLE_FREE_TYPES = {
@@ -111,6 +125,8 @@ RECOMMENDABLE_FREE_TYPES = {
     "trial_credit",
     "free_model",
     "free_router",
+    "community_volunteer",
+    "limited_time_promotion",
 }
 
 RECOMMENDABLE_SOURCE_TYPES = {
@@ -118,6 +134,7 @@ RECOMMENDABLE_SOURCE_TYPES = {
     "official_api",
     "official_pricing",
     "official_changelog",
+    "official_announcement",
 }
 
 PROTOCOL_REFERENCE_IDS = {"openai-api", "anthropic-api"}
@@ -185,12 +202,20 @@ def write_catalog_csv(
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=REQUIRED_FIELDS, extrasaction="ignore")
+        writer = csv.DictWriter(
+            f,
+            fieldnames=REQUIRED_FIELDS,
+            extrasaction="ignore",
+            lineterminator="\n",
+        )
         writer.writeheader()
         for record in records:
             row = dict(record)
             if isinstance(row.get("modalities"), list):
                 row["modalities"] = "|".join(str(v) for v in row["modalities"])
+            for field in ("model_pricing", "rate_limits", "applies_to_models"):
+                if isinstance(row.get(field), (dict, list)):
+                    row[field] = json.dumps(row[field], ensure_ascii=False, sort_keys=True)
             writer.writerow(row)
 
 
@@ -216,9 +241,14 @@ def empty_record(**overrides: Any) -> dict[str, Any]:
         "requires_phone_region": "",
         "model_id": "",
         "model_name": "",
+        "model_type": "unknown",
         "model_family": "",
         "context_window": None,
         "modalities": [],
+        "model_pricing": {},
+        "rate_limits": {},
+        "quota_scope": "unknown",
+        "applies_to_models": [],
         "tool_calling": "unknown",
         "structured_output": "unknown",
         "reasoning": "unknown",
@@ -236,7 +266,10 @@ def empty_record(**overrides: Any) -> dict[str, Any]:
         "source_url": "",
         "evidence_summary": "",
         "last_checked": today_utc(),
+        "verified_at": today_utc(),
         "confidence": "low",
+        "verification_status": "unverified",
+        "data_origin": "manual",
         "is_recommended": False,
         "recommendation_reason": "",
         "fetch_status": "pending",
