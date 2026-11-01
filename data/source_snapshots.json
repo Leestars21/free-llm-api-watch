@@ -10,7 +10,7 @@
       "free_model_count": 17,
       "selection_rule": "prompt and completion exactly zero; every returned pricing value parses to zero"
     },
-    "hash": "6978ab9c78d38946bc7f19b85a6e42ddbc8731988c3d8dd3dc49840d91463502",
+    "hash": "91cea86cc48a4f8eec65197d9b3005dc804c9b33a0a445481fc80132e0152674",
     "parser_status": "ok"
   }
 ]

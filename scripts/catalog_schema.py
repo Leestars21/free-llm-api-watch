@@ -34,10 +34,15 @@ REQUIRED_FIELDS = [
     "requires_phone_region",
     "model_id",
     "model_name",
+    "model_scope",
     "model_type",
     "model_family",
     "context_window",
     "modalities",
+    "input_modalities",
+    "output_modalities",
+    "capabilities",
+    "capabilities_source_url",
     "model_pricing",
     "rate_limits",
     "quota_scope",
@@ -82,6 +87,7 @@ ENUMS = {
     "anthropic_compatible": {"yes", "no", "partial", "unknown"},
     "free_type": {
         "stable_free_tier",
+        "monthly_evaluation_tier",
         "new_user_credit",
         "trial_credit",
         "free_model",
@@ -117,10 +123,38 @@ ENUMS = {
     "verification_status": {"active", "stale", "withdrawn", "pending", "historical", "unverified"},
     "data_origin": {"manual", "official_api"},
     "quota_scope": {"provider_shared", "account_shared", "per_model", "per_user", "one_time", "unknown"},
+    "model_scope": {"core_llm", "related_ai_api", "unknown"},
 }
+
+MODEL_TYPES = {
+    "text_llm",
+    "multimodal_llm",
+    "embedding",
+    "rerank",
+    "speech_recognition",
+    "speech_generation",
+    "image_generation",
+    "video_generation",
+    "music_generation",
+    "content_moderation",
+    "classification",
+    "routing_alias",
+    "unknown",
+}
+CORE_LLM_TYPES = {"text_llm", "multimodal_llm"}
+RELATED_AI_TYPES = MODEL_TYPES - CORE_LLM_TYPES - {"unknown"}
+MODEL_CAPABILITIES = {
+    "reasoning",
+    "code_generation",
+    "long_context",
+    "image_understanding",
+    "agent_workflows",
+}
+MODALITY_TYPES = {"text", "image", "audio", "video", "pdf", "embedding", "score", "label"}
 
 RECOMMENDABLE_FREE_TYPES = {
     "stable_free_tier",
+    "monthly_evaluation_tier",
     "new_user_credit",
     "trial_credit",
     "free_model",
@@ -241,10 +275,15 @@ def empty_record(**overrides: Any) -> dict[str, Any]:
         "requires_phone_region": "",
         "model_id": "",
         "model_name": "",
+        "model_scope": "unknown",
         "model_type": "unknown",
         "model_family": "",
         "context_window": None,
         "modalities": [],
+        "input_modalities": [],
+        "output_modalities": [],
+        "capabilities": [],
+        "capabilities_source_url": "",
         "model_pricing": {},
         "rate_limits": {},
         "quota_scope": "unknown",
@@ -276,6 +315,80 @@ def empty_record(**overrides: Any) -> dict[str, Any]:
         "error_summary": "",
     }
     record.update(overrides)
+    return record
+
+
+def migrate_model_metadata(record: dict[str, Any]) -> dict[str, Any]:
+    """Upgrade legacy model labels while preserving their model IDs."""
+    if record.get("record_level") != "model":
+        return record
+
+    legacy_modalities = record.get("modalities")
+    if not isinstance(legacy_modalities, list):
+        legacy_modalities = []
+    legacy_modalities = sorted({str(value).lower() for value in legacy_modalities})
+    input_modalities = record.get("input_modalities")
+    output_modalities = record.get("output_modalities")
+
+    model_type = str(record.get("model_type") or "unknown")
+    if model_type == "chat":
+        # Legacy chat records with another modality do not say whether that
+        # modality is input or output. Keep them unknown until source data is
+        # reviewed instead of silently treating them as text-only LLMs.
+        model_type = "unknown" if set(legacy_modalities) - {"text"} else "text_llm"
+    elif model_type == "multimodal":
+        # The legacy union field loses direction; a fresh source check must
+        # supply input_modalities and output_modalities before promotion.
+        model_type = "unknown"
+    if model_type not in MODEL_TYPES:
+        model_type = "unknown"
+
+    record["model_type"] = model_type
+    if model_type in CORE_LLM_TYPES:
+        record["model_scope"] = "core_llm"
+    elif model_type in RELATED_AI_TYPES:
+        record["model_scope"] = "related_ai_api"
+    else:
+        record["model_scope"] = "unknown"
+
+    if not isinstance(input_modalities, list) or not isinstance(output_modalities, list):
+        input_modalities = input_modalities if isinstance(input_modalities, list) else []
+        output_modalities = output_modalities if isinstance(output_modalities, list) else []
+    if model_type in CORE_LLM_TYPES | RELATED_AI_TYPES and (
+        not input_modalities or not output_modalities
+    ):
+        directions: tuple[list[str], list[str]] = ([], [])
+        if model_type == "text_llm":
+            directions = (["text"], ["text"])
+        elif model_type == "multimodal_llm":
+            directions = ([], [])
+        elif model_type == "speech_recognition":
+            directions = (["audio"], ["text"])
+        elif model_type == "speech_generation":
+            directions = (["text"], ["audio"])
+        elif model_type == "embedding":
+            directions = ([value for value in legacy_modalities if value in {"text", "image"}] or ["text"], ["embedding"])
+        elif model_type == "rerank":
+            directions = (["text"], ["score"])
+        elif model_type == "content_moderation":
+            directions = (["text"], ["label"])
+        elif model_type == "music_generation":
+            directions = (["text"], ["audio"])
+        if not input_modalities:
+            input_modalities = directions[0]
+        if not output_modalities:
+            output_modalities = directions[1]
+
+    record["input_modalities"] = sorted({str(value).lower() for value in input_modalities})
+    record["output_modalities"] = sorted({str(value).lower() for value in output_modalities})
+    directional_union = set(record["input_modalities"]) | set(record["output_modalities"])
+    record["modalities"] = sorted(directional_union or set(legacy_modalities))
+
+    capabilities = record.get("capabilities")
+    if not isinstance(capabilities, list):
+        capabilities = []
+    record["capabilities"] = sorted({str(value) for value in capabilities})
+    record.setdefault("capabilities_source_url", "")
     return record
 
 

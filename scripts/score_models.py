@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from catalog_schema import load_catalog, write_catalog
+from catalog_schema import load_catalog, migrate_model_metadata, write_catalog
 
 
 SCORE_FIELDS = [
@@ -22,6 +22,8 @@ CAPABILITY_FIELDS = [
 def score_records(records: list[dict]) -> list[dict]:
     for record in records:
         # Do not infer benchmark capability without evidence. This pass only normalizes blanks.
+        if record.get("record_level") == "model":
+            migrate_model_metadata(record)
         for field in SCORE_FIELDS:
             if not record.get(field):
                 record[field] = "unknown"

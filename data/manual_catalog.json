@@ -68,17 +68,18 @@
       "api_base": "https://api.cerebras.ai/v1",
       "openai_compatible": "yes",
       "official": true,
-      "free_type": "stable_free_tier",
+      "free_type": "trial_credit",
       "source_type": "official_pricing",
-      "source_name": "Cerebras Inference pricing",
-      "source_url": "https://inference-docs.cerebras.ai/support/pricing",
-      "evidence_summary": "Cerebras publishes a $0 Free tier with lower rate limits. Exact limits and available models can change; the model documentation marks zai-glm-4.7 as available on the Free Tier.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_name": "Cerebras current pricing",
+      "source_url": "https://www.cerebras.ai/pricing",
+      "evidence_summary": "Current public pricing describes a one-time $5 promotion for 30 days, requires a valid payment method, and says there is no automatic billing; older inference docs still describe a $0 Free tier, leaving model eligibility unresolved.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official pricing confirms a $0 Free tier; model-specific access remains subject to account limits."
+      "recommendation_reason": "Current developer pricing describes a one-time $5 promotion; an older Free Tier page conflicts, so no current model ID is assumed.",
+      "is_recommended": true
     },
     {
       "provider_id": "cloudflare-workers-ai",
@@ -142,23 +143,23 @@
     },
     {
       "provider_id": "tencent-tokenhub",
-      "provider": "Tencent Cloud TokenHub (migration offer)",
+      "provider": "Tencent Cloud TokenHub",
       "channel_type": "official_cloud_platform",
       "country_or_region": "China; eligible migrated users only",
-      "api_base": "",
-      "openai_compatible": "unknown",
+      "api_base": "https://tokenhub.tencentmaas.com/v1",
+      "openai_compatible": "yes",
       "official": true,
-      "free_type": "trial_credit",
+      "free_type": "limited_time_promotion",
       "source_type": "official_announcement",
-      "source_name": "Tencent Cloud migration announcement",
-      "source_url": "https://cloud.tencent.com/announce/detail/2287",
-      "evidence_summary": "The official migration announcement says eligible users of the retired platform can claim TokenHub free experience credits for three months. The amount and eligible model IDs are not stated in the announcement and must be checked in the account console.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_name": "TokenHub free experience package",
+      "source_url": "https://intl.cloud.tencent.com/zh/document/product/1300/80423",
+      "evidence_summary": "Current TokenHub docs describe a per-model free package for language models through 2026-12-31: 1M tokens for one year, one claim per model, and $10 balance/credit frozen until endpoint deletion. The separate migration offer is for eligible users of the retired service.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "medium",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "A time-limited credit is officially documented for migrated users, but amount and model eligibility are account-specific."
+      "recommendation_reason": "Current campaign and a separate migration offer are documented; the campaign requires a console claim and freezes a balance per model."
     },
     {
       "provider_id": "volcengine-ark",
@@ -173,8 +174,8 @@
       "source_name": "Ark free inference quota and safe experience mode",
       "source_url": "https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh",
       "evidence_summary": "Official Ark docs describe model-specific new-user inference quotas and a Safe Experience mode with a 500,000-token usage cap. Eligibility is restricted to accounts that have not activated the model service or used the mode before; applicable models and plugin/knowledge-base exclusions are listed in account/console docs.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
@@ -208,17 +209,18 @@
       "api_base": "https://qianfan.baidubce.com",
       "openai_compatible": "partial",
       "official": true,
-      "free_type": "not_free_or_unverified",
+      "free_type": "new_user_credit",
       "source_type": "official_announcement",
-      "source_name": "Baidu historical free-model announcement",
-      "source_url": "https://cloud.baidu.com/news/news_c7a145b9-5c99-4870-939f-e09ba506aab3",
-      "evidence_summary": "A May 2024 official announcement described several ERNIE APIs as long-term free, but current model/API availability and current quota terms were not confirmed from current docs. Historical bulletin is retained for follow-up only.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
-      "confidence": "low",
-      "verification_status": "historical",
+      "source_name": "Baidu Qianfan product documentation",
+      "source_url": "https://cloud.baidu.com/doc/Qianfan/index.html",
+      "evidence_summary": "Current Qianfan product docs list a 20 RMB new-user coupon after real-name verification, valid for one month. The reviewed offer page does not name a currently eligible free model ID.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Historical 2024 free bulletin is not enough to recommend a current API model; verify current Qianfan catalog and pricing."
+      "recommendation_reason": "Current official product docs list a new-user coupon; the reviewed source names no specific eligible free API model.",
+      "is_recommended": true
     },
     {
       "provider_id": "siliconflow",
@@ -233,8 +235,8 @@
       "source_name": "SiliconFlow rate limits and free-model documentation",
       "source_url": "https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation",
       "evidence_summary": "Official docs confirm free model calls are billed at zero after real-name verification. The current model gallery is the source of exact free model IDs. Published rate-limit ranges vary by model type and are limits, not free-token grants.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
@@ -253,8 +255,8 @@
       "source_name": "ModelScope MoLi points announcement",
       "source_url": "https://www.modelscope.cn/posts/435591",
       "evidence_summary": "ModelScope's official platform post describes 200 MoLi points granted daily per registered account and an additional 50 points/day for binding an Alibaba Cloud account. API-Inference usage consumes roughly 0.5/1/2 points per call by model size; points are shared with other inference/training uses. The available model list is dynamic.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "medium",
       "verification_status": "active",
       "fetch_status": "manual",
@@ -273,8 +275,8 @@
       "source_name": "Inference Providers pricing",
       "source_url": "https://huggingface.co/docs/inference-providers/en/pricing",
       "evidence_summary": "Official docs describe $0.10 monthly credits for free users across Inference Providers, subject to change. This is a shared credit balance for metered hosted inference, not proof that open weights or every listed model is free.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
@@ -293,8 +295,8 @@
       "source_name": "Mistral Studio quickstart and usage limits",
       "source_url": "https://docs.mistral.ai/getting-started/quickstarts/developer/first-api-request",
       "evidence_summary": "Mistral's current quickstart says Studio is enabled in Free mode by default with no credit card required. Free mode has usage/rate limits; numeric monthly usage and model eligibility are shown in the account.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
@@ -308,17 +310,17 @@
       "api_base": "https://api.cohere.com/v2",
       "openai_compatible": "partial",
       "official": true,
-      "free_type": "trial_credit",
+      "free_type": "monthly_evaluation_tier",
       "source_type": "official_docs",
       "source_name": "Cohere API rate limits",
       "source_url": "https://docs.cohere.com/v2/docs/rate-limits",
-      "evidence_summary": "Cohere documents free evaluation API keys with 1,000 API calls/month shared across endpoints; request-per-minute limits also apply. Production use requires a production key and separate terms.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "Eligible Cohere evaluation keys have up to 1,000 calls/month shared across endpoints; model-specific RPM limits also apply. This is a monthly allowance, not a one-time trial.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official docs specify evaluation-key monthly call allowance and separate rate limits; this is not an unlimited production tier."
+      "recommendation_reason": "Official docs specify a recurring monthly evaluation allowance and separate rate limits."
     },
     {
       "provider_id": "vercel-ai-gateway",
@@ -573,8 +575,8 @@
       "source_name": "Ollama Cloud pricing",
       "source_url": "https://www.ollama.com/pricing",
       "evidence_summary": "Official pricing says Free accounts include starter usage credits for a smaller set of starter cloud models, reset monthly from signup; Free includes one concurrent request. No fixed credit amount or full starter-model list is stated.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
@@ -794,7 +796,11 @@
       "requires_card": "unknown",
       "quota_scope": "account_shared",
       "applies_to_models": [],
-      "rate_limits": {"requests_per_minute": 20, "requests_per_day": 50, "scope": "free_model_account"},
+      "rate_limits": {
+        "requests_per_minute": 20,
+        "requests_per_day": 50,
+        "scope": "free_model_account"
+      },
       "source_type": "official_docs",
       "source_name": "OpenRouter free model rate limits",
       "source_url": "https://openrouter.ai/collections/free-models",
@@ -818,14 +824,22 @@
       "requires_identity_verification": "unknown",
       "requires_phone_region": "Availability varies by country/region",
       "quota_scope": "per_model",
-      "applies_to_models": ["gemini-3.5-flash-lite", "gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"],
-      "rate_limits": {"scope": "project_and_model", "details": "Dynamic; inspect AI Studio for current RPM/TPM/RPD"},
+      "applies_to_models": [
+        "gemini-3.1-flash-lite",
+        "gemini-3.5-flash-lite",
+        "gemini-3.8-flash-lite-tts",
+        "gemini-3.8-flash-tts"
+      ],
+      "rate_limits": {
+        "scope": "project_and_model",
+        "details": "Dynamic; inspect AI Studio for current RPM/TPM/RPD"
+      },
       "source_type": "official_pricing",
       "source_name": "Gemini Developer API pricing and rate limits",
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
       "evidence_summary": "Free-tier token prices are $0 only for the models and endpoints marked free. Search grounding and other tools may have separate limits or prices; free-tier data may be used to improve Google products.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
@@ -841,18 +855,21 @@
       "expires": "No fixed end date published",
       "requires_card": "unknown",
       "quota_scope": "account_shared",
-      "applies_to_models": ["zai-glm-4.7"],
-      "rate_limits": {"scope": "account_and_model", "details": "Lower Free-tier rate limits; numeric limits not stated on public pricing page"},
+      "applies_to_models": [],
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Lower Free-tier rate limits; numeric limits not stated on public pricing page"
+      },
       "source_type": "official_pricing",
       "source_name": "Cerebras pricing and GLM 4.7 model page",
       "source_url": "https://inference-docs.cerebras.ai/support/pricing",
-      "evidence_summary": "The pricing page lists a $0 Free tier; the model page identifies zai-glm-4.7 as Free Tier. The pricing page's older context-length details may differ from current per-model docs, so no context value is copied here.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
-      "confidence": "high",
-      "verification_status": "active",
-      "is_recommended": true,
-      "recommendation_reason": "A named current model and provider Free tier are both shown in official Cerebras docs."
+      "evidence_summary": "Older official docs describe a $0 Free tier and label zai-glm-4.7 as Free Tier. Current pricing describes a one-time $5 developer promotion; do not treat the older page as proof of current model eligibility.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "low",
+      "verification_status": "pending",
+      "is_recommended": false,
+      "recommendation_reason": "Older official pricing/model docs conflict with current developer pricing; eligibility is unresolved."
     },
     {
       "provider_id": "cloudflare-workers-ai",
@@ -864,14 +881,20 @@
       "expires": "No fixed end date published",
       "requires_card": "unknown",
       "quota_scope": "account_shared",
-      "applies_to_models": ["@cf/zai-org/glm-4.7-flash", "@cf/google/gemma-4-26b-a4b-it"],
-      "rate_limits": {"scope": "account_and_model", "details": "Per-model limits and paid-only eligibility vary; see Workers AI model catalog"},
+      "applies_to_models": [
+        "@cf/zai-org/glm-4.7-flash",
+        "@cf/google/gemma-4-26b-a4b-it"
+      ],
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Per-model limits and paid-only eligibility vary; see Workers AI model catalog"
+      },
       "source_type": "official_pricing",
       "source_name": "Workers AI pricing and changelog",
       "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
       "evidence_summary": "Daily allocation is in Neurons, not tokens or requests. Official changelog says some named frontier models have lost free-tier access; verify each model's current pricing entry.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
@@ -887,10 +910,15 @@
       "expires": "90 days from the applicable model activation/release/approval date; see console",
       "requires_card": "unknown",
       "requires_identity_verification": "yes",
-      "requires_phone_region": "China Beijing region and eligible account required",
+      "requires_phone_region": "Beijing region in China; verify the identity wording in the account console because the localized pages differ",
       "quota_scope": "per_model",
-      "applies_to_models": ["qwen3.8-max"],
-      "rate_limits": {"scope": "account_and_model", "details": "Separate from free-token grant; check console"},
+      "applies_to_models": [
+        "qwen3.8-max"
+      ],
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Separate from free-token grant; check console"
+      },
       "source_type": "official_docs",
       "source_name": "Model Studio new-user free quota",
       "source_url": "https://help.aliyun.com/zh/model-studio/new-free-quota/",
@@ -937,7 +965,10 @@
       "requires_identity_verification": "unknown",
       "quota_scope": "account_shared",
       "applies_to_models": [],
-      "rate_limits": {"scope": "account_and_model", "details": "Separate model rate limits apply"},
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Separate model rate limits apply"
+      },
       "source_type": "official_docs",
       "source_name": "Ark Safe Experience mode",
       "source_url": "https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh",
@@ -959,8 +990,13 @@
       "expires": "No fixed end date stated in announcement",
       "requires_card": "unknown",
       "quota_scope": "per_model",
-      "applies_to_models": ["glm-4.7-flash"],
-      "rate_limits": {"scope": "account_and_model", "details": "Check BigModel console for current limits"},
+      "applies_to_models": [
+        "glm-4.7-flash"
+      ],
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Check BigModel console for current limits"
+      },
       "source_type": "official_announcement",
       "source_name": "Zhipu GLM-4.7-Flash announcement",
       "source_url": "https://www.zhipuai.cn/zh/news/148",
@@ -984,7 +1020,13 @@
       "requires_identity_verification": "yes",
       "quota_scope": "per_model",
       "applies_to_models": [],
-      "rate_limits": {"scope": "account_and_model", "chat": "1000-10000 RPM; 50000-5000000 TPM", "embedding": "2000-10000 RPM; 500000-10000000 TPM", "reranker": "2000 RPM; 500000 TPM", "image": "2 IPM; 400 IPD"},
+      "rate_limits": {
+        "scope": "account_and_model",
+        "chat": "1000-10000 RPM; 50000-5000000 TPM",
+        "embedding": "2000-10000 RPM; 500000-10000000 TPM",
+        "reranker": "2000 RPM; 500000 TPM",
+        "image": "2 IPM; 400 IPD"
+      },
       "source_type": "official_docs",
       "source_name": "SiliconFlow rate limits and model gallery",
       "source_url": "https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation",
@@ -1000,21 +1042,24 @@
       "provider_id": "modelscope",
       "offer_id": "modelscope-daily-moli-points",
       "free_type": "stable_free_tier",
-      "free_quota": "200 MoLi points/day per registered account; +50/day for binding Alibaba Cloud",
+      "free_quota": "200 MoLi points/day per registered account; points are shared across platform usage",
       "free_quota_unit": "MoLi points/day",
-      "quota_reset": "Daily account grant; check the current MoLi balance page",
+      "quota_reset": "Daily grant; usage balance shared with other inference/training activities",
       "expires": "Daily grant; accumulated balance/expiration terms can vary",
       "requires_card": "no",
       "quota_scope": "account_shared",
       "applies_to_models": [],
-      "rate_limits": {"scope": "account_and_model", "details": "Typical API-Inference call consumes about 0.5/1/2 MoLi points by model size; other tasks share points"},
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Typical API-Inference call consumes about 0.5/1/2 MoLi points by model size; other tasks share points"
+      },
       "source_type": "official_announcement",
       "source_name": "ModelScope MoLi points announcement",
       "source_url": "https://www.modelscope.cn/posts/435591",
-      "evidence_summary": "MoLi points are a platform-specific balance, not requests or tokens. Actual calls per day depend on each model's per-call cost and shared account activity; model IDs are dynamic.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
-      "confidence": "medium",
+      "evidence_summary": "Official announcement describes 200 MoLi points per registered account per day. API-Inference calls consume approximately 0.5/1/2 points by model size; exact models and costs are dynamic.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
       "recommendation_reason": "A daily account points grant is documented; check live balance and per-model MoLi costs before estimating calls."
@@ -1030,7 +1075,10 @@
       "requires_card": "unknown",
       "quota_scope": "account_shared",
       "applies_to_models": [],
-      "rate_limits": {"scope": "provider_and_model", "details": "Provider/model-specific limits; check current router docs"},
+      "rate_limits": {
+        "scope": "provider_and_model",
+        "details": "Provider/model-specific limits; check current router docs"
+      },
       "source_type": "official_docs",
       "source_name": "Inference Providers pricing",
       "source_url": "https://huggingface.co/docs/inference-providers/en/pricing",
@@ -1053,7 +1101,10 @@
       "requires_card": "no",
       "quota_scope": "account_shared",
       "applies_to_models": [],
-      "rate_limits": {"scope": "organization_and_model", "details": "Model and organization limits apply separately from monthly usage"},
+      "rate_limits": {
+        "scope": "organization_and_model",
+        "details": "Model and organization limits apply separately from monthly usage"
+      },
       "source_type": "official_docs",
       "source_name": "Mistral free mode and usage limits",
       "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
@@ -1068,21 +1119,30 @@
     {
       "provider_id": "cohere",
       "offer_id": "cohere-evaluation-key",
-      "free_type": "trial_credit",
-      "free_quota": "1,000 API calls/month shared across endpoints",
-      "free_quota_unit": "requests/month",
-      "quota_reset": "Monthly",
-      "expires": "Evaluation key; production usage requires a production key",
+      "free_type": "monthly_evaluation_tier",
+      "free_quota": "Up to 1,000 API calls/month shared across endpoints for eligible evaluation keys; model/endpoint RPM limits also apply",
+      "free_quota_unit": "model calls/month",
+      "quota_reset": "Monthly shared request allowance",
+      "expires": "Evaluation-key eligibility; apply for a production key for production use",
       "requires_card": "unknown",
       "quota_scope": "account_shared",
-      "applies_to_models": ["command-a-03-2025", "command-r7b-12-2024", "rerank-v4.0-fast", "embed-v4.0"],
-      "rate_limits": {"scope": "endpoint_and_model", "chat": "20 requests/minute for documented chat families; other endpoints differ"},
+      "applies_to_models": [
+        "command-a-03-2025",
+        "command-r7b-12-2024",
+        "embed-v4.0",
+        "north-mini-code-1.0",
+        "rerank-v4.0-fast"
+      ],
+      "rate_limits": {
+        "scope": "endpoint_and_model",
+        "chat": "20 requests/minute for documented chat families; other endpoints differ"
+      },
       "source_type": "official_docs",
-      "source_name": "Cohere rate limits and models",
+      "source_name": "Cohere rate limits and model access",
       "source_url": "https://docs.cohere.com/v2/docs/rate-limits",
-      "evidence_summary": "The monthly call allowance is a total request grant, while RPM values are separate rate limits. Model IDs are sourced from Cohere's current official model catalog.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "Official rate-limit docs describe an evaluation allowance of 1,000 calls/month shared across endpoints with per-endpoint RPM limits. This is a recurring monthly allowance, not a one-time trial.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
@@ -1098,8 +1158,14 @@
       "expires": "Free monthly credit no longer applies after purchasing credits",
       "requires_card": "yes",
       "quota_scope": "account_shared",
-      "applies_to_models": ["inclusionai/ling-3.1-flash-1019", "nvidia/nemotron-3.5-lightning-free"],
-      "rate_limits": {"scope": "upstream_provider_and_model", "details": "Upstream/model free-tier rate limits still apply"},
+      "applies_to_models": [
+        "inclusionai/ling-3.1-flash-1019",
+        "nvidia/nemotron-3.5-lightning-free"
+      ],
+      "rate_limits": {
+        "scope": "upstream_provider_and_model",
+        "details": "Upstream/model free-tier rate limits still apply"
+      },
       "source_type": "official_docs",
       "source_name": "Vercel AI Gateway pricing and live model catalog",
       "source_url": "https://vercel.com/docs/ai-gateway/pricing",
@@ -1122,7 +1188,10 @@
       "requires_card": "no",
       "quota_scope": "provider_shared",
       "applies_to_models": [],
-      "rate_limits": {"scope": "worker_and_queue", "details": "No fixed numeric rate; anonymous key has lowest priority"},
+      "rate_limits": {
+        "scope": "worker_and_queue",
+        "details": "No fixed numeric rate; anonymous key has lowest priority"
+      },
       "source_type": "official_docs",
       "source_name": "AI Horde OpenAI API docs",
       "source_url": "https://oai.aihorde.net/",
@@ -1191,7 +1260,9 @@
       "requires_card": "unknown",
       "quota_scope": "account_shared",
       "applies_to_models": [],
-      "rate_limits": {"concurrent_requests": 1},
+      "rate_limits": {
+        "concurrent_requests": 1
+      },
       "source_type": "official_pricing",
       "source_name": "Ollama Cloud pricing",
       "source_url": "https://www.ollama.com/pricing",
@@ -1213,7 +1284,9 @@
       "expires": "Pricing can change; recheck the model page before use",
       "requires_card": "unknown",
       "quota_scope": "per_model",
-      "applies_to_models": ["inclusionai/ling-3.1-flash"],
+      "applies_to_models": [
+        "inclusionai/ling-3.1-flash"
+      ],
       "rate_limits": {},
       "source_type": "official_pricing",
       "source_name": "Novita Ling 3.1 Flash model details",
@@ -1236,7 +1309,11 @@
       "expires": "Time-limited; end date not stated on reviewed pages",
       "requires_card": "unknown",
       "quota_scope": "per_model",
-      "applies_to_models": ["inclusionai/ling-3.0-flash-fin", "inclusionai/ling-3.0-flash-vl", "inclusionai/ling-3.0-flash-sante"],
+      "applies_to_models": [
+        "inclusionai/ling-3.0-flash-fin",
+        "inclusionai/ling-3.0-flash-vl",
+        "inclusionai/ling-3.0-flash-sante"
+      ],
       "rate_limits": {},
       "source_type": "official_pricing",
       "source_name": "Novita Ling 3.0 model details",
@@ -1259,7 +1336,9 @@
       "expires": "Launch promotion; end date not stated on reviewed page",
       "requires_card": "unknown",
       "quota_scope": "per_model",
-      "applies_to_models": ["apodex/apodex-1.1-mini"],
+      "applies_to_models": [
+        "apodex/apodex-1.1-mini"
+      ],
       "rate_limits": {},
       "source_type": "official_announcement",
       "source_name": "Novita Apodex 1.1 Mini launch and pricing",
@@ -1305,8 +1384,84 @@
       "expires": "No fixed end date stated; Free Plan terms and model availability may change",
       "requires_card": "unknown",
       "quota_scope": "account_shared",
-      "applies_to_models": ["canopylabs/orpheus-arabic-saudi", "canopylabs/orpheus-v1-english", "meta-llama/llama-prompt-guard-2-22m", "meta-llama/llama-prompt-guard-2-86m", "openai/gpt-oss-120b", "openai/gpt-oss-20b", "openai/gpt-oss-safeguard-20b", "qwen/qwen3.8-27b", "whisper-large-v3", "whisper-large-v3-turbo"],
-      "rate_limits": {"scope": "organization_and_model", "source": "Free Plan Limits table; current account limits may differ", "models": {"canopylabs/orpheus-arabic-saudi": {"rpm": 10, "rpd": 100, "tpm": 1200, "tpd": 3600}, "canopylabs/orpheus-v1-english": {"rpm": 10, "rpd": 100, "tpm": 1200, "tpd": 3600}, "meta-llama/llama-prompt-guard-2-22m": {"rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000}, "meta-llama/llama-prompt-guard-2-86m": {"rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000}, "openai/gpt-oss-120b": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000}, "openai/gpt-oss-20b": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000}, "openai/gpt-oss-safeguard-20b": {"rpm": 3, "rpd": 1000, "tpm": 2000, "tpd": 200000}, "qwen/qwen3.8-27b": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000}, "whisper-large-v3": {"rpm": 20, "rpd": 2000, "ash": 7200, "asd": 28800}, "whisper-large-v3-turbo": {"rpm": 20, "rpd": 2000, "ash": 7200, "asd": 28800}}},
+      "applies_to_models": [
+        "canopylabs/orpheus-arabic-saudi",
+        "canopylabs/orpheus-v1-english",
+        "meta-llama/llama-prompt-guard-2-22m",
+        "meta-llama/llama-prompt-guard-2-86m",
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "openai/gpt-oss-safeguard-20b",
+        "qwen/qwen3.8-27b",
+        "whisper-large-v3",
+        "whisper-large-v3-turbo"
+      ],
+      "rate_limits": {
+        "scope": "organization_and_model",
+        "source": "Free Plan Limits table; current account limits may differ",
+        "models": {
+          "canopylabs/orpheus-arabic-saudi": {
+            "rpm": 10,
+            "rpd": 100,
+            "tpm": 1200,
+            "tpd": 3600
+          },
+          "canopylabs/orpheus-v1-english": {
+            "rpm": 10,
+            "rpd": 100,
+            "tpm": 1200,
+            "tpd": 3600
+          },
+          "meta-llama/llama-prompt-guard-2-22m": {
+            "rpm": 30,
+            "rpd": 14400,
+            "tpm": 15000,
+            "tpd": 500000
+          },
+          "meta-llama/llama-prompt-guard-2-86m": {
+            "rpm": 30,
+            "rpd": 14400,
+            "tpm": 15000,
+            "tpd": 500000
+          },
+          "openai/gpt-oss-120b": {
+            "rpm": 30,
+            "rpd": 1000,
+            "tpm": 8000,
+            "tpd": 200000
+          },
+          "openai/gpt-oss-20b": {
+            "rpm": 30,
+            "rpd": 1000,
+            "tpm": 8000,
+            "tpd": 200000
+          },
+          "openai/gpt-oss-safeguard-20b": {
+            "rpm": 3,
+            "rpd": 1000,
+            "tpm": 2000,
+            "tpd": 200000
+          },
+          "qwen/qwen3.8-27b": {
+            "rpm": 30,
+            "rpd": 1000,
+            "tpm": 8000,
+            "tpd": 200000
+          },
+          "whisper-large-v3": {
+            "rpm": 20,
+            "rpd": 2000,
+            "ash": 7200,
+            "asd": 28800
+          },
+          "whisper-large-v3-turbo": {
+            "rpm": 20,
+            "rpd": 2000,
+            "ash": 7200,
+            "asd": 28800
+          }
+        }
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan rate limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1317,6 +1472,189 @@
       "verification_status": "active",
       "is_recommended": true,
       "recommendation_reason": "Official current Free Plan limit rows name these exact models; check the account limits page because organization limits and availability may differ."
+    },
+    {
+      "provider": "Cerebras Inference",
+      "record_level": "offer",
+      "provider_id": "cerebras",
+      "offer_id": "cerebras-developer-intro-promotion",
+      "channel_type": "third_party_inference_provider",
+      "country_or_region": "",
+      "official": true,
+      "api_base": "",
+      "openai_compatible": "unknown",
+      "anthropic_compatible": "unknown",
+      "free_type": "trial_credit",
+      "free_quota": "$5 one-time promotional credit for 30 days; valid payment method required; no automatic billing; API pauses after expiry or exhaustion unless PayGo is separately purchased",
+      "free_quota_unit": "USD credit",
+      "quota_reset": "One-time promotion; 30-day validity",
+      "expires": "30 days after activation; current pricing page does not publish a separate end date",
+      "requires_card": "yes",
+      "requires_identity_verification": "unknown",
+      "requires_phone_region": "unknown",
+      "model_id": "",
+      "model_name": "",
+      "model_scope": "unknown",
+      "model_type": "unknown",
+      "model_family": "",
+      "context_window": null,
+      "modalities": [],
+      "input_modalities": [],
+      "output_modalities": [],
+      "capabilities": [],
+      "capabilities_source_url": "",
+      "model_pricing": {},
+      "rate_limits": {},
+      "quota_scope": "one_time",
+      "applies_to_models": [],
+      "tool_calling": "unknown",
+      "structured_output": "unknown",
+      "reasoning": "unknown",
+      "web_search": "unknown",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "privacy_notes": "",
+      "data_training_policy": "unknown",
+      "terms_risk": "",
+      "source_type": "official_pricing",
+      "source_name": "Cerebras current pricing",
+      "source_url": "https://www.cerebras.ai/pricing",
+      "evidence_summary": "Current self-service developer pricing describes a one-time $5 promotional credit valid for 30 days and requires a valid payment method. It says users are not automatically billed and API access pauses unless they separately buy PayGo. Current API model IDs are not listed on the pricing page.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "Current official pricing supports this one-time promotion; no model IDs are inferred.",
+      "fetch_status": "pending",
+      "error_summary": ""
+    },
+    {
+      "provider": "Baidu Qianfan / ERNIE",
+      "record_level": "offer",
+      "provider_id": "baidu-qianfan",
+      "offer_id": "baidu-qianfan-new-user-coupon",
+      "channel_type": "third_party_inference_provider",
+      "country_or_region": "",
+      "official": true,
+      "api_base": "",
+      "openai_compatible": "unknown",
+      "anthropic_compatible": "unknown",
+      "free_type": "new_user_credit",
+      "free_quota": "20 RMB new-user coupon; current official page says no usage threshold",
+      "free_quota_unit": "CNY",
+      "quota_reset": "Issued once to eligible new users after real-name verification",
+      "expires": "One month from issuance",
+      "requires_card": "unknown",
+      "requires_identity_verification": "yes",
+      "requires_phone_region": "unknown",
+      "model_id": "",
+      "model_name": "",
+      "model_scope": "unknown",
+      "model_type": "unknown",
+      "model_family": "",
+      "context_window": null,
+      "modalities": [],
+      "input_modalities": [],
+      "output_modalities": [],
+      "capabilities": [],
+      "capabilities_source_url": "",
+      "model_pricing": {},
+      "rate_limits": {},
+      "quota_scope": "one_time",
+      "applies_to_models": [],
+      "tool_calling": "unknown",
+      "structured_output": "unknown",
+      "reasoning": "unknown",
+      "web_search": "unknown",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "privacy_notes": "",
+      "data_training_policy": "unknown",
+      "terms_risk": "",
+      "source_type": "official_docs",
+      "source_name": "Baidu Qianfan new-user coupon",
+      "source_url": "https://cloud.baidu.com/doc/Qianfan/index.html",
+      "evidence_summary": "Current official Qianfan product documentation lists a 20 RMB coupon for newly verified users with one-month validity. It does not give an exact model ID or model-level free API eligibility.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "The current provider-level coupon is documented; no specific free model is inferred.",
+      "fetch_status": "pending",
+      "error_summary": ""
+    },
+    {
+      "provider": "Tencent Cloud TokenHub",
+      "record_level": "offer",
+      "provider_id": "tencent-tokenhub",
+      "offer_id": "tokenhub-language-model-free-package-2026",
+      "channel_type": "third_party_inference_provider",
+      "country_or_region": "",
+      "official": true,
+      "api_base": "",
+      "openai_compatible": "unknown",
+      "anthropic_compatible": "unknown",
+      "free_type": "limited_time_promotion",
+      "free_quota": "1,000,000 free tokens per eligible language model; freezes $10 account balance/credit per model until endpoint deletion",
+      "free_quota_unit": "tokens/model",
+      "quota_reset": "Each model can claim once; one-time per-model package",
+      "expires": "One year after claim; campaign ends 2026-12-31",
+      "requires_card": "unknown",
+      "requires_identity_verification": "unknown",
+      "requires_phone_region": "unknown",
+      "model_id": "",
+      "model_name": "",
+      "model_scope": "unknown",
+      "model_type": "unknown",
+      "model_family": "",
+      "context_window": null,
+      "modalities": [],
+      "input_modalities": [],
+      "output_modalities": [],
+      "capabilities": [],
+      "capabilities_source_url": "",
+      "model_pricing": {},
+      "rate_limits": {},
+      "quota_scope": "per_model",
+      "applies_to_models": [
+        "deepseek-v4-flash",
+        "glm-5.3-flash"
+      ],
+      "tool_calling": "unknown",
+      "structured_output": "unknown",
+      "reasoning": "unknown",
+      "web_search": "unknown",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "privacy_notes": "",
+      "data_training_policy": "unknown",
+      "terms_risk": "",
+      "source_type": "official_docs",
+      "source_name": "TokenHub free experience package terms",
+      "source_url": "https://intl.cloud.tencent.com/zh/document/product/1300/80423",
+      "evidence_summary": "Official TokenHub terms state all language models may receive a one-time 1M-token package through 2026-12-31. Each model is claimable once, quota expires one year after claim, and the account freezes $10 balance/credit per model; insufficient balance prevents a claim.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "Current official terms cover language models; these exact IDs are verified in Tencent model documentation.",
+      "fetch_status": "pending",
+      "error_summary": ""
     }
   ],
   "models": [
@@ -1325,21 +1663,52 @@
       "offer_id": "gemini-api-free-tier",
       "model_id": "gemini-3.5-flash-lite",
       "model_name": "Gemini 3.5 Flash-Lite",
-      "model_type": "chat",
+      "model_type": "multimodal_llm",
       "model_family": "Gemini 3.5",
-      "context_window": null,
-      "modalities": ["text", "image", "audio", "video"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "free_tier_standard"},
+      "context_window": 1048576,
+      "modalities": [
+        "audio",
+        "image",
+        "pdf",
+        "text",
+        "video"
+      ],
+      "model_pricing": {
+        "input": "0",
+        "output": "0",
+        "unit": "USD per token"
+      },
       "source_type": "official_pricing",
-      "source_name": "Gemini Developer API pricing",
-      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
-      "evidence_summary": "The current official pricing table marks Standard input and output as Free Tier; grounding and other tools have separate terms.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_name": "Gemini 3.5 Flash-Lite model and pricing",
+      "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+      "evidence_summary": "Official model docs list a 1,048,576-token context, function calling, structured outputs and thinking; the standard Free Tier table lists free input and output.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Exact API model ID is shown on Google's official pricing page with $0 Standard input/output."
+      "recommendation_reason": "Exact API model ID is shown on Google's official pricing page with $0 Standard input/output.",
+      "model_scope": "core_llm",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "pdf"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "capabilities_source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
     },
     {
       "provider_id": "google-gemini",
@@ -1349,18 +1718,32 @@
       "model_type": "speech_generation",
       "model_family": "Gemini 3.8",
       "context_window": null,
-      "modalities": ["text", "audio"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "free_tier_standard"},
+      "modalities": [
+        "audio",
+        "text"
+      ],
+      "model_pricing": {
+        "input": "0",
+        "output": "0",
+        "unit": "USD per token"
+      },
       "source_type": "official_pricing",
       "source_name": "Gemini Developer API pricing",
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
       "evidence_summary": "The Standard tier table marks text input and audio output Free Tier; grounding/tool pricing is separate.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Exact API model ID and free Standard input/output are shown on the official pricing page."
+      "recommendation_reason": "Exact API model ID and free Standard input/output are shown on the official pricing page.",
+      "model_scope": "related_ai_api",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "audio"
+      ]
     },
     {
       "provider_id": "google-gemini",
@@ -1370,82 +1753,147 @@
       "model_type": "speech_generation",
       "model_family": "Gemini 3.8",
       "context_window": null,
-      "modalities": ["text", "audio"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "free_tier_standard"},
+      "modalities": [
+        "audio",
+        "text"
+      ],
+      "model_pricing": {
+        "input": "0",
+        "output": "0",
+        "unit": "USD per token"
+      },
       "source_type": "official_pricing",
       "source_name": "Gemini Developer API pricing",
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
       "evidence_summary": "The Standard tier table marks text input and audio output Free Tier; grounding/tool pricing is separate.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Exact API model ID and free Standard input/output are shown on the official pricing page."
+      "recommendation_reason": "Exact API model ID and free Standard input/output are shown on the official pricing page.",
+      "model_scope": "related_ai_api",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "audio"
+      ]
     },
     {
       "provider_id": "cerebras",
       "offer_id": "cerebras-free-tier",
       "model_id": "zai-glm-4.7",
       "model_name": "Z.ai GLM 4.7 on Cerebras",
-      "model_type": "chat",
+      "model_type": "text_llm",
       "model_family": "GLM 4.7",
       "context_window": null,
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "free_tier"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "free_tier"
+      },
       "tool_calling": "supported",
       "source_type": "official_docs",
       "source_name": "Cerebras Z.ai GLM 4.7 model page",
       "source_url": "https://inference-docs.cerebras.ai/models/zai-glm-47",
-      "evidence_summary": "Official model page specifies model ID zai-glm-4.7 and labels its access Free Tier; it also documents tool calling. Exact numeric limits depend on account tier.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
-      "confidence": "high",
-      "verification_status": "active",
-      "is_recommended": true,
-      "recommendation_reason": "Official model-specific docs identify this exact model as Free Tier."
+      "evidence_summary": "The official page documents the exact ID and tool support, but its Free Tier claim conflicts with current pricing; current free eligibility is not confirmed.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "medium",
+      "verification_status": "pending",
+      "is_recommended": false,
+      "recommendation_reason": "Official model-specific docs identify this exact model as Free Tier.",
+      "model_scope": "core_llm",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "free_type": "not_free_or_unverified",
+      "api_base": "https://api.cerebras.ai/v1",
+      "openai_compatible": "yes",
+      "capabilities_source_url": "https://inference-docs.cerebras.ai/models/zai-glm-47"
     },
     {
       "provider_id": "cloudflare-workers-ai",
       "offer_id": "workers-ai-daily-neurons",
       "model_id": "@cf/zai-org/glm-4.7-flash",
       "model_name": "GLM-4.7-Flash on Workers AI",
-      "model_type": "chat",
+      "model_type": "text_llm",
       "model_family": "GLM 4.7 Flash",
       "context_window": null,
-      "modalities": ["text"],
-      "model_pricing": {"billing_unit": "Neurons", "free_allocation_applies": true},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "billing_unit": "Neurons",
+        "free_allocation_applies": true
+      },
       "source_type": "official_docs",
-      "source_name": "Cloudflare Workers AI model catalog",
-      "source_url": "https://developers.cloudflare.com/workers-ai/models/",
-      "evidence_summary": "Model ID appears in the official Workers AI catalog and is not among the listed models whose free-tier access was removed in the reviewed changelog.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_name": "Workers AI GLM-4.7-Flash model page",
+      "source_url": "https://developers.cloudflare.com/workers-ai/models/glm-4.7-flash/",
+      "evidence_summary": "The exact model is in the current Workers AI catalog and free Neurons eligibility list. Its official model page documents tool use.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "medium",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Use within the daily Neurons allocation after confirming current model pricing and availability."
+      "recommendation_reason": "Use within the daily Neurons allocation after confirming current model pricing and availability.",
+      "model_scope": "core_llm",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "api_base": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
+      "openai_compatible": "partial",
+      "tool_calling": "supported",
+      "capabilities": [
+        "agent_workflows"
+      ],
+      "capabilities_source_url": "https://developers.cloudflare.com/workers-ai/models/glm-4.7-flash/"
     },
     {
       "provider_id": "cloudflare-workers-ai",
       "offer_id": "workers-ai-daily-neurons",
       "model_id": "@cf/google/gemma-4-26b-a4b-it",
       "model_name": "Gemma 4 26B A4B IT on Workers AI",
-      "model_type": "chat",
+      "model_type": "text_llm",
       "model_family": "Gemma 4",
       "context_window": null,
-      "modalities": ["text"],
-      "model_pricing": {"billing_unit": "Neurons", "free_allocation_applies": true},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "billing_unit": "Neurons",
+        "free_allocation_applies": true
+      },
       "source_type": "official_docs",
       "source_name": "Cloudflare Workers AI model catalog",
       "source_url": "https://developers.cloudflare.com/workers-ai/models/",
-      "evidence_summary": "Model ID appears in the official Workers AI catalog and is eligible for the daily Neurons allocation according to the current pricing page; recheck before use.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "The exact model is in the current Workers AI model catalog and free Neurons eligibility list; capability fields not explicitly documented remain unknown.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "medium",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Use within the daily Neurons allocation after confirming current model pricing and availability."
+      "recommendation_reason": "Use within the daily Neurons allocation after confirming current model pricing and availability.",
+      "model_scope": "core_llm",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "api_base": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
+      "openai_compatible": "partial"
     },
     {
       "provider_id": "zhipu-bigmodel",
@@ -1455,8 +1903,15 @@
       "model_type": "chat",
       "model_family": "GLM 4.7",
       "context_window": null,
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "CNY", "basis": "official_free_model"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "CNY",
+        "basis": "official_free_model"
+      },
       "source_type": "official_announcement",
       "source_name": "Zhipu GLM-4.7-Flash announcement",
       "source_url": "https://www.zhipuai.cn/zh/news/148",
@@ -1475,7 +1930,9 @@
       "model_name": "Qwen 3.8 Max",
       "model_type": "chat",
       "model_family": "Qwen 3.8",
-      "modalities": ["text"],
+      "modalities": [
+        "text"
+      ],
       "source_type": "official_docs",
       "source_name": "Model Studio new-user free quota example",
       "source_url": "https://help.aliyun.com/zh/model-studio/new-free-quota/",
@@ -1494,7 +1951,9 @@
       "model_name": "Command A",
       "model_type": "chat",
       "model_family": "Command A",
-      "modalities": ["text"],
+      "modalities": [
+        "text"
+      ],
       "source_type": "official_docs",
       "source_name": "Cohere models catalog",
       "source_url": "https://docs.cohere.com/v1/docs/models",
@@ -1513,7 +1972,9 @@
       "model_name": "Command R7B",
       "model_type": "chat",
       "model_family": "Command R",
-      "modalities": ["text"],
+      "modalities": [
+        "text"
+      ],
       "source_type": "official_docs",
       "source_name": "Cohere models catalog",
       "source_url": "https://docs.cohere.com/v1/docs/models",
@@ -1532,7 +1993,9 @@
       "model_name": "Rerank 4.0 Fast",
       "model_type": "rerank",
       "model_family": "Rerank 4.0",
-      "modalities": ["text"],
+      "modalities": [
+        "text"
+      ],
       "source_type": "official_docs",
       "source_name": "Cohere models catalog",
       "source_url": "https://docs.cohere.com/v1/docs/models",
@@ -1551,7 +2014,10 @@
       "model_name": "Embed 4.0",
       "model_type": "embedding",
       "model_family": "Embed 4.0",
-      "modalities": ["text", "image"],
+      "modalities": [
+        "text",
+        "image"
+      ],
       "source_type": "official_docs",
       "source_name": "Cohere models catalog",
       "source_url": "https://docs.cohere.com/v1/docs/models",
@@ -1570,8 +2036,15 @@
       "model_name": "InclusionAI Ling 3.1 Flash 1019 (Vercel AI Gateway route)",
       "model_type": "chat",
       "model_family": "Ling 3.1",
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "live_ai_gateway_catalog_free_price"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "live_ai_gateway_catalog_free_price"
+      },
       "source_type": "official_api",
       "source_name": "Vercel AI Gateway model catalog",
       "source_url": "https://vercel.com/ai-gateway/models?features=free",
@@ -1590,8 +2063,15 @@
       "model_name": "NVIDIA Nemotron 3.5 Lightning Free (Vercel AI Gateway route)",
       "model_type": "chat",
       "model_family": "Nemotron 3.5",
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "live_ai_gateway_catalog_free_price"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "live_ai_gateway_catalog_free_price"
+      },
       "source_type": "official_api",
       "source_name": "Vercel AI Gateway model catalog",
       "source_url": "https://vercel.com/ai-gateway/models?features=free",
@@ -1611,8 +2091,15 @@
       "model_type": "chat",
       "model_family": "Ling 3.1",
       "context_window": 256000,
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "novita_model_page_per_million_tokens"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "novita_model_page_per_million_tokens"
+      },
       "tool_calling": "supported",
       "reasoning": "supported",
       "source_type": "official_pricing",
@@ -1624,7 +2111,8 @@
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Model-specific official pricing is zero for input/output; exact availability can change."
+      "recommendation_reason": "Model-specific official pricing is zero for input/output; exact availability can change.",
+      "capabilities_source_url": "https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing"
     },
     {
       "provider_id": "novita",
@@ -1634,8 +2122,15 @@
       "model_type": "chat",
       "model_family": "Ling 3.0",
       "context_window": 256000,
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "novita_time_limited_catalog_price"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "novita_time_limited_catalog_price"
+      },
       "tool_calling": "supported",
       "reasoning": "supported",
       "source_type": "official_pricing",
@@ -1647,30 +2142,53 @@
       "confidence": "medium",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Time-limited catalog price; recheck the official page before use."
+      "recommendation_reason": "Time-limited catalog price; recheck the official page before use.",
+      "capabilities_source_url": "https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin"
     },
     {
       "provider_id": "novita",
       "offer_id": "novita-ling-3-0-limited-promotion",
       "model_id": "inclusionai/ling-3.0-flash-vl",
       "model_name": "InclusionAI Ling 3.0 Flash VL",
-      "model_type": "chat",
+      "model_type": "multimodal_llm",
       "model_family": "Ling 3.0",
       "context_window": 256000,
-      "modalities": ["text", "image", "video"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "novita_time_limited_catalog_price"},
+      "modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "novita_time_limited_catalog_price"
+      },
       "tool_calling": "supported",
       "reasoning": "supported",
       "source_type": "official_pricing",
       "source_name": "Novita Ling 3.0 Flash VL model details",
       "source_url": "https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-vl",
       "evidence_summary": "Official model details list the exact direct API ID, text/image/video input, zero input/output prices, 256K context, function calling and reasoning. The current catalog marks selected free listings time-limited.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "medium",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Time-limited catalog price; recheck the official page before use."
+      "recommendation_reason": "Time-limited catalog price; recheck the official page before use.",
+      "model_scope": "core_llm",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "capabilities": [
+        "image_understanding"
+      ],
+      "capabilities_source_url": "https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-vl"
     },
     {
       "provider_id": "novita",
@@ -1680,8 +2198,15 @@
       "model_type": "chat",
       "model_family": "Ling 3.0",
       "context_window": 256000,
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "novita_time_limited_catalog_price"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "novita_time_limited_catalog_price"
+      },
       "tool_calling": "supported",
       "reasoning": "supported",
       "source_type": "official_pricing",
@@ -1693,7 +2218,8 @@
       "confidence": "medium",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Time-limited catalog price; recheck the official page before use."
+      "recommendation_reason": "Time-limited catalog price; recheck the official page before use.",
+      "capabilities_source_url": "https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante?from=pricing"
     },
     {
       "provider_id": "novita",
@@ -1703,8 +2229,15 @@
       "model_type": "chat",
       "model_family": "Apodex 1.1",
       "context_window": 256000,
-      "modalities": ["text"],
-      "model_pricing": {"input": 0, "output": 0, "currency": "USD", "basis": "novita_launch_promotion"},
+      "modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "USD",
+        "basis": "novita_launch_promotion"
+      },
       "tool_calling": "supported",
       "structured_output": "supported",
       "reasoning": "supported",
@@ -1717,7 +2250,8 @@
       "confidence": "medium",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Treat as temporary launch pricing and verify the current official model page."
+      "recommendation_reason": "Treat as temporary launch pricing and verify the current official model page.",
+      "capabilities_source_url": "https://novita.ai/models/model-detail/apodex-apodex-1.1-mini?from=pricing"
     },
     {
       "provider_id": "groqcloud",
@@ -1727,8 +2261,16 @@
       "model_type": "speech_generation",
       "model_family": "Orpheus",
       "context_window": 4000,
-      "modalities": ["text", "audio"],
-      "rate_limits": {"rpm": 10, "rpd": 100, "tpm": 1200, "tpd": 3600},
+      "modalities": [
+        "text",
+        "audio"
+      ],
+      "rate_limits": {
+        "rpm": 10,
+        "rpd": 100,
+        "tpm": 1200,
+        "tpd": 3600
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1748,8 +2290,16 @@
       "model_type": "speech_generation",
       "model_family": "Orpheus",
       "context_window": 4000,
-      "modalities": ["text", "audio"],
-      "rate_limits": {"rpm": 10, "rpd": 100, "tpm": 1200, "tpd": 3600},
+      "modalities": [
+        "text",
+        "audio"
+      ],
+      "rate_limits": {
+        "rpm": 10,
+        "rpd": 100,
+        "tpm": 1200,
+        "tpd": 3600
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1769,8 +2319,15 @@
       "model_type": "content_moderation",
       "model_family": "Llama Prompt Guard 2",
       "context_window": 512,
-      "modalities": ["text"],
-      "rate_limits": {"rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000},
+      "modalities": [
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 30,
+        "rpd": 14400,
+        "tpm": 15000,
+        "tpd": 500000
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1790,8 +2347,15 @@
       "model_type": "content_moderation",
       "model_family": "Llama Prompt Guard 2",
       "context_window": 512,
-      "modalities": ["text"],
-      "rate_limits": {"rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000},
+      "modalities": [
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 30,
+        "rpd": 14400,
+        "tpm": 15000,
+        "tpd": 500000
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1811,18 +2375,31 @@
       "model_type": "chat",
       "model_family": "GPT OSS",
       "context_window": 131072,
-      "modalities": ["text"],
-      "rate_limits": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000},
+      "modalities": [
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 30,
+        "rpd": 1000,
+        "tpm": 8000,
+        "tpd": 200000
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
       "evidence_summary": "Exact ID is listed in the Free Plan Limits table and supported-models page; the model page states 131,072 context tokens. Free-plan limit shown: 30 RPM, 1K RPD, 8K TPM and 200K TPD.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits."
+      "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits.",
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "capabilities": [
+        "agent_workflows"
+      ],
+      "capabilities_source_url": "https://console.groq.com/docs/tool-use/overview"
     },
     {
       "provider_id": "groqcloud",
@@ -1832,18 +2409,31 @@
       "model_type": "chat",
       "model_family": "GPT OSS",
       "context_window": 131072,
-      "modalities": ["text"],
-      "rate_limits": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000},
+      "modalities": [
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 30,
+        "rpd": 1000,
+        "tpm": 8000,
+        "tpd": 200000
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
       "evidence_summary": "Exact ID is listed in the Free Plan Limits table and supported-models page; the model page states 131,072 context tokens. Free-plan limit shown: 30 RPM, 1K RPD, 8K TPM and 200K TPD.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits."
+      "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits.",
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "capabilities": [
+        "agent_workflows"
+      ],
+      "capabilities_source_url": "https://console.groq.com/docs/tool-use/overview"
     },
     {
       "provider_id": "groqcloud",
@@ -1853,8 +2443,15 @@
       "model_type": "content_moderation",
       "model_family": "GPT OSS Safeguard",
       "context_window": 131072,
-      "modalities": ["text"],
-      "rate_limits": {"rpm": 3, "rpd": 1000, "tpm": 2000, "tpd": 200000},
+      "modalities": [
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 3,
+        "rpd": 1000,
+        "tpm": 2000,
+        "tpd": 200000
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1874,18 +2471,31 @@
       "model_type": "chat",
       "model_family": "Qwen 3.8",
       "context_window": 131072,
-      "modalities": ["text"],
-      "rate_limits": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000},
+      "modalities": [
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 30,
+        "rpd": 1000,
+        "tpm": 8000,
+        "tpd": 200000
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
       "evidence_summary": "Exact ID is listed in the Free Plan Limits table and supported-models page; the model page states 131,072 context tokens. Free-plan limit shown: 30 RPM, 1K RPD, 8K TPM and 200K TPD.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits."
+      "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits.",
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "capabilities": [
+        "agent_workflows"
+      ],
+      "capabilities_source_url": "https://console.groq.com/docs/tool-use/overview"
     },
     {
       "provider_id": "groqcloud",
@@ -1895,8 +2505,16 @@
       "model_type": "speech_recognition",
       "model_family": "Whisper",
       "context_window": null,
-      "modalities": ["audio", "text"],
-      "rate_limits": {"rpm": 20, "rpd": 2000, "ash": 7200, "asd": 28800},
+      "modalities": [
+        "audio",
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 20,
+        "rpd": 2000,
+        "ash": 7200,
+        "asd": 28800
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1916,8 +2534,16 @@
       "model_type": "speech_recognition",
       "model_family": "Whisper",
       "context_window": null,
-      "modalities": ["audio", "text"],
-      "rate_limits": {"rpm": 20, "rpd": 2000, "ash": 7200, "asd": 28800},
+      "modalities": [
+        "audio",
+        "text"
+      ],
+      "rate_limits": {
+        "rpm": 20,
+        "rpd": 2000,
+        "ash": 7200,
+        "asd": 28800
+      },
       "source_type": "official_docs",
       "source_name": "Groq Free Plan limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
@@ -1928,6 +2554,211 @@
       "verification_status": "active",
       "is_recommended": true,
       "recommendation_reason": "Official documentation names the model in the Free Plan Limits table; verify current account limits."
+    },
+    {
+      "record_level": "model",
+      "provider_id": "google-gemini",
+      "offer_id": "gemini-api-free-tier",
+      "official": true,
+      "free_type": "stable_free_tier",
+      "model_id": "gemini-3.1-flash-lite",
+      "model_name": "Gemini 3.1 Flash-Lite",
+      "model_scope": "core_llm",
+      "model_type": "multimodal_llm",
+      "context_window": 1048576,
+      "modalities": [
+        "audio",
+        "image",
+        "pdf",
+        "text",
+        "video"
+      ],
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "pdf"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "capabilities_source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite",
+      "model_pricing": {
+        "input": "0",
+        "output": "0",
+        "unit": "USD per token"
+      },
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "source_type": "official_docs",
+      "source_name": "Gemini 3.1 Flash-Lite model and pricing",
+      "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite",
+      "evidence_summary": "Official model docs list a 1,048,576-token context, function calling, structured outputs and thinking; the standard Free Tier table lists free input and output.",
+      "last_checked": "2026-11-02",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "Official model docs list a 1,048,576-token context, function calling, structured outputs and thinking; the standard Free Tier table lists free input and output."
+    },
+    {
+      "record_level": "model",
+      "provider_id": "cohere",
+      "offer_id": "cohere-evaluation-key",
+      "official": true,
+      "api_base": "https://api.cohere.com/v2",
+      "openai_compatible": "partial",
+      "free_type": "monthly_evaluation_tier",
+      "free_quota": "Uses the shared Cohere evaluation allowance",
+      "free_quota_unit": "model calls/month",
+      "model_id": "north-mini-code-1.0",
+      "model_name": "North Mini Code 1.0",
+      "model_scope": "core_llm",
+      "model_type": "text_llm",
+      "context_window": 256000,
+      "modalities": [
+        "text"
+      ],
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "capabilities": [
+        "agent_workflows",
+        "code_generation",
+        "long_context"
+      ],
+      "capabilities_source_url": "https://docs.cohere.com/docs/north-mini-code-1.0",
+      "rate_limits": {
+        "rpm": 20
+      },
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "source_type": "official_docs",
+      "source_name": "Cohere North Mini Code model",
+      "source_url": "https://docs.cohere.com/docs/north-mini-code-1.0",
+      "evidence_summary": "Official model docs list north-mini-code-1.0, a 256K context, tool use and agentic coding; the model page identifies evaluation-key access under Cohere limits.",
+      "last_checked": "2026-11-01",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "Official model docs list north-mini-code-1.0, a 256K context, tool use and agentic coding; the model page identifies evaluation-key access under Cohere limits."
+    },
+    {
+      "record_level": "model",
+      "provider_id": "tencent-tokenhub",
+      "offer_id": "tokenhub-language-model-free-package-2026",
+      "official": true,
+      "api_base": "https://tokenhub.tencentmaas.com/v1",
+      "openai_compatible": "yes",
+      "free_type": "limited_time_promotion",
+      "free_quota": "1,000,000 tokens per model for one year after claim",
+      "free_quota_unit": "tokens/model",
+      "model_id": "deepseek-v4-flash",
+      "model_name": "DeepSeek V4 Flash",
+      "model_scope": "core_llm",
+      "model_type": "text_llm",
+      "context_window": 1000000,
+      "modalities": [
+        "text"
+      ],
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "capabilities": [
+        "agent_workflows",
+        "long_context",
+        "reasoning"
+      ],
+      "capabilities_source_url": "https://cloud.tencent.com/document/product/1823/132248",
+      "quota_scope": "per_model",
+      "tool_calling": "supported",
+      "reasoning": "supported",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "source_type": "official_docs",
+      "source_name": "Tencent TokenHub DeepSeek V4 model guide",
+      "source_url": "https://cloud.tencent.com/document/product/1823/132248",
+      "evidence_summary": "Tencent docs name the exact ID, 1M-token context, reasoning and tool calls. Current TokenHub package terms apply to language models.",
+      "last_checked": "2026-11-01",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "Tencent docs name the exact ID, 1M-token context, reasoning and tool calls. Current TokenHub package terms apply to language models."
+    },
+    {
+      "record_level": "model",
+      "provider_id": "tencent-tokenhub",
+      "offer_id": "tokenhub-language-model-free-package-2026",
+      "official": true,
+      "api_base": "https://tokenhub.tencentmaas.com/v1",
+      "openai_compatible": "yes",
+      "free_type": "limited_time_promotion",
+      "free_quota": "1,000,000 tokens per model for one year after claim",
+      "free_quota_unit": "tokens/model",
+      "model_id": "glm-5.3-flash",
+      "model_name": "GLM 5.3 Flash",
+      "model_scope": "core_llm",
+      "model_type": "text_llm",
+      "modalities": [
+        "text"
+      ],
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "capabilities": [],
+      "capabilities_source_url": "",
+      "quota_scope": "per_model",
+      "coding_score_tier": "unknown",
+      "reasoning_score_tier": "unknown",
+      "long_context_score_tier": "unknown",
+      "multimodal_score_tier": "unknown",
+      "speed_tier": "unknown",
+      "source_type": "official_docs",
+      "source_name": "Tencent TokenHub model inventory",
+      "source_url": "https://cloud.tencent.com/document/product/1823/130078",
+      "evidence_summary": "The exact ID appears in Tencent TokenHub model docs; the current free package applies to language models.",
+      "last_checked": "2026-11-01",
+      "verified_at": "2026-11-02",
+      "confidence": "high",
+      "verification_status": "active",
+      "data_origin": "manual",
+      "is_recommended": true,
+      "recommendation_reason": "The exact ID appears in Tencent TokenHub model docs; the current free package applies to language models."
     }
   ]
 }

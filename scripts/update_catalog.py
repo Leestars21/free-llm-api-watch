@@ -19,6 +19,7 @@ from catalog_schema import (
     empty_record,
     load_catalog,
     load_json,
+    migrate_model_metadata,
     record_key,
     today_utc,
     write_catalog,
@@ -128,6 +129,7 @@ def normalize_existing(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
             and not record.get("offer_id")
         ):
             record["offer_id"] = "openrouter-free-model-route"
+        record = migrate_model_metadata(record)
         normalized.append(record)
     return normalized
 
@@ -212,6 +214,7 @@ def build_manual_records() -> list[dict[str, Any]]:
             "free_quota_unit", offer.get("free_quota_unit", "")
         )
         record["rate_limits"] = source.get("rate_limits", offer.get("rate_limits", {}))
+        record = migrate_model_metadata(record)
         records.append(record)
     return records
 
@@ -276,33 +279,57 @@ def merge_records(
     return list(merged.values())
 
 
-def infer_modalities(model: dict[str, Any]) -> list[str]:
+def openrouter_modalities(model: dict[str, Any]) -> tuple[list[str], list[str]]:
     architecture = model.get("architecture") or {}
-    values = architecture.get("input_modalities") or []
+    inputs = architecture.get("input_modalities") or []
     outputs = architecture.get("output_modalities") or []
-    modalities = {str(value).lower() for value in [*values, *outputs]}
-    if not modalities:
-        text = " ".join(
-            [
-                str(model.get("id", "")),
-                str(model.get("name", "")),
-                str(architecture.get("modality", "")),
-            ]
-        ).lower()
-        modalities.add("text")
-        for modality in ("image", "audio", "video"):
-            if modality in text or modality in {"vision"}:
-                if modality == "vision":
-                    modalities.add("image")
-                else:
-                    modalities.add(modality)
-    return sorted(modalities)
+    if (not inputs or not outputs) and isinstance(architecture.get("modality"), str):
+        sides = architecture["modality"].lower().split("->", maxsplit=1)
+        if len(sides) == 2:
+            if not inputs:
+                inputs = [part.strip() for part in sides[0].split("+") if part.strip()]
+            if not outputs:
+                outputs = [part.strip() for part in sides[1].split("+") if part.strip()]
+    return (
+        sorted({str(value).lower() for value in inputs}),
+        sorted({str(value).lower() for value in outputs}),
+    )
 
 
-def model_type_from_modalities(modalities: list[str]) -> str:
-    if "audio" in modalities or "video" in modalities or "image" in modalities:
-        return "multimodal"
-    return "chat"
+OPENROUTER_MODEL_TYPE_OVERRIDES = {
+    "google/lyria-3-clip-preview": "music_generation",
+    "google/lyria-3-pro-preview": "music_generation",
+    "nvidia/nemotron-3.5-content-safety": "content_moderation",
+    "openrouter/free": "routing_alias",
+}
+
+
+def model_type_from_modalities(
+    model_id: str, input_modalities: list[str], output_modalities: list[str]
+) -> str:
+    """Classify only from explicit API metadata or a reviewed exact-ID override."""
+    exact_id = model_id.removesuffix(":free")
+    if exact_id in OPENROUTER_MODEL_TYPE_OVERRIDES:
+        return OPENROUTER_MODEL_TYPE_OVERRIDES[exact_id]
+    inputs = set(input_modalities)
+    outputs = set(output_modalities)
+    if "embedding" in outputs:
+        return "embedding"
+    if "score" in outputs:
+        return "rerank"
+    if "audio" in outputs and "text" in inputs and "text" not in outputs:
+        return "speech_generation"
+    if "audio" in inputs and "text" in outputs and not ({"image", "video"} & inputs):
+        return "speech_recognition"
+    if "text" in inputs and "text" in outputs:
+        if {"image", "audio", "video"} & (inputs | outputs):
+            return "multimodal_llm"
+        return "text_llm"
+    if "text" in inputs and "image" in outputs:
+        return "image_generation"
+    if "text" in inputs and "video" in outputs:
+        return "video_generation"
+    return "unknown"
 
 
 def build_openrouter_record(model: dict[str, Any], checked: str) -> dict[str, Any]:
@@ -313,7 +340,22 @@ def build_openrouter_record(model: dict[str, Any], checked: str) -> dict[str, An
         context_window = int(context) if context is not None else None
     except (TypeError, ValueError):
         context_window = None
-    modalities = infer_modalities(model)
+    input_modalities, output_modalities = openrouter_modalities(model)
+    model_type = model_type_from_modalities(model_id, input_modalities, output_modalities)
+    modalities = sorted(set(input_modalities) | set(output_modalities))
+    supported_parameters = model.get("supported_parameters") or []
+    if not isinstance(supported_parameters, list):
+        supported_parameters = []
+    tool_calling = "supported" if "tools" in supported_parameters else "unknown"
+    structured_output = (
+        "supported" if {"response_format", "structured_outputs"} & set(supported_parameters) else "unknown"
+    )
+    # The endpoint accepting a `reasoning` request parameter does not prove the
+    # model has a documented reasoning capability.
+    reasoning = "unknown"
+    capabilities = []
+    if tool_calling == "supported":
+        capabilities.append("agent_workflows")
     record = empty_record(
         provider="OpenRouter",
         record_level="model",
@@ -334,10 +376,22 @@ def build_openrouter_record(model: dict[str, Any], checked: str) -> dict[str, An
         quota_scope="per_model",
         model_id=model_id,
         model_name=str(model.get("name") or model_id),
-        model_type=model_type_from_modalities(modalities),
+        model_scope="core_llm" if model_type in {"text_llm", "multimodal_llm"} else "related_ai_api" if model_type != "unknown" else "unknown",
+        model_type=model_type,
         model_family=model_id.split("/", 1)[0] if "/" in model_id else "unknown",
         context_window=context_window,
         modalities=modalities,
+        input_modalities=input_modalities,
+        output_modalities=output_modalities,
+        capabilities=capabilities,
+        capabilities_source_url=(
+            "https://openrouter.ai/api/v1/models"
+            if capabilities or structured_output == "supported"
+            else ""
+        ),
+        tool_calling=tool_calling,
+        structured_output=structured_output,
+        reasoning=reasoning,
         model_pricing={"unit": "USD per token", **pricing},
         privacy_notes="Third-party routing; review OpenRouter and upstream provider terms before sending sensitive data.",
         terms_risk="Free routing, model eligibility and limits can change without notice.",

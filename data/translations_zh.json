@@ -14,10 +14,10 @@
       "rate_limits": "速率限制与赠送 Token 分开；请在控制台查看"
     },
     "cerebras-free-tier": {
-      "free_quota": "提供 $0 免费层；公开页面未列出适用于所有账号/模型的统一数字额度",
-      "quota_reset": "按账号和模型限速；具体窗口与额度见账户文档",
-      "expires": "官方未公布固定结束日期",
-      "rate_limits": "免费层速率较低；具体限值随账号和模型变化，公开定价页未给出统一数字"
+      "free_quota": "旧官方文档称 0 元 Free Tier，但与当前开发者定价页的试用方案冲突，暂不推荐。",
+      "quota_reset": "旧文档未给出稳定额度；需查账户和当前条款。",
+      "expires": "当前资格与旧文档关系未确认。",
+      "rate_limits": "旧文档所列速率限制不能证明当前免费余额或型号资格。"
     },
     "workers-ai-daily-neurons": {
       "free_quota": "每天 10,000 Neurons",
@@ -26,10 +26,10 @@
       "rate_limits": "另有模型级限制；部分模型不适用免费额度，请查 Workers AI 型号目录"
     },
     "cohere-evaluation-key": {
-      "free_quota": "评估 Key 每月共 1,000 次 API 调用，多个端点共享",
-      "quota_reset": "按月重置",
-      "expires": "评估 Key 使用；生产环境需申请生产 Key",
-      "rate_limits": "文档所列部分聊天模型为 20 RPM；其他端点和模型限制不同"
+      "free_quota": "符合条件的评估 Key 每月最多 1,000 次 API 调用，多个端点共享；另有端点/型号 RPM 限制。",
+      "quota_reset": "每月重置共享调用额度。",
+      "expires": "评估 Key 资格；生产用途需申请 Production Key。",
+      "rate_limits": "聊天模型常见限制为 20 RPM；实际端点与型号限制以官方表格为准。"
     },
     "gemini-api-free-tier": {
       "free_quota": "指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异",
@@ -51,10 +51,10 @@
       "rate_limits": "月度预算之外还会受组织与模型级限制"
     },
     "modelscope-daily-moli-points": {
-      "free_quota": "注册账号每天 200 MoLi 积分；绑定阿里云账号后每天再加 50 分",
-      "quota_reset": "按日发放；积分余额页可查当前情况",
+      "free_quota": "注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享。",
+      "quota_reset": "每日发放；积分按模型大小和任务消耗。",
       "expires": "每日额度及累计积分有效期以当前积分规则为准",
-      "rate_limits": "API-Inference 调用通常按模型大小消耗约 0.5 / 1 / 2 分；其他任务也会共用积分"
+      "rate_limits": "API-Inference 每次通常消耗约 0.5 / 1 / 2 分；可用型号和具体消耗动态变化。"
     },
     "novita-apodex-1-1-mini-launch-promotion": {
       "free_quota": "当前模型页显示输入和输出均为每百万 Token $0，属于上线促销",
@@ -117,10 +117,11 @@
       "rate_limits": "官方范围：聊天 1,000–10,000 RPM / 50,000–5,000,000 TPM；Embedding 2,000–10,000 RPM / 500,000–10,000,000 TPM；重排 2,000 RPM / 500,000 TPM；图像 2 IPM / 400 IPD"
     },
     "tokenhub-migration-experience-credit": {
-      "free_quota": "公告未公布额度金额；仅符合条件的旧平台迁移用户可领取",
-      "quota_reset": "符合资格的迁移用户可领取一次",
-      "expires": "公告称领取后 3 个月",
-      "rate_limits": "具体额度和可用模型需在用户控制台确认"
+      "free_quota": "公告未公布额度；仅符合条件的旧平台迁移用户可领取。",
+      "quota_reset": "符合资格的迁移用户可领取一次。",
+      "expires": "公告称领取后 3 个月。",
+      "requires_phone_region": "以迁移用户账号资格为准。",
+      "rate_limits": "具体额度和型号需在控制台确认。"
     },
     "vercel-ai-gateway-monthly-credit": {
       "free_quota": "符合条件的 Free 团队账号每月有 $5 AI Gateway 额度",
@@ -139,13 +140,34 @@
       "quota_reset": "公告未说明数字额度或重置周期",
       "expires": "公告未注明固定结束日期",
       "rate_limits": "当前请求限制请在 BigModel 控制台查看"
+    },
+    "cerebras-developer-intro-promotion": {
+      "free_quota": "一次性 5 美元推广额度，有效 30 天；需有效支付方式，不会自动扣款；到期或用尽后 API 暂停，除非另购 PayGo。",
+      "quota_reset": "激活后一次性发放。",
+      "expires": "激活后 30 天；定价页未公布单独活动截止日。",
+      "requires_phone_region": "未知",
+      "rate_limits": "推广额度与速率限制分开；当前模型级限速和资格需查控制台。"
+    },
+    "tokenhub-language-model-free-package-2026": {
+      "free_quota": "适用语言模型每个型号 100 万 Token；每个型号需冻结 10 美元账户余额/额度，删除端点后返还。",
+      "quota_reset": "每个模型仅可领取一次。",
+      "expires": "领取后一年；活动截止 2026-12-31。",
+      "requires_phone_region": "账号地区及资格请在 TokenHub 控制台核对。",
+      "rate_limits": "速率限制另行适用，未在该赠额说明中给出。"
+    },
+    "baidu-qianfan-new-user-coupon": {
+      "free_quota": "新用户 20 元优惠券；官方产品页未列出具体免费 API 型号。",
+      "quota_reset": "完成实名认证后符合条件者一次领取。",
+      "expires": "发放后一个月。",
+      "requires_phone_region": "账号地区与手机号要求待核对。",
+      "rate_limits": "优惠券不属于速率限制；具体 API 限速见千帆控制台。"
     }
   },
   "providers": {
     "ai21-labs": "本轮未能从当前官方定价资料确认 API 免费额度、试用金或适用模型 ID。",
     "anthropic-api": "此项仅作为 API 协议参考；本目录未确认 Claude API 的通用免费额度。",
     "baichuan": "本轮未能从当前官方 API/模型目录确认免费政策；历史或活动页面还需对照当前接口复核。",
-    "baidu-qianfan": "可查到 2024 年官方免费公告，但当前资料未能确认相应模型 API 仍可用；暂保留为历史线索。",
+    "baidu-qianfan": "官方产品文档现列出新用户 20 元优惠券，需实名认证，有效期一个月；本次未从该方案确认具体免费 API 型号。",
     "deepinfra": "当前官方定价列出付费价格，API 调用需要绑卡或预付费；未确认通用免费额度。",
     "deepseek": "当前官方 API 定价为按量收费；未确认通用免费额度。开源权重和第三方托管不计入官方 API 免费。",
     "fireworks-ai": "当前定价页未确认免费余额；旧的 $1 赠额资料可能已经过期，需继续复核。",
@@ -161,23 +183,37 @@
     "sambanova-cloud": "当前 Free 方案可浏览控制台，但调用 API 需要添加付款方式并购买额度；不计作免费推理。",
     "tencent-tokenhub-hunyuan": "旧混元 API 平台已于 2026-09-30 停止；迁移用户可领取独立的 TokenHub 体验额度。",
     "together-ai": "官方支持文章称当前没有免费试用，API 使用需先购买最低额度；低价或开源权重不算免费托管 API。",
-    "yi-api": "本轮未能从当前公开官方页面确认免费 API 价格或额度；开源权重不代表托管 API 免费。"
+    "yi-api": "本轮未能从当前公开官方页面确认免费 API 价格或额度；开源权重不代表托管 API 免费。",
+    "cerebras": "当前定价页描述 5 美元、30 天的一次性推广额度且需有效支付方式；旧推理文档仍称 0 元 Free Tier，模型资格存在官方资料冲突。",
+    "cohere": "符合条件的评估 Key 每月最多共享 1,000 次 API 调用，属于按月额度，不是一次性试用。",
+    "tencent-tokenhub": "TokenHub 当前活动按语言模型发放 100 万 Token，领取后有效一年；每个模型冻结 10 美元余额，活动截止 2026-12-31。迁移用户方案另列。",
+    "modelscope": "官方公告记录注册账号每日 200 MoLi 积分；实际模型和每次调用消耗随型号及账号动态变化。"
   },
   "model_types": {
-    "chat": "聊天",
+    "chat": "旧分类（文本交互）",
     "speech_generation": "语音生成",
     "speech_recognition": "语音识别",
     "content_moderation": "内容安全 / 审核",
     "embedding": "Embedding 向量",
     "rerank": "Rerank 重排",
     "image_generation": "图像生成",
-    "multimodal": "多模态",
-    "unknown": "未知"
+    "multimodal": "旧分类（多模态）",
+    "unknown": "未知",
+    "text_llm": "文本大语言模型",
+    "multimodal_llm": "多模态大语言模型",
+    "classification": "分类模型",
+    "music_generation": "音乐生成",
+    "video_generation": "视频生成",
+    "routing_alias": "路由别名"
   },
   "modalities": {
     "text": "文本",
     "image": "图像",
     "audio": "音频",
-    "video": "视频"
+    "video": "视频",
+    "pdf": "PDF",
+    "embedding": "向量",
+    "score": "相关性分数",
+    "label": "类别标签"
   }
 }

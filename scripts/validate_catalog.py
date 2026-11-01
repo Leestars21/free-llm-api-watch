@@ -2,15 +2,21 @@ from __future__ import annotations
 
 import argparse
 from datetime import date
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
 
 from catalog_schema import (
     CATALOG_PATH,
+    CORE_LLM_TYPES,
     ENUMS,
+    MODEL_CAPABILITIES,
+    MODEL_TYPES,
+    MODALITY_TYPES,
     PROTOCOL_REFERENCE_IDS,
     RECOMMENDABLE_FREE_TYPES,
     RECOMMENDABLE_SOURCE_TYPES,
+    RELATED_AI_TYPES,
     REQUIRED_FIELDS,
     SNAPSHOT_REQUIRED_FIELDS,
     SNAPSHOTS_PATH,
@@ -41,8 +47,16 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
         errors.append(f"{label}.official: must be boolean")
     if not isinstance(record.get("is_recommended"), bool):
         errors.append(f"{label}.is_recommended: must be boolean")
-    if not isinstance(record.get("modalities"), list):
-        errors.append(f"{label}.modalities: must be a list")
+    modalities = record.get("modalities")
+    if not isinstance(modalities, list) or any(value not in MODALITY_TYPES for value in modalities):
+        errors.append(f"{label}.modalities: must be a list of supported modality labels")
+    for field in ("input_modalities", "output_modalities"):
+        values = record.get(field)
+        if not isinstance(values, list) or any(value not in MODALITY_TYPES for value in values):
+            errors.append(f"{label}.{field}: must be a list of supported modality labels")
+    capabilities = record.get("capabilities")
+    if not isinstance(capabilities, list) or any(value not in MODEL_CAPABILITIES for value in capabilities):
+        errors.append(f"{label}.capabilities: must be a list of supported capability tags")
     if not isinstance(record.get("model_pricing"), dict):
         errors.append(f"{label}.model_pricing: must be an object")
     if not isinstance(record.get("rate_limits"), dict):
@@ -64,6 +78,37 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
     record_level = record.get("record_level")
     if record_level == "model" and not str(record.get("model_id", "")):
         errors.append(f"{label}.model_id: model-level records must set model_id")
+    if record_level == "model":
+        model_type = record.get("model_type")
+        model_scope = record.get("model_scope")
+        if model_type not in MODEL_TYPES:
+            errors.append(f"{label}.model_type: unsupported model type {model_type!r}")
+        expected_scope = (
+            "core_llm" if model_type in CORE_LLM_TYPES
+            else "related_ai_api" if model_type in RELATED_AI_TYPES
+            else "unknown"
+        )
+        if model_scope != expected_scope:
+            errors.append(f"{label}.model_scope: {model_type!r} must use {expected_scope!r}")
+        if model_type in CORE_LLM_TYPES and (
+            "text" not in record.get("input_modalities", [])
+            or "text" not in record.get("output_modalities", [])
+        ):
+            errors.append(f"{label}: core LLMs must record text input and text output")
+        input_values = record.get("input_modalities") if isinstance(record.get("input_modalities"), list) else []
+        output_values = record.get("output_modalities") if isinstance(record.get("output_modalities"), list) else []
+        modality_values = record.get("modalities") if isinstance(record.get("modalities"), list) else []
+        if model_type == "multimodal_llm" and not (set(input_values) | set(output_values)) - {"text"}:
+            errors.append(f"{label}: multimodal LLMs must record a non-text modality")
+        directional_union = set(input_values) | set(output_values)
+        if directional_union and set(modality_values) != directional_union:
+            errors.append(f"{label}.modalities: must equal the input/output modality union")
+        has_capability_claim = bool(record.get("capabilities")) or any(
+            record.get(field) == "supported"
+            for field in ("tool_calling", "structured_output", "reasoning", "web_search")
+        )
+        if has_capability_claim and not str(record.get("capabilities_source_url", "")).startswith(("https://", "http://")):
+            errors.append(f"{label}.capabilities_source_url: required when capabilities are claimed")
     if record_level == "offer" and not str(record.get("offer_id", "")):
         errors.append(f"{label}.offer_id: offer-level records must set offer_id")
 
@@ -109,6 +154,21 @@ def validate_record(record: dict[str, Any], index: int) -> list[str]:
             errors.append(f"{label}: failed records may not be recommended")
         if not str(record.get("recommendation_reason", "")):
             errors.append(f"{label}: recommended records need recommendation_reason")
+
+    if record_level == "model" and record.get("free_type") in {"free_model", "free_router"}:
+        pricing = record.get("model_pricing", {})
+        if isinstance(pricing, dict):
+            for field in ("input", "output", "prompt", "completion", "image", "request", "cache_read", "cache_write", "audio", "video", "web_search"):
+                if field in pricing:
+                    try:
+                        if Decimal(str(pricing[field])) != 0:
+                            errors.append(
+                                f"{label}.model_pricing.{field}: a fully free model cannot have a non-zero price"
+                            )
+                    except (InvalidOperation, TypeError, ValueError):
+                        errors.append(
+                            f"{label}.model_pricing.{field}: price must be numeric when present"
+                        )
 
     if provider_id in PROTOCOL_REFERENCE_IDS:
         if record.get("record_level") != "provider":
@@ -178,6 +238,21 @@ def validate_relationships(records: list[dict[str, Any]]) -> list[str]:
             errors.append(f"record[{index}]: model references missing offer {provider_id}/{offer_id}")
         if level == "model" and not offer_id:
             errors.append(f"record[{index}]: model record must reference an offer_id")
+        if level == "model" and offer_id and (provider_id, offer_id) in offers:
+            offer = next(
+                item for item in records
+                if item.get("record_level") == "offer"
+                and str(item.get("provider_id", "")) == provider_id
+                and str(item.get("offer_id", "")) == offer_id
+            )
+            if record.get("is_recommended") is True:
+                if offer.get("is_recommended") is not True or offer.get("verification_status") != "active":
+                    errors.append(f"record[{index}]: recommended model must reference an active recommended offer")
+                if record.get("free_type") != offer.get("free_type"):
+                    errors.append(f"record[{index}]: recommended model free_type must match its linked offer")
+                applicable_models = offer.get("applies_to_models", [])
+                if applicable_models and str(record.get("model_id", "")) not in applicable_models:
+                    errors.append(f"record[{index}]: recommended model is outside its linked offer's model scope")
         if level == "offer":
             for model_id in record.get("applies_to_models", []):
                 if (provider_id, model_id) not in models:

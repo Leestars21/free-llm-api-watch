@@ -6,7 +6,7 @@ from datetime import date
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from catalog_schema import PROJECT_ROOT, load_catalog
+from catalog_schema import CORE_LLM_TYPES, PROJECT_ROOT, RELATED_AI_TYPES, load_catalog
 
 
 README_PATH = PROJECT_ROOT / "README.md"
@@ -16,11 +16,14 @@ FREE_MODELS_PATH = PROJECT_ROOT / "docs" / "free-models.md"
 FREE_MODELS_EN_PATH = PROJECT_ROOT / "docs" / "free-models.en.md"
 PROVIDER_COMPARISON_PATH = PROJECT_ROOT / "docs" / "provider-comparison.md"
 CANDIDATE_SOURCES_PATH = PROJECT_ROOT / "docs" / "candidate-sources.md"
+RELATED_AI_PATH = PROJECT_ROOT / "docs" / "related-ai-apis.md"
+RELATED_AI_EN_PATH = PROJECT_ROOT / "docs" / "related-ai-apis.en.md"
 TRANSLATIONS_ZH_PATH = PROJECT_ROOT / "data" / "translations_zh.json"
 TRANSLATIONS_ZH = json.loads(TRANSLATIONS_ZH_PATH.read_text(encoding="utf-8"))
 
 FREE_TYPE_ZH = {
     "stable_free_tier": "长期免费层（有用量/速率限制）",
+    "monthly_evaluation_tier": "每月免费评估额度",
     "new_user_credit": "新用户赠额 / 免费使用上限",
     "trial_credit": "一次性试用额度",
     "free_model": "指定免费模型",
@@ -32,6 +35,7 @@ FREE_TYPE_ZH = {
 }
 FREE_TYPE_EN = {
     "stable_free_tier": "Recurring free tier (usage/rate limits apply)",
+    "monthly_evaluation_tier": "Monthly free evaluation allowance",
     "new_user_credit": "New-user grant / usage cap",
     "trial_credit": "One-time trial credit",
     "free_model": "Specific free model",
@@ -86,9 +90,15 @@ QUOTA_UNIT_ZH = {
     "unknown": "未知",
     "video_minutes": "视频分钟",
     "volunteer_capacity": "志愿算力容量",
+    "CNY": "人民币",
+    "RMB": "人民币",
+    "USD credit": "美元抵扣额",
+    "model calls/month": "次模型调用/月",
+    "tokens/model": "Token/模型",
 }
 FREE_TYPES = {
     "stable_free_tier",
+    "monthly_evaluation_tier",
     "new_user_credit",
     "trial_credit",
     "free_model",
@@ -144,8 +154,16 @@ def formatted_rate_limits(record: dict[str, Any], language: str) -> str:
         translated = TRANSLATIONS_ZH.get("offers", {}).get(offer_id, {}).get("rate_limits")
         if translated:
             return str(translated)
+    else:
+        model_limit_keys = {"rpm", "rpd", "tpm", "tpd", "ash", "asd"}
+        if record.get("record_level") == "model" and isinstance(limits, dict) and any(key in limits for key in model_limit_keys):
+            units = {"rpm": "RPM", "rpd": "RPD", "tpm": "TPM", "tpd": "TPD", "ash": "audio seconds/hour", "asd": "audio seconds/day"}
+            return ", ".join(f"{units[key]} {value}" for key, value in limits.items() if key in units) or "unknown"
     if not limits:
         return "未知" if language == "zh" else "unknown"
+    if isinstance(limits, dict):
+        separator = "；" if language == "zh" else "; "
+        return separator.join(f"{key.replace('_', ' ')}: {markdown(value)}" for key, value in limits.items())
     return markdown(limits)
 
 
@@ -172,7 +190,38 @@ def model_type_label(value: Any, language: str) -> str:
     model_type = str(value or "unknown")
     if language == "zh":
         return TRANSLATIONS_ZH.get("model_types", {}).get(model_type, model_type)
-    return model_type.replace("_", " ")
+    return {
+        "text_llm": "Text LLM",
+        "multimodal_llm": "Multimodal LLM",
+        "speech_recognition": "Speech recognition",
+        "speech_generation": "Speech generation",
+        "image_generation": "Image generation",
+        "video_generation": "Video generation",
+        "music_generation": "Music generation",
+        "content_moderation": "Content moderation",
+        "routing_alias": "Routing alias",
+    }.get(model_type, model_type.replace("_", " "))
+
+
+def capability_tags(values: Any, language: str) -> str:
+    if not isinstance(values, list) or not values:
+        return "未确认" if language == "zh" else "not confirmed"
+    zh_labels = {
+        "reasoning": "推理",
+        "code_generation": "代码生成",
+        "long_context": "长上下文",
+        "image_understanding": "图像理解",
+        "agent_workflows": "Agent 工作流",
+    }
+    en_labels = {
+        "reasoning": "reasoning",
+        "code_generation": "code generation",
+        "long_context": "long context",
+        "image_understanding": "image understanding",
+        "agent_workflows": "agent workflows",
+    }
+    labels = zh_labels if language == "zh" else en_labels
+    return ", ".join(labels.get(str(value), str(value)) for value in values)
 
 
 def modality_labels(values: Any, language: str) -> str:
@@ -286,15 +335,38 @@ def free_counts(records: list[dict[str, Any]]) -> dict[str, Any]:
         if record.get("record_level") == "offer"
         and record.get("free_type") in {"new_user_credit", "trial_credit"}
     }
+    selected_models = [row for row in selected if row.get("record_level") == "model"]
+    core_model_keys = {
+        (str(row.get("provider_id", "")), str(row.get("model_id", "")))
+        for row in selected_models
+        if row.get("model_scope") == "core_llm"
+    }
+    related_model_keys = {
+        (str(row.get("provider_id", "")), str(row.get("model_id", "")))
+        for row in selected_models
+        if row.get("model_scope") == "related_ai_api"
+    }
+    router_keys = {
+        (str(row.get("provider_id", "")), str(row.get("model_id", "")))
+        for row in selected_models
+        if row.get("model_type") == "routing_alias"
+    }
+    model_by_key = {
+        (str(row.get("provider_id", "")), str(row.get("model_id", ""))): row
+        for row in selected_models
+        if row.get("model_scope") == "core_llm"
+    }
     return {
         "monitored_providers": len({str(row.get("provider_id", "")) for row in provider_records}),
         "confirmed_providers": len(active_provider_ids),
-        "free_models": sum(1 for row in selected if row.get("record_level") == "model"),
+        "free_models": len(core_model_keys),
+        "core_llm_models": len(core_model_keys),
+        "related_ai_models": len(related_model_keys - router_keys),
+        "routing_aliases": len(router_keys),
         "offers": sum(1 for row in selected if row.get("record_level") == "offer"),
         "credit_providers": len(credit_provider_ids),
         "zero_price_models": sum(
-            1 for row in selected
-            if row.get("record_level") == "model" and has_zero_input_output_price(row)
+            1 for row in model_by_key.values() if has_zero_input_output_price(row)
         ),
     }
 
@@ -330,25 +402,27 @@ def model_ids_for(
 ) -> str:
     model_rows = [
         row for row in entries["model"]
-        if row.get("is_recommended") and row.get("verification_status") == "active"
+        if row.get("is_recommended")
+        and row.get("verification_status") == "active"
+        and row.get("model_scope") == "core_llm"
     ]
     ids = sorted({str(row.get("model_id", "")) for row in model_rows if row.get("model_id")})
     if ids:
-        return ", ".join(f"`{model_id}`" for model_id in ids)
-    applies = sorted({
-        str(model_id)
+        shown = ", ".join(f"`{model_id}`" for model_id in ids[:3])
+        if len(ids) > 3:
+            suffix = "；" if language == "zh" else "; "
+            more = f"另有 {len(ids) - 3} 个" if language == "zh" else f"{len(ids) - 3} more"
+            link = "docs/free-models.md" if language == "zh" else "docs/free-models.en.md"
+            shown += f"{suffix}{more}（[全部]({link})）"
+        return shown
+    if any(
+        offer.get("is_recommended") and offer.get("verification_status") == "active"
         for offer in entries["offer"]
-        if offer.get("is_recommended") and offer.get("verification_status") == "active"
-        for model_id in offer.get("applies_to_models", [])
-        if model_id
-    })
-    if applies:
-        return ", ".join(f"`{model_id}`" for model_id in applies)
-    if any(offer.get("is_recommended") for offer in entries["offer"]):
+    ):
         return (
-            "型号随平台目录或账号资格变化，请查看官方链接"
+            "具体型号需在平台目录或账号内确认；此处不推测"
             if language == "zh"
-            else "Models vary by catalog/account eligibility; see official source"
+            else "No specific free LLM confirmed; check the live catalog/account"
         )
     return "无当前已确认免费型号" if language == "zh" else "No currently confirmed free model"
 
@@ -361,7 +435,29 @@ def official_link(record: dict[str, Any]) -> str:
     return f"[{markdown(name)}]({url})"
 
 
-def provider_overview_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict[str, Any]]:
+def shorten(value: Any, limit: int, language: str) -> str:
+    text = str(value or "")
+    if len(text) <= limit:
+        return text
+    marker = "…" if language == "zh" else "…"
+    return text[: limit - 1].rstrip() + marker
+
+
+def eligibility_summary(record: dict[str, Any], language: str) -> str:
+    card = flag_label(record.get("requires_card", "unknown"), language)
+    identity = flag_label(record.get("requires_identity_verification", "unknown"), language)
+    region = localized(record, "requires_phone_region", language)
+    region = str(region) if region else ("未说明" if language == "zh" else "not stated")
+    if language == "zh":
+        return f"绑卡 {card}；实名 {identity}；地区 {shorten(region, 42, language)}"
+    return f"Card {card}; identity {identity}; region {shorten(region, 42, language)}"
+
+
+def provider_overview_rows(
+    records: list[dict[str, Any]],
+    language: str = "zh",
+    selected_free_types: set[str] | None = None,
+) -> list[dict[str, Any]]:
     grouped = group_records(records)
     rows = []
     for provider_id in sorted(grouped):
@@ -370,10 +466,11 @@ def provider_overview_rows(records: list[dict[str, Any]], language: str = "zh") 
         active_offers = [
             row for row in entries["offer"]
             if row.get("is_recommended") and row.get("verification_status") == "active"
+            and (selected_free_types is None or row.get("free_type") in selected_free_types)
         ]
         if not active_offers:
             continue
-        free_types = []
+        type_labels = []
         offer_descriptions = []
         for row in active_offers:
             free_type = row.get("free_type")
@@ -382,43 +479,47 @@ def provider_overview_rows(records: list[dict[str, Any]], language: str = "zh") 
                 if language == "zh"
                 else FREE_TYPE_EN.get(str(free_type), str(free_type))
             )
-            free_types.append(type_label)
-            separator = "；" if language == "zh" else "; "
+            type_labels.append(type_label)
             colon = "：" if language == "zh" else ": "
-            offer_descriptions.append(
-                f"`{row.get('offer_id')}`{colon}{type_label}{separator}"
-                f"{localized(row, 'free_quota', language) or ('额度未知' if language == 'zh' else 'amount unknown')}"
-            )
+            offer_descriptions.append(f"{type_label}{colon}{localized(row, 'free_quota', language) or ('额度未知' if language == 'zh' else 'amount unknown')}")
         source = active_offers[0]
+        expiry_label = "有效期" if language == "zh" else "valid"
+        quota_items = []
+        for row in active_offers:
+            quota = str(localized(row, "free_quota", language) or ("额度未知" if language == "zh" else "amount unknown"))
+            expiry = str(localized(row, "expires", language) or ("未说明" if language == "zh" else "not stated"))
+            quota = quota.strip().rstrip(" .;；。")
+            expiry = expiry.strip().rstrip(" .;；。")
+            quota_items.append(f"{quota}；{expiry_label} {expiry}" if language == "zh" else f"{quota}; {expiry_label}: {expiry}")
+        other_offer_count = max(0, len(quota_items) - 2)
+        quota_items = quota_items[:2]
+        if other_offer_count:
+            quota_items.append(f"另有 {other_offer_count} 个方案" if language == "zh" else f"{other_offer_count} more offers")
+        eligibility = list(dict.fromkeys(eligibility_summary(row, language) for row in active_offers))
+        modes = list(dict.fromkeys(FREE_TYPE_ZH.get(str(row.get("free_type")), str(row.get("free_type"))) if language == "zh" else FREE_TYPE_EN.get(str(row.get("free_type")), str(row.get("free_type"))) for row in active_offers))
         rows.append({
             "provider": provider.get("provider", provider_id),
-            "free_type": ("；" if language == "zh" else "; ").join(free_types),
-            "quota": ("；" if language == "zh" else "; ").join(
-                str(localized(row, "free_quota", language) or ("额度未知" if language == "zh" else "amount unknown"))
-                for row in active_offers
-            ),
+            "free_type": ("；" if language == "zh" else "; ").join(modes),
+            "quota": shorten(("；" if language == "zh" else "; ").join(quota_items), 155, language),
             "models": model_ids_for(provider_id, entries, language),
-            "expires": ("；" if language == "zh" else "; ").join(
-                str(localized(row, "expires", language) or ("未说明" if language == "zh" else "not stated"))
-                for row in active_offers
-            ),
-            "card": ("；" if language == "zh" else "; ").join(
-                flag_label(row.get("requires_card", "unknown"), language)
-                for row in active_offers
-            ),
+            "eligibility": shorten(("；" if language == "zh" else "; ").join(eligibility), 95, language),
             "compat": compatibility_label(provider.get("openai_compatible", "unknown"), language),
-            "status": provider_status(provider, True, language),
             "source": official_link(source),
             "offer_ids": ("；" if language == "zh" else "; ").join(str(row.get("offer_id", "")) for row in active_offers),
-            "offers": ("；" if language == "zh" else "; ").join(offer_descriptions),
+            "offers": ("；" if language == "zh" else "; ").join(offer_descriptions[:2]),
             "rate_limits": ("；" if language == "zh" else "; ").join(
                 formatted_rate_limits(row, language) for row in active_offers
             ),
+            "expires": shorten(("；" if language == "zh" else "; ").join(str(localized(row, "expires", language) or ("未说明" if language == "zh" else "not stated")) for row in active_offers), 70, language),
         })
     return rows
 
 
-def model_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict[str, Any]]:
+def model_rows(
+    records: list[dict[str, Any]],
+    language: str = "zh",
+    model_scope: str = "core_llm",
+) -> list[dict[str, Any]]:
     provider_names = {
         str(row.get("provider_id", "")): str(row.get("provider", row.get("provider_id", "")))
         for row in records if row.get("record_level") == "provider"
@@ -430,6 +531,7 @@ def model_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict
             "model_id": row.get("model_id", ""),
             "model_name": row.get("model_name", ""),
             "model_type": model_type_label(row.get("model_type", "unknown"), language),
+            "model_scope": row.get("model_scope", "unknown"),
             "offer_id": row.get("offer_id", ""),
             "free_type": (
                 FREE_TYPE_ZH.get(str(row.get("free_type")), str(row.get("free_type", "")))
@@ -443,7 +545,10 @@ def model_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict
             "reset": localized(row, "quota_reset", language) or ("未知" if language == "zh" else "unknown"),
             "context": context_label(row.get("context_window"), language),
             "modalities": modality_labels(row.get("modalities"), language),
-            "multimodal": multimodal_label(row.get("modalities"), language),
+            "input_modalities": modality_labels(row.get("input_modalities"), language),
+            "output_modalities": modality_labels(row.get("output_modalities"), language),
+            "capabilities": capability_tags(row.get("capabilities"), language),
+            "capabilities_source": official_link({**row, "source_url": row.get("capabilities_source_url") or row.get("source_url"), "source_name": "能力依据" if language == "zh" else "Capability evidence"}),
             "limits": formatted_rate_limits(row, language),
             "tools": capability_label(row.get("tool_calling", "unknown"), language),
             "structured": capability_label(row.get("structured_output", "unknown"), language),
@@ -458,8 +563,41 @@ def model_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict
             "confidence": row.get("confidence", "unknown"),
         }
         for row in recommended(records)
-        if row.get("record_level") == "model"
+        if row.get("record_level") == "model" and row.get("model_scope") == model_scope
     ]
+
+
+def use_case_rows(records: list[dict[str, Any]], language: str) -> list[dict[str, Any]]:
+    rows = model_rows(records, language, "core_llm")
+    raw_models = {
+        (str(row.get("provider_id", "")), str(row.get("model_id", ""))): row
+        for row in recommended(records)
+        if row.get("record_level") == "model" and row.get("model_scope") == "core_llm"
+    }
+    definitions = [
+        ("普通文本生成" if language == "zh" else "General text generation", lambda row: True),
+        ("推理" if language == "zh" else "Reasoning", lambda row: row.get("reasoning") == "supported" or "reasoning" in row.get("capabilities", [])),
+        ("代码生成" if language == "zh" else "Code generation", lambda row: "code_generation" in row.get("capabilities", [])),
+        ("工具调用 / Agent" if language == "zh" else "Tool use / agent workflows", lambda row: row.get("tool_calling") == "supported" or "agent_workflows" in row.get("capabilities", [])),
+        ("长上下文（≥100K）" if language == "zh" else "Long context (≥100K)", lambda row: isinstance(row.get("context_window"), int) and row.get("context_window") >= 100_000),
+        ("图像理解" if language == "zh" else "Image understanding", lambda row: "image" in row.get("input_modalities", []) and "text" in row.get("output_modalities", [])),
+        ("高频调用（公布了速率限制）" if language == "zh" else "Higher-volume use (published rate limits)", lambda row: isinstance(row.get("rate_limits"), dict) and any(key in row["rate_limits"] for key in ("rpm", "rpd", "tpm", "tpd"))),
+    ]
+    result = []
+    for label, predicate in definitions:
+        candidates = []
+        for display in rows:
+            source = raw_models.get((str(display["provider_id"]), str(display["model_id"])), {})
+            if predicate(source):
+                detail = f"`{display['model_id']}`"
+                if label.endswith("rate limits)") or label.endswith("速率限制）"):
+                    detail += f" ({display['limits']})"
+                candidates.append(f"{official_link(source)} {detail}")
+        result.append({
+            "use_case": label,
+            "candidates": ("、" if language == "zh" else "; ").join(candidates[:5]) or ("暂无已核实型号" if language == "zh" else "No verified model listed"),
+        })
+    return result
 
 
 def offer_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict[str, Any]]:
@@ -485,6 +623,7 @@ def offer_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict
             "card": flag_label(row.get("requires_card", "unknown"), language),
             "identity": flag_label(row.get("requires_identity_verification", "unknown"), language),
             "region": localized(row, "requires_phone_region", language) or ("未知" if language == "zh" else "unknown"),
+            "eligibility": eligibility_summary(row, language),
             "scope": QUOTA_SCOPE_ZH.get(str(row.get("quota_scope", "unknown")), "未知") if language == "zh" else row.get("quota_scope", "unknown"),
             "limits": formatted_rate_limits(row, language),
             "source": official_link(row),
@@ -522,46 +661,94 @@ def render_readme(records: list[dict[str, Any]]) -> str:
     date_checked = latest_date(recommended(records))
     overview = provider_overview_rows(records, "zh")
     models = model_rows(records, "zh")
-    offers = offer_rows(records, "zh")
-    candidates = candidate_rows(records, "zh")
+    long_term = provider_overview_rows(
+        records, "zh", {"stable_free_tier", "monthly_evaluation_tier", "free_model", "free_router", "community_volunteer"}
+    )
+    new_user = provider_overview_rows(records, "zh", {"new_user_credit", "trial_credit"})
+    limited = provider_overview_rows(records, "zh", {"limited_time_promotion"})
+    use_cases = use_case_rows(records, "zh")
+    named_models = [
+        row for row in models
+        if any(token in str(row["model_id"]).lower() for token in ("qwen", "glm", "gemini", "deepseek"))
+    ]
     return f"""# Free LLM API Watch
 
-**最后核验日期：{date_checked}**
+整理国内外可通过 API 免费调用大语言模型的服务商，覆盖指定免费模型、周期性免费额度、新用户赠额和限时活动。模型资格与额度以官方来源和账号内显示为准。
 
-这是一个基于官方证据维护的免费/试用 LLM API 目录。目录区分零价格模型、周期性免费层、新用户赠额、一次性试用、速率限制和开源权重；具体额度和模型名单可能因账号、地区、产品批次而变动。
+**最近核验：{date_checked}** · [English](README.en.md)
 
-## 当前目录统计
+## 目录统计
 
 | 指标 | 数量 |
 | --- | ---: |
 | 监控提供商 | {counts['monitored_providers']} |
-| 已确认有免费 API 或试用方案的提供商 | {counts['confirmed_providers']} |
-| 有明确免费访问关系的模型记录 | {counts['free_models']} |
-| 已确认免费/试用 Offer | {counts['offers']} |
-| 提供新用户赠额或试用额度的平台 | {counts['credit_providers']} |
-| 其中明确标为输入/输出零价格的模型记录 | {counts['zero_price_models']} |
+| 有已核实免费方案的平台 | {counts['confirmed_providers']} |
+| 核心免费 LLM（按平台 + Model ID 去重） | {counts['core_llm_models']} |
+| 相关 AI API 扩展 | {counts['related_ai_models']} |
+| 核心模型明确列为零价格 | {counts['zero_price_models']} |
 
-统计只计 `active`、官方来源、`medium/high` 可信度且 `is_recommended=true` 的记录。一个平台级额度若适用于多个模型，计作一个 Offer；没有固定模型清单时会标注为动态/账号内确认，不会推测型号。
+只统计 `active`、有官方证据、可信度为中/高且标记推荐的记录。同一个平台上的一个 Model ID 只计一次。速率限制和免费总额度分开记录。
 
-## 免费平台总览
+## 快速导航
 
-{overview_table(overview)}
+- [免费 API 平台速查](#free-api-quick-lookup)
+- [长期免费与周期额度](#recurring-free-api)
+- [新用户赠额与一次性试用](#new-user-credits)
+- [限时活动](#limited-time-offers)
+- [按用途寻找模型](#find-by-use-case)
+- [按 Qwen、GLM、Gemini、DeepSeek 查找](#find-by-model-family)
+- [API 接入示例](#api-setup)
+- [全部核心模型](docs/free-models.md) · [相关 AI API 扩展](docs/related-ai-apis.md)
+- [数据更新和来源](#data-and-sources)
 
-## 免费模型详细列表
+<a id="free-api-quick-lookup"></a>
+## 免费 API 平台速查
 
-模型类型包括聊天、语音生成、语音识别、内容审核、Embedding、Rerank 等；`unknown` 表示官方材料未能确认，不代表不支持。额度、速率限制、资格、到期、API Base、来源和验证时间等完整字段见[免费模型明细](docs/free-models.md)。
+每家平台一行；型号只列最多 3 个已核实的核心 LLM。没有公开具体型号的动态/账号内目录会明确说明，不用平台级额度推测模型资格。
 
-{md_table(models, [('平台','provider'),('Model Name','model_name'),('精确 Model ID','model_id'),('类型','model_type'),('Offer ID','offer_id'),('免费范围','quota'),('上下文','context'),('模态','modalities'),('多模态','multimodal'),('速率限制','limits'),('工具调用','tools'),('结构化输出','structured'),('API Base','base'),('OpenAI 兼容','openai'),('来源','source')])}
+{overview_table(overview, "zh")}
 
-## 新用户赠额与试用
+免费网页聊天、开源模型权重、模型 API 可见和免费 API 调用是不同概念。赠额不等于永久免费；免费层也可能有调用限制、实名、信用卡或地区要求。使用前请查看“条件”和官方详情。
 
-赠额、共享余额与模型免费定价不是同一概念。下表的 `额度范围`、有效期、实名/地区要求须与账号内页面再次核对。
+<a id="recurring-free-api"></a>
+## 长期免费与周期额度
 
-{md_table([row for row in offers if any(token in str(row['type']) for token in ('新用户','试用'))], [('平台','provider'),('Offer ID','offer_id'),('类型','type'),('额度','quota'),('额度单位','quota_unit'),('可用模型','models'),('重置/发放','reset'),('有效期','expires'),('绑卡','card'),('实名','identity'),('地区限制','region'),('额度范围','scope'),('速率限制（不属于赠额）','limits'),('官方来源','source')])}
+包含零价格型号、持续免费层、每日积分和按月评估额度。平台级额度不保证所有目录型号都免费。
 
+{overview_table(long_term, "zh")}
+
+<a id="new-user-credits"></a>
+## 新用户赠额与一次性试用
+
+这类额度通常有资格、领取期限或有效期；请把它与长期免费方案分开看。
+
+{overview_table(new_user, "zh")}
+
+<a id="limited-time-offers"></a>
+## 限时活动
+
+活动结束时间和可用范围会变化；过期记录不会进入推荐表。
+
+{overview_table(limited, "zh")}
+
+<a id="find-by-use-case"></a>
+## 按用途寻找模型
+
+下表只依据模型记录中的官方能力字段、模态和上下文长度筛选；不提供未经验证的性能排名。长上下文筛选阈值为已记录的上下文窗口至少 100K Token。
+
+{md_table(use_cases, [('用途','use_case'),('已核实候选','candidates')])}
+
+<a id="find-by-model-family"></a>
+## 按 Qwen、GLM、Gemini、DeepSeek 查找
+
+这里只列当前免费关系已核实的对应模型；名字相似或第三方可调用不表示免费。
+
+{md_table(named_models, [('平台','provider'),('精确 Model ID','model_id'),('模型类型','model_type'),('免费类型','free_type'),('免费范围','quota'),('官方来源','source')])}
+
+<a id="api-setup"></a>
 ## OpenAI-Compatible API 配置示例
 
-将 API Key 放在环境变量中，替换 Base URL 和 Model ID。仅对标记为 `yes` 的端点直接套用；`partial` 可能不支持全部 OpenAI 参数。原生协议平台应使用各自 SDK/文档。
+具体模型的 API Base、兼容性、模态、工具调用、速率限制和官方来源见[完整核心模型目录](docs/free-models.md)。仅对标记为“是”的端点直接套用；“部分兼容”可能不支持全部 OpenAI 参数。
 
 ```python
 import os
@@ -579,35 +766,17 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-例如 OpenRouter 的 Base URL 为 `https://openrouter.ai/api/v1`；每家服务商的 API Key、模型 ID、模型可用性和条款不同。不要将密钥写入仓库。
+每家服务商都需使用自己的 API Key、Base URL 和精确 Model ID。不要将密钥写入仓库。完整请求参数见[API 使用指南](docs/free-api-guide.md)。
 
-## 待复核、已停止与历史平台
+<a id="data-and-sources"></a>
+## 数据更新与来源
 
-下面的条目尚无足够当前官方证据，或服务已停止/迁移；不会进入当前免费推荐列表。
-
-{md_table(candidates, [('平台','provider'),('状态','status'),('官方来源','source'),('原因/证据缺口','reason')])}
-
-## 数据和更新规则
-
-- `data/manual_catalog.json` 保存人工核实的提供商、Offer、型号及官方证据；`data/free_api_catalog.json` 是合并后的输出。
-- `data/translations_zh.json` 只负责中文显示文本，不替代或改变官方证据字段。
-- `data/free_api_catalog.csv` 与 JSON 由同一次更新生成；模型记录按 `provider_id + model_id + offer_id` 去重，不能跨平台合并同名模型。
-- `free_quota` 表示免费总量、赠额或模型价格；`rate_limits` 单独记录 RPM、TPM、RPD 等速率/并发限制。
-- 模型清单 API 只证明模型存在；只有官方价格或官方免费政策证据才能把它列为免费。
-- 网络失败会保留旧自动记录并标记为 `stale`，不进入推荐表；完整 API 成功确认模型消失或价格变化后才会标记 `withdrawn`。
-- 自动目录抓取不会将抓取日期当成每个平台的政策验证日期；人工记录的 `verified_at` 只在核对证据后修改。
-
-## 本地验证
-
-```powershell
-python scripts/update_catalog.py
-python scripts/validate_catalog.py
-python scripts/score_models.py
-python scripts/render_docs.py
-python -m unittest discover -s tests -v
-```
-
-仓库中的 `.github/workflows/update-catalog.yml` 每天 UTC 00:00 运行，执行验证和测试后才允许生成自动更新提交。该工作流只对模型目录进行自动化检查，人工政策条目仍以 `manual_catalog.json` 的官方证据和复核日期为准。
+- [完整核心免费模型目录](docs/free-models.md)：精确 ID、免费方案、限速、上下文、输入/输出模态、能力、API Base、来源和核验日期。
+- [相关 AI API 扩展](docs/related-ai-apis.md)：Embedding、Rerank、ASR、TTS、内容审核及图像/视频/音乐生成，不计入核心 LLM 数量。
+- [平台对比](docs/provider-comparison.md) · [候补与历史来源](docs/candidate-sources.md) · [变更记录](docs/changelog.md) · [API 使用指南](docs/free-api-guide.md)
+- `data/manual_catalog.json` 保留人工核实的政策与型号；`data/free_api_catalog.json` 是合并后的输出。模型清单 API 只证明型号存在，不证明免费。
+- 网络更新失败会保留旧自动记录并标记待复核；仅在成功完整响应确认下架或变为付费后撤销自动推荐。自动抓取不会刷新人工政策核验日期。
+- [GitHub Actions 工作流](.github/workflows/update-catalog.yml) 每日 UTC 00:00 执行更新、验证、评分、文档生成和测试；来源检查失败时不会自动提交变更。
 
 ## 免责声明与隐私提醒
 
@@ -624,33 +793,19 @@ MIT License. See [LICENSE](LICENSE).
 def overview_table(rows: list[dict[str, Any]], language: str = "zh") -> str:
     if not rows:
         return "（暂无已确认 Offer）" if language == "zh" else "(No confirmed offers yet)"
-    # Keep the overview scannable while retaining every offer ID and its evidence link.
     if language == "en":
-        overview_columns = [
-            ("Provider", "provider"), ("Free type", "free_type"), ("Free amount", "quota"),
-            ("Listed models", "models"), ("Validity", "expires"), ("Card", "card"),
-            ("OpenAI compatible", "compat"), ("Status", "status"), ("Official source", "source"),
-        ]
-        detail_columns = [
-            ("Provider", "provider"), ("Offer ID", "offer_ids"), ("Offer details", "offers"),
-            ("Rate limits (separate from grants)", "rate_limits"),
+        columns = [
+            ("Provider", "provider"), ("Free method", "free_type"), ("Allowance / limit / validity", "quota"),
+            ("Representative free LLMs", "models"), ("Conditions", "eligibility"),
+            ("OpenAI SDK", "compat"), ("Official details", "source"),
         ]
     else:
-        overview_columns = [
-            ("平台", "provider"), ("免费类型", "free_type"), ("免费额度", "quota"),
-            ("已列型号", "models"), ("有效期", "expires"), ("绑卡", "card"),
-            ("OpenAI 兼容", "compat"), ("状态", "status"), ("官方链接", "source"),
+        columns = [
+            ("平台", "provider"), ("免费方式", "free_type"), ("额度 / 限制 / 有效期", "quota"),
+            ("代表性免费 LLM", "models"), ("使用条件", "eligibility"),
+            ("OpenAI SDK", "compat"), ("官方详情", "source"),
         ]
-        detail_columns = [
-            ("平台", "provider"), ("Offer ID", "offer_ids"), ("方案说明", "offers"),
-            ("速率限制（独立于赠额）", "rate_limits"),
-        ]
-    summary = "Offer ID、速率限制与判定范围" if language == "zh" else "Offer IDs, rate limits, and scope"
-    return md_table(rows, [
-        *overview_columns,
-    ]) + f"\n\n<details><summary>{summary}</summary>\n\n" + md_table(rows, [
-        *detail_columns,
-    ]) + "\n\n</details>"
+    return md_table(rows, columns)
 
 
 def render_readme_en(records: list[dict[str, Any]]) -> str:
@@ -658,44 +813,94 @@ def render_readme_en(records: list[dict[str, Any]]) -> str:
     date_checked = latest_date(recommended(records))
     overview = provider_overview_rows(records, "en")
     models = model_rows(records, "en")
-    offers = offer_rows(records, "en")
-    candidates = candidate_rows(records, "en")
+    long_term = provider_overview_rows(
+        records, "en", {"stable_free_tier", "monthly_evaluation_tier", "free_model", "free_router", "community_volunteer"}
+    )
+    new_user = provider_overview_rows(records, "en", {"new_user_credit", "trial_credit"})
+    limited = provider_overview_rows(records, "en", {"limited_time_promotion"})
+    use_cases = use_case_rows(records, "en")
+    named_models = [
+        row for row in models
+        if any(token in str(row["model_id"]).lower() for token in ("qwen", "glm", "gemini", "deepseek"))
+    ]
     return f"""# Free LLM API Watch
 
-**Last evidence review: {date_checked}**
+An evidence-based directory of free LLM API providers, including zero-priced models, recurring allowances, new-user grants and limited-time promotions. Model eligibility and quota details follow the linked official source and account console.
 
-An evidence-based directory of free and trial LLM API access. The catalog separates zero-priced models, recurring free tiers, new-user grants, one-time trials, rate limits, and open weights. Availability can depend on account, region, model, and product cohort.
+**Last reviewed: {date_checked}** · [中文](README.md)
 
-## Current catalog statistics
+## Catalog statistics
 
 | Metric | Count |
 | --- | ---: |
 | Monitored providers | {counts['monitored_providers']} |
-| Providers with a confirmed free API or trial offer | {counts['confirmed_providers']} |
-| Model records with confirmed free access | {counts['free_models']} |
-| Confirmed free/trial offers | {counts['offers']} |
-| Providers with a new-user grant or trial credit | {counts['credit_providers']} |
-| Models explicitly listed at zero input/output price | {counts['zero_price_models']} |
+| Providers with a verified free offer | {counts['confirmed_providers']} |
+| Core free LLMs (unique provider + Model ID) | {counts['core_llm_models']} |
+| Related AI API extensions | {counts['related_ai_models']} |
+| Core models explicitly priced at zero | {counts['zero_price_models']} |
 
-Statistics include only active, recommended records supported by official sources at medium/high confidence. A shared provider credit is counted once as an offer. Dynamic model lists are labeled as such instead of being guessed.
+Counts include active, recommended records backed by official sources at medium/high confidence. Each Model ID is counted once per provider. Free quotas and rate limits are shown separately.
 
-## Free API provider overview
+## Quick navigation
+
+- [Free API provider lookup](#free-api-quick-lookup)
+- [Recurring free API and periodic allowances](#recurring-free-api)
+- [New-user credits and one-time trials](#new-user-credits)
+- [Limited-time offers](#limited-time-offers)
+- [Find models by use case](#find-by-use-case)
+- [Find Qwen, GLM, Gemini, and DeepSeek](#find-by-model-family)
+- [API setup example](#api-setup)
+- [All core models](docs/free-models.en.md) · [Related AI API extensions](docs/related-ai-apis.en.md)
+- [Updates and sources](#data-and-sources)
+
+<a id="free-api-quick-lookup"></a>
+## Free API provider lookup
+
+One row per provider; at most three verified core LLMs are shown. If a provider uses a dynamic or account-only model catalog, the table says so instead of guessing a free model ID.
 
 {overview_table(overview, "en")}
 
-## Free model details
+Free web chat, open model weights, API model visibility, and free API inference are different things. A credit is not a permanent free tier. Free plans can require rate limits, identity verification, a payment card, or regional eligibility. Check the conditions and official source before use.
 
-`unknown` means that official evidence reviewed here did not confirm the field. Full model-level quota, rate limits, eligibility, expiry, API base, source, verification date, and confidence are in the [free model detail file](docs/free-models.en.md).
+<a id="recurring-free-api"></a>
+## Recurring free API and periodic allowances
 
-{md_table(models, [('Provider','provider'),('Model name','model_name'),('Exact Model ID','model_id'),('Type','model_type'),('Offer ID','offer_id'),('Free scope','quota'),('Context','context'),('Modalities','modalities'),('Multimodal','multimodal'),('Rate limits','limits'),('Tools','tools'),('Structured output','structured'),('API Base','base'),('OpenAI compatible','openai'),('Source','source')])}
+This group includes zero-priced models, recurring free tiers, daily points, and monthly evaluation allowances. A provider-level allowance does not prove every catalog model is free.
 
-## New-user credits and trials
+{overview_table(long_term, "en")}
 
-Credits, shared balances and zero-priced models are different kinds of free access. Check the account console for current eligibility, expiry, identity and region requirements.
+<a id="new-user-credits"></a>
+## New-user credits and one-time trials
 
-{md_table(offers, [('Provider','provider'),('Offer ID','offer_id'),('Type','type'),('Amount','quota'),('Unit','quota_unit'),('Models','models'),('Reset/grant','reset'),('Validity','expires'),('Card','card'),('Identity','identity'),('Region','region'),('Scope','scope'),('Rate limits (not a grant)','limits'),('Source','source')])}
+These offers may have eligibility rules, claim periods, or expiry dates. Keep them separate from recurring free access.
 
+{overview_table(new_user, "en")}
+
+<a id="limited-time-offers"></a>
+## Limited-time offers
+
+Campaign end dates and eligible models can change. Expired records are removed from recommendations.
+
+{overview_table(limited, "en")}
+
+<a id="find-by-use-case"></a>
+## Find models by use case
+
+Candidates are filtered using recorded official capability fields, modalities, and context windows. This is not a performance ranking. The long-context filter requires a documented context window of at least 100K tokens.
+
+{md_table(use_cases, [('Use case','use_case'),('Verified candidates','candidates')])}
+
+<a id="find-by-model-family"></a>
+## Find Qwen, GLM, Gemini, and DeepSeek
+
+Only models with a confirmed current free-access relationship appear here. Similar names or third-party availability do not establish free access.
+
+{md_table(named_models, [('Provider','provider'),('Exact Model ID','model_id'),('Model type','model_type'),('Free method','free_type'),('Free scope','quota'),('Official source','source')])}
+
+<a id="api-setup"></a>
 ## OpenAI-compatible API example
+
+The [full core model directory](docs/free-models.en.md) lists exact API bases, compatibility, modalities, tool support, rate limits, and sources. Use the OpenAI SDK directly only where compatibility is marked “yes”; “partial” may not support every parameter.
 
 ```python
 import os
@@ -712,35 +917,17 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-For example, OpenRouter uses `https://openrouter.ai/api/v1`. Confirm compatibility, parameters, model ID, terms, and key handling for each provider. Never commit API keys.
+Use each provider's own API key, base URL, and exact Model ID. Never commit API keys. See the [API setup guide](docs/free-api-guide.md) for more details.
 
-## Candidates, retired services, and records to recheck
+<a id="data-and-sources"></a>
+## Updates and sources
 
-These providers are not in the current recommendation list because current evidence is incomplete or the service has been retired.
-
-{md_table(candidates, [('Provider','provider'),('Status','status'),('Official source','source'),('Reason/evidence gap','reason')])}
-
-## Data and update policy
-
-- `data/manual_catalog.json` is the evidence-backed source for manually reviewed providers, offers, models, and official links. `data/free_api_catalog.json` is the merged output.
-- `data/translations_zh.json` contains display-only Chinese text; it does not replace or alter official evidence fields.
-- JSON and CSV are emitted together. Records are keyed by provider, record level, model ID, and offer ID; same-named models from different providers stay separate.
-- `free_quota` records a grant or free-price scope; `rate_limits` separately records RPM, TPM, RPD and related limits.
-- A model-list API proves model existence, not free access. Free recommendations require separate official pricing or policy evidence.
-- Network failures retain old automatic records as `stale` and remove them from recommendations. A model is withdrawn only after a complete successful API response confirms its removal or changed pricing.
-- Running the updater does not refresh the evidence date for manually reviewed policies.
-
-## Local verification
-
-```powershell
-python scripts/update_catalog.py
-python scripts/validate_catalog.py
-python scripts/score_models.py
-python scripts/render_docs.py
-python -m unittest discover -s tests -v
-```
-
-The repository workflow `.github/workflows/update-catalog.yml` runs daily at UTC 00:00 and validates/test-gates automated updates. Manual policy evidence remains maintained in `manual_catalog.json`.
+- [Full core free model list](docs/free-models.en.md): exact IDs, access terms, rate limits, context, input/output modalities, capabilities, API base, sources, and review date.
+- [Related AI API extensions](docs/related-ai-apis.en.md): embeddings, reranking, ASR, TTS, moderation, and image/video/music generation; excluded from core LLM counts.
+- [Provider comparison](docs/provider-comparison.md) · [Candidate and historical sources](docs/candidate-sources.md) · [Changelog](docs/changelog.md) · [API guide](docs/free-api-guide.md)
+- `data/manual_catalog.json` stores manually verified policy and model evidence; `data/free_api_catalog.json` is generated. A model-list endpoint proves existence, not free access.
+- Failed updates retain automatic records for review and do not refresh manual policy dates. Automatic recommendations are withdrawn only after a successful complete response confirms removal or a paid price.
+- [GitHub Actions workflow](.github/workflows/update-catalog.yml) runs updates, validation, scoring, documentation generation, and tests daily at 00:00 UTC. It skips automatic commits if any source check fails.
 
 ## Disclaimer and privacy
 
@@ -761,86 +948,141 @@ def render_free_guide(records: list[dict[str, Any]]) -> str:
 
 最近證據核驗日期：{latest_date(recommended(records))}
 
-## 如何區分免費類型
+## 免費方式
 
-| free_type | 含義 |
+| 類型 | 含義 |
 | --- | --- |
-| `free_model` | 官方證據確認特定模型的 API 價格為零，或明確列為免費模型。 |
-| `stable_free_tier` | 平台提供持續免費層；仍可能有每月總量、RPM、TPM 或模型准入限制。 |
-| `new_user_credit` | 新帳號/符合條件的模型領取免費 Token 或用量上限，常有地區與有效期限制。 |
-| `trial_credit` | 一次性或限时评估；不能当作长期、无限调用。 |
-| `limited_time_promotion` | 活动期免费，须明确活动时间和资格。 |
-| `open_weight_only` | 可自行部署开放权重，不代表平台提供免费的托管 API。 |
+| `free_model` | 官方資料確認特定模型 API 價格為零，或明確列為免費模型。 |
+| `stable_free_tier` | 持續免費層；仍可能有額度、RPM、TPM 或模型准入限制。 |
+| `monthly_evaluation_tier` | 每月重置的評估额度；例如共享的月度 API 調用次數。 |
+| `new_user_credit` | 符合條件的新用户可领取的 Token 或用量上限，常有地区与有效期限制。 |
+| `trial_credit` | 一次性或限时评估额度，不代表长期免费。 |
+| `limited_time_promotion` | 明确限定活动时间和资格的免费方案。 |
+| `community_volunteer` | 依赖志愿算力，模型、排队时间和吞吐量会动态变化。 |
 
-## 已确认的 Offers
+## 已确认方案
 
-{md_table(offers, [('平台','provider'),('Offer ID','offer_id'),('类型','type'),('额度','quota'),('适用模型','models'),('额度范围','scope'),('重置','reset'),('有效期','expires'),('绑卡','card'),('实名','identity'),('地区/账号资格','region'),('速率限制（另计）','limits'),('来源','source')])}
+{md_table(offers, [('平台','provider'),('类型','type'),('额度','quota'),('单位','quota_unit'),('适用范围','scope'),('有效期','expires'),('绑卡/实名/地区','eligibility'),('官方来源','source')])}
 
-## 明确型号
+## 核心 LLM
 
-{md_table(models, [('平台','provider'),('Model Name','model_name'),('Model ID','model_id'),('类型','model_type'),('关联 Offer','offer_id'),('免费范围','quota'),('上下文','context'),('模态','modalities'),('速率限制','limits'),('工具调用','tools'),('API Base','base'),('OpenAI 兼容','openai'),('来源','source')])}
+模型类型与使用能力分开记录。`text_llm` 是文本 LLM；`multimodal_llm` 同时支持文本交互和至少一种非文本模态。模型清单可证明型号存在，只有独立免费政策或官方价格才能证明免费。
 
-## 额度和速率限制
+### 型号、方案与接入
 
-- `free_quota` 是免费总量、共享余额、免费模型价格或平台专属额度。`rate_limits` 是 RPM/TPM/RPD/TPD/并发等限流，二者不互相替代。
-- 按模型赠送 Token 时查看 `quota_scope=per_model`；平台共享余额通常为 `account_shared`；一次性试用为 `one_time`。
-- Account/Project RPM/TPM 可能针对每个模型单独执行，也可能共享。没有公开规则时保留为 `unknown`，不要推算请求数。
-- 模型 API 返回清单只能证明型号存在。免费状态必须由独立官方价格页、免费层政策或公告确认。
+{md_table(models, [('平台','provider'),('精确 Model ID','model_id'),('类型','model_type'),('Offer ID','offer_id'),('免费类型','free_type'),('额度范围','quota'),('API Base','base'),('OpenAI 兼容','openai'),('来源','source')])}
 
-## 数据状态
+### 模态、能力与限速
 
-- `active`：来源在核验日期仍支持该范围的结论；不代表实际 API 调用成功。
-- `stale`：最新自动检查失败，旧记录留存供复核，当前不推荐。
-- `withdrawn`：完整且成功的官方目录检查确认型号下架或不再免费。
-- `pending` / `historical` / `unverified`：证据缺口或仅有历史记录，不进入推荐表。
-- `verified_at` 表示政策/型号证据实际核对日期，不会因为更新脚本运行而自动刷新。
+{md_table(models, [('平台','provider'),('Model ID','model_id'),('输入模态','input_modalities'),('输出模态','output_modalities'),('能力标签','capabilities'),('工具调用','tools'),('结构化输出','structured'),('推理','reasoning'),('上下文','context'),('速率限制','limits'),('免费资格','eligibility'),('核验日期','verified_at'),('能力依据','capabilities_source')])}
 
-完整统计和中英文表格见 [README](../README.md) 与 [English README](../README.en.md)。
-逐型号的额度、限速、资格、API Base、来源和核验时间见[完整型号清单](free-models.md)。
+## 额度与速率限制
+
+- `free_quota` 记录免费总量、共享余额或模型价格；`rate_limits` 单独记录 RPM、TPM、RPD、TPD 和并发上限。
+- `quota_scope=per_model` 表示按型号发放；`account_shared` 表示账号共享；`one_time` 表示一次性方案。
+- 若限速在平台控制台按账号或型号变化，目录不推算请求数或 Token 额度。
+- `unknown` 表示当前官方证据无法确认；能力标签只有在有官方来源时才显示。
+
+## 数据状态和接入
+
+- `active` 表示来源在核验日期支持所述结论，不等于本项目实际发起了 API 调用。
+- `stale` 表示最新自动检查失败，旧自动数据保留供复核，当前不推荐。
+- `withdrawn` 表示成功的完整来源检查确认型号下架或价格不再免费。
+- `verified_at` 是政策或型号证据实际核对日期，不会随自动目录抓取更新。
+
+完整首页见 [中文 README](../README.md) 与 [English README](../README.en.md)。扩展模型见[相关 AI API 目录](related-ai-apis.md)。
 """
 
 
 def render_free_models(records: list[dict[str, Any]], language: str) -> str:
     rows = model_rows(records, language)
+    detailed_rows = [{**row, "model": f"{row['provider']} / `{row['model_id']}`"} for row in rows]
     if language == "zh":
-        columns = [
-            ("提供商", "provider"), ("Provider ID", "provider_id"), ("Model Name", "model_name"),
-            ("精确 Model ID", "model_id"), ("模型类型", "model_type"), ("Offer ID", "offer_id"),
-            ("免费类型", "free_type"), ("免费额度/价格范围", "quota"), ("额度单位", "quota_unit"),
-            ("重置周期", "reset"), ("速率限制", "limits"), ("免费资格", "eligibility"),
-            ("有效期", "expires"), ("上下文窗口", "context"), ("支持模态", "modalities"),
-            ("多模态", "multimodal"), ("工具调用", "tools"), ("结构化输出", "structured"),
-            ("推理", "reasoning"), ("网页搜索", "web_search"), ("API Base", "base"),
-            ("OpenAI 兼容", "openai"), ("官方来源", "source"), ("最近核验", "verified_at"),
-            ("可信度", "confidence"),
+        connection_columns = [
+            ("提供商", "provider"), ("精确 Model ID", "model_id"), ("模型类型", "model_type"),
+            ("关联 Offer", "offer_id"), ("免费类型", "free_type"), ("免费额度/范围", "quota"),
+            ("额度单位", "quota_unit"), ("API Base", "base"), ("OpenAI 兼容", "openai"),
+            ("官方来源", "source"),
         ]
-        return f"""# 已确认免费或试用的模型明细
+        capability_columns = [
+            ("平台 / Model ID", "model"), ("输入模态", "input_modalities"), ("输出模态", "output_modalities"),
+            ("能力标签", "capabilities"), ("工具调用", "tools"), ("结构化输出", "structured"),
+            ("推理", "reasoning"), ("上下文窗口", "context"), ("速率限制", "limits"),
+            ("资格", "eligibility"), ("有效期", "expires"), ("最近核验", "verified_at"),
+            ("可信度", "confidence"), ("能力依据", "capabilities_source"),
+        ]
+        return f"""# 已确认免费或试用的核心 LLM
 
-本页由 catalog 生成，只列出当前 `active`、有官方依据、`medium/high` 可信度且已推荐的型号，共 {len(rows)} 条记录。
+本页由目录生成，只列出当前 `active`、有官方依据、中/高可信度且已推荐的核心模型，共 {len(rows)} 个按平台和 Model ID 去重的型号。扩展资源见[相关 AI API 目录](related-ai-apis.md)。
 
-免费总量与速率限制分列。多模态一栏按来源列出的模态数量派生；`unknown` 表示当前官方证据没有确认该字段。免费资格和额度可能受账号、地区、项目或模型限制，使用前请核对来源。
+免费额度与速率限制分列；未知字段表示已审阅的官方来源没有确认该项。模型免费资格可能受账号、地区、项目或型号限制。
 
-{md_table(rows, columns)}
+## 免费方案和接入
+
+{md_table(rows, connection_columns)}
+
+## 输入/输出模态、能力和限制
+
+{md_table(detailed_rows, capability_columns)}
 """
 
-    columns = [
-        ("Provider", "provider"), ("Provider ID", "provider_id"), ("Model name", "model_name"),
-        ("Exact Model ID", "model_id"), ("Model type", "model_type"), ("Offer ID", "offer_id"),
-        ("Free type", "free_type"), ("Free quota/price scope", "quota"), ("Quota unit", "quota_unit"),
-        ("Reset period", "reset"), ("Rate limits", "limits"), ("Eligibility", "eligibility"),
-        ("Validity", "expires"), ("Context window", "context"), ("Modalities", "modalities"),
-        ("Multimodal", "multimodal"), ("Tool calling", "tools"), ("Structured output", "structured"),
-        ("Reasoning", "reasoning"), ("Web search", "web_search"), ("API Base", "base"),
-        ("OpenAI compatible", "openai"), ("Official source", "source"), ("Last verified", "verified_at"),
-        ("Confidence", "confidence"),
+    connection_columns = [
+        ("Provider", "provider"), ("Exact Model ID", "model_id"), ("Model type", "model_type"),
+        ("Linked offer", "offer_id"), ("Free type", "free_type"), ("Free quota/scope", "quota"),
+        ("Quota unit", "quota_unit"), ("API Base", "base"), ("OpenAI compatible", "openai"),
+        ("Official source", "source"),
     ]
-    return f"""# Confirmed Free or Trial Model Details
+    capability_columns = [
+        ("Provider / Model ID", "model"), ("Input modalities", "input_modalities"),
+        ("Output modalities", "output_modalities"), ("Capability tags", "capabilities"),
+        ("Tool calling", "tools"), ("Structured output", "structured"), ("Reasoning", "reasoning"),
+        ("Context window", "context"), ("Rate limits", "limits"), ("Eligibility", "eligibility"),
+        ("Validity", "expires"), ("Last verified", "verified_at"), ("Confidence", "confidence"),
+        ("Capability evidence", "capabilities_source"),
+    ]
+    return f"""# Confirmed free or trial core LLMs
 
-Generated from the catalog. This page includes only active, recommended model records backed by official evidence at medium/high confidence ({len(rows)} records).
+Generated from the catalog. This page includes active, recommended core models backed by official evidence at medium/high confidence ({len(rows)} unique provider + Model ID pairs). See the [related AI API directory](related-ai-apis.en.md) for extensions.
 
-Free grants and rate limits are separate. The multimodal column is derived from the number of modalities listed in the source. `unknown` means the reviewed official evidence did not confirm that field. Check the linked source for current account, region, project, and model eligibility.
+Free quota and rate limits are separate. `unknown` means the reviewed official source did not confirm the field. Eligibility may depend on account, region, project, and model.
 
-{md_table(rows, columns)}
+## Free access and connection
+
+{md_table(rows, connection_columns)}
+
+## Input/output modalities, capabilities, and limits
+
+{md_table(detailed_rows, capability_columns)}
+"""
+
+
+def render_related_ai(records: list[dict[str, Any]], language: str) -> str:
+    rows = [row for row in model_rows(records, language, "related_ai_api") if row.get("model_type") != model_type_label("routing_alias", language)]
+    detailed_rows = [{**row, "model": f"{row['provider']} / `{row['model_id']}`"} for row in rows]
+    if language == "zh":
+        return f"""# 相关 AI API 扩展资源
+
+这些 API 可用于生成、检索或安全任务，但不是核心文本/多模态 LLM。它们单独列出，不计入 README 的核心模型数量。当前有 {len(rows)} 个已核实的扩展型号。
+
+{md_table(rows, [('平台','provider'),('精确 Model ID','model_id'),('扩展类型','model_type'),('免费类型','free_type'),('额度/范围','quota'),('速率限制','limits'),('API Base','base'),('OpenAI 兼容','openai'),('官方来源','source')])}
+
+## 输入/输出与能力详情
+
+{md_table(detailed_rows, [('平台 / Model ID','model'),('输入模态','input_modalities'),('输出模态','output_modalities'),('能力标签','capabilities'),('工具调用','tools'),('结构化输出','structured'),('资格','eligibility'),('有效期','expires'),('核验日期','verified_at'),('来源','source')])}
+
+未列型号不代表平台没有该类 API；只有当前免费方案和型号关系均有官方证据时才纳入本页。
+"""
+    return f"""# Related AI API extensions
+
+These APIs support generation, retrieval, or safety tasks but are not core text/multimodal LLMs. They are listed separately and excluded from the README core model count. There are {len(rows)} verified extension model records.
+
+{md_table(rows, [('Provider','provider'),('Exact Model ID','model_id'),('Extension type','model_type'),('Free type','free_type'),('Quota/scope','quota'),('Rate limits','limits'),('API Base','base'),('OpenAI compatible','openai'),('Official source','source')])}
+
+## Input/output and capability details
+
+{md_table(detailed_rows, [('Provider / Model ID','model'),('Input modalities','input_modalities'),('Output modalities','output_modalities'),('Capability tags','capabilities'),('Tool calling','tools'),('Structured output','structured'),('Eligibility','eligibility'),('Validity','expires'),('Last verified','verified_at'),('Source','source')])}
+
+An omitted model does not mean a provider lacks that API category. Include a record only when both the current free offer and model relationship have official evidence.
 """
 
 
@@ -851,12 +1093,22 @@ def render_provider_comparison(records: list[dict[str, Any]]) -> str:
         provider = entries["provider"][0] if entries["provider"] else {}
         active = [row for row in recommended(records) if row.get("provider_id") == provider_id]
         active_offer = any(row.get("record_level") == "offer" for row in active)
+        core_models = {
+            str(row.get("model_id", "")) for row in active
+            if row.get("record_level") == "model" and row.get("model_scope") == "core_llm"
+        }
+        related_models = {
+            str(row.get("model_id", "")) for row in active
+            if row.get("record_level") == "model" and row.get("model_scope") == "related_ai_api"
+            and row.get("model_type") != "routing_alias"
+        }
         rows.append({
             "provider": provider.get("provider", provider_id),
             "provider_id": provider_id,
             "status": provider_status(provider, active_offer, "zh"),
             "offer_count": sum(1 for row in active if row.get("record_level") == "offer"),
-            "model_count": sum(1 for row in active if row.get("record_level") == "model"),
+            "model_count": len(core_models),
+            "related_model_count": len(related_models),
             "free_types": "、".join(sorted({FREE_TYPE_ZH.get(str(row.get("free_type", "")), str(row.get("free_type", ""))) for row in active})) or "无已确认方案",
             "openai": compatibility_label(provider.get("openai_compatible", "unknown"), "zh"),
             "api_base": provider.get("api_base", "") or "未知 / 原生端点",
@@ -868,13 +1120,32 @@ def render_provider_comparison(records: list[dict[str, Any]]) -> str:
 
 """ + md_table(rows, [
         ("平台", "provider"), ("Provider ID", "provider_id"), ("状态", "status"),
-        ("Offer 数", "offer_count"), ("型号数", "model_count"), ("免费类型", "free_types"),
+        ("Offer 数", "offer_count"), ("核心 LLM 数", "model_count"), ("扩展 API 数", "related_model_count"), ("免费类型", "free_types"),
         ("OpenAI 兼容", "openai"), ("API Base", "api_base"), ("官方来源", "source"),
     ]) + "\n"
 
 
 def render_candidate_sources(records: list[dict[str, Any]]) -> str:
     rows = candidate_rows(records)
+    provider_names = {
+        str(row.get("provider_id", "")): str(row.get("provider", row.get("provider_id", "")))
+        for row in records if row.get("record_level") == "provider"
+    }
+    core_provider_ids = {
+        str(row.get("provider_id", "")) for row in recommended(records)
+        if row.get("record_level") == "model" and row.get("model_scope") == "core_llm"
+    }
+    dynamic_rows = []
+    for offer in recommended(records):
+        if offer.get("record_level") != "offer" or str(offer.get("provider_id", "")) in core_provider_ids:
+            continue
+        dynamic_rows.append({
+            "provider": provider_names.get(str(offer.get("provider_id", "")), offer.get("provider_id", "")),
+            "type": FREE_TYPE_ZH.get(str(offer.get("free_type", "")), str(offer.get("free_type", ""))),
+            "quota": localized(offer, "free_quota", "zh"),
+            "eligibility": eligibility_summary(offer, "zh"),
+            "source": official_link(offer),
+        })
     return f"""# 候补与历史来源
 
 本页由 provider-level 目录记录生成，涵盖本轮重点研究的国内外平台。候补不是免费 API 结论。只有官方政策与可用 API 型号均得到当前证据支持时，才进入推荐区。
@@ -882,6 +1153,12 @@ def render_candidate_sources(records: list[dict[str, Any]]) -> str:
 ## 尚待复核、非免费或仅有历史证据
 
 {md_table(rows, [('平台','provider'),('状态','status'),('官方来源','source'),('原因/证据缺口','reason')])}
+
+## 已确认免费方案，但未确认具体核心 LLM 型号
+
+以下平台确有官方免费方案，但公开来源没有列出稳定、明确适用的核心 LLM ID，或者型号资格只在动态目录/账号中显示。README 不会因此推荐未验证的具体模型。
+
+{md_table(dynamic_rows, [('平台','provider'),('免费方式','type'),('额度/限制','quota'),('账号条件与有效期','eligibility'),('官方来源','source')])}
 
 ## 复核规则
 
@@ -899,6 +1176,8 @@ def main() -> int:
     FREE_GUIDE_PATH.write_text(render_free_guide(records), encoding="utf-8")
     FREE_MODELS_PATH.write_text(render_free_models(records, "zh"), encoding="utf-8")
     FREE_MODELS_EN_PATH.write_text(render_free_models(records, "en"), encoding="utf-8")
+    RELATED_AI_PATH.write_text(render_related_ai(records, "zh"), encoding="utf-8")
+    RELATED_AI_EN_PATH.write_text(render_related_ai(records, "en"), encoding="utf-8")
     PROVIDER_COMPARISON_PATH.write_text(render_provider_comparison(records), encoding="utf-8")
     CANDIDATE_SOURCES_PATH.write_text(render_candidate_sources(records), encoding="utf-8")
     counts = free_counts(records)

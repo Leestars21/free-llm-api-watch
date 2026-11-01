@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 generated_for: free-llm-api-watch
 notes:
   - This is the provider monitoring inventory. Evidence-backed offer and model records live in manual_catalog.json and free_api_catalog.json.
@@ -30,8 +30,8 @@ providers:
     name: Cerebras Inference
     status: free_offer_confirmed
     model_list_api: https://inference-docs.cerebras.ai/
-    policy_source: https://inference-docs.cerebras.ai/support/pricing
-    notes: Public docs confirm a $0 Free tier; model and rate access can vary.
+    policy_source: https://www.cerebras.ai/pricing
+    notes: Current page documents a one-time $5 promotion for 30 days with a valid payment method and no automatic billing; older inference docs still claim a $0 Free tier, so specific model eligibility is unresolved.
   - provider_id: cloudflare-workers-ai
     name: Cloudflare Workers AI
     status: free_offer_confirmed
@@ -51,11 +51,11 @@ providers:
     policy_source: https://cloud.tencent.com/announce/detail/2287
     notes: Old API platform shut down 2026-09-30; see separate TokenHub migration offer.
   - provider_id: tencent-tokenhub
-    name: Tencent Cloud TokenHub (migration offer)
+    name: Tencent Cloud TokenHub
     status: free_offer_confirmed
-    model_list_api: https://cloud.tencent.com/document/product/1772
-    policy_source: https://cloud.tencent.com/announce/detail/2287
-    notes: Public announcement only covers eligible migrated users; amount and model IDs require account-console review.
+    model_list_api: https://cloud.tencent.com/document/product/1823/130078
+    policy_source: https://intl.cloud.tencent.com/zh/document/product/1300/80423
+    notes: Current 2026 campaign grants 1M tokens per language model for one year, one claim/model, freezes $10 account balance per model, and ends 2026-12-31; migration offer is separate.
   - provider_id: volcengine-ark
     name: Volcengine Ark / Doubao
     status: free_offer_confirmed
@@ -70,10 +70,10 @@ providers:
     notes: GLM-4.7-Flash is documented as a free API model; GLM-4.5-Flash is historical/retired.
   - provider_id: baidu-qianfan
     name: Baidu Qianfan / ERNIE
-    status: historical
-    model_list_api: https://cloud.baidu.com/doc/WENXINWORKSHOP/
-    policy_source: https://cloud.baidu.com/news/news_c7a145b9-5c99-4870-939f-e09ba506aab3
-    notes: Reviewed free bulletin is from 2024; current API model and quota policy need re-verification.
+    status: free_offer_confirmed
+    model_list_api: https://cloud.baidu.com/doc/Qianfan/index.html
+    policy_source: https://cloud.baidu.com/doc/Qianfan/index.html
+    notes: Current product docs list a 20 RMB new-user coupon after real-name verification, valid for one month; the reviewed offer does not confirm a specific free API model ID.
   - provider_id: siliconflow
     name: SiliconFlow
     status: free_offer_confirmed
@@ -85,7 +85,7 @@ providers:
     status: free_offer_confirmed
     model_list_api: https://api-inference.modelscope.cn/v1/models
     policy_source: https://www.modelscope.cn/posts/435591
-    notes: Daily MoLi points are shared account balance; exact model inventory and per-call cost are dynamic.
+    notes: Official source documents 200 MoLi points/day per registered account; API-Inference costs vary by model size and the exact free model inventory is dynamic, so no specific model is claimed.
   - provider_id: huggingface-inference-providers
     name: Hugging Face Inference Providers
     status: free_offer_confirmed
@@ -103,7 +103,7 @@ providers:
     status: free_offer_confirmed
     model_list_api: https://api.cohere.com/v2/models
     policy_source: https://docs.cohere.com/v2/docs/rate-limits
-    notes: Optional inventory check uses COHERE_API_KEY; evaluation allowance is shared across endpoints.
+    notes: Optional inventory check uses COHERE_API_KEY; eligible evaluation keys receive a recurring 1,000 calls/month shared across endpoints, not a one-time trial.
   - provider_id: vercel-ai-gateway
     name: Vercel AI Gateway
     status: free_offer_confirmed
