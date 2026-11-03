@@ -1,6 +1,6 @@
 # 免費 API 使用指南
 
-最近證據核驗日期：2026-11-02
+最近證據核驗日期：2026-11-03
 
 ## 免費方式
 
@@ -107,19 +107,19 @@
 | Novita AI | inclusionai/ling-3.0-flash-sante | 文本 | 文本 | 未确认 | 支持 | 未知 | 支持 | 256,000 Token | 模型页未说明固定速率限制 | 绑卡：未知；实名：未知；地区：未知 | 2026-11-01 | [能力依据](https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante?from=pricing) |
 | Novita AI | inclusionai/ling-3.0-flash-vl | 图像, 文本, 视频 | 文本 | 图像理解 | 支持 | 未知 | 支持 | 256,000 Token | 模型页未说明固定速率限制 | 绑卡：未知；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-vl) |
 | Novita AI | inclusionai/ling-3.1-flash | 文本 | 文本 | 未确认 | 支持 | 未知 | 支持 | 256,000 Token | 模型页未说明固定速率限制 | 绑卡：未知；实名：未知；地区：未知 | 2026-11-01 | [能力依据](https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing) |
-| OpenRouter | cohere/north-mini-code:free | 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 256,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | dots-studio/dots-3-note-preview:free | 图像, 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 512,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | google/gemma-4-26b-a4b-it:free | 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | google/gemma-4-31b-it:free | 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | liquid/lfm-2.5-2.6b:free | 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 65,536 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | 音频, 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 256,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | nvidia/nemotron-3-ultra-550b-a55b:free | 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,000,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | nvidia/nemotron-3.5-lightning:free | 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,000,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | nvidia/nemotron-3.5-super-vl:free | 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 1,000,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | recursive/flint-v1.0:free | 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | thinkingmachines/inkling-small:free | 音频, 图像, 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,048,576 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | thinkingmachines/inkling:free | 音频, 图像, 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,048,576 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
-| OpenRouter | xingchen-agi/xing4.0-29b-a4b:free | 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-02 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | cohere/north-mini-code:free | 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 256,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | dots-studio/dots-3-note-preview:free | 图像, 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 512,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | google/gemma-4-26b-a4b-it:free | 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | google/gemma-4-31b-it:free | 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | liquid/lfm-2.5-2.6b:free | 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 65,536 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | 音频, 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 256,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | nvidia/nemotron-3-ultra-550b-a55b:free | 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,000,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | nvidia/nemotron-3.5-lightning:free | 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,000,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | nvidia/nemotron-3.5-super-vl:free | 图像, 文本, 视频 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 1,000,000 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | recursive/flint-v1.0:free | 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | thinkingmachines/inkling-small:free | 音频, 图像, 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,048,576 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | thinkingmachines/inkling:free | 音频, 图像, 文本 | 文本 | Agent 工作流 | 支持 | 未知 | 未知 | 1,048,576 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
+| OpenRouter | xingchen-agi/xing4.0-29b-a4b:free | 文本 | 文本 | Agent 工作流 | 支持 | 支持 | 未知 | 262,144 Token | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | 绑卡：否；实名：未知；地区：未知 | 2026-11-03 | [能力依据](https://openrouter.ai/api/v1/models) |
 | Tencent Cloud TokenHub | deepseek-v4-flash | 文本 | 文本 | Agent 工作流, 长上下文, 推理 | 支持 | 未知 | 支持 | 1,000,000 Token | 速率限制另行适用，未在该赠额说明中给出。 | 绑卡：未知；实名：未知；地区：账号地区及资格请在 TokenHub 控制台核对。 | 2026-11-02 | [能力依据](https://cloud.tencent.com/document/product/1823/132248) |
 | Tencent Cloud TokenHub | glm-5.3-flash | 文本 | 文本 | 未确认 | 未知 | 未知 | 未知 | 未知 | 速率限制另行适用，未在该赠额说明中给出。 | 绑卡：未知；实名：未知；地区：账号地区及资格请在 TokenHub 控制台核对。 | 2026-11-02 | [能力依据](https://cloud.tencent.com/document/product/1823/130078) |
 | Vercel AI Gateway | inclusionai/ling-3.1-flash-1019 | 文本 | 文本 | 未确认 | 未知 | 未知 | 未知 | 未知 | 上游服务商和模型自身的免费层速率限制仍然适用 | 绑卡：是；实名：未知；地区：未知 | 2026-11-01 | [能力依据](https://vercel.com/ai-gateway/models?features=free) |
