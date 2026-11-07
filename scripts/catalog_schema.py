@@ -150,7 +150,7 @@ MODEL_CAPABILITIES = {
     "image_understanding",
     "agent_workflows",
 }
-MODALITY_TYPES = {"text", "image", "audio", "video", "pdf", "embedding", "score", "label"}
+MODALITY_TYPES = {"text", "image", "audio", "video", "pdf", "file", "embedding", "score", "label"}
 
 RECOMMENDABLE_FREE_TYPES = {
     "stable_free_tier",

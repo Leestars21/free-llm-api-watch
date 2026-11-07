@@ -528,12 +528,17 @@ def update_openrouter(records: list[dict[str, Any]], offline: bool = False) -> t
         offer_key = ("openrouter", "offer", "", "openrouter-free-model-route")
         for record in merged:
             if record_key(record) == offer_key:
-                record["applies_to_models"] = sorted(new_by_id.keys()) if new_by_id else sorted(
-                    r["model_id"] for r in merged
-                    if r.get("provider_id") == "openrouter"
-                    and r.get("record_level") == "model"
-                    and r.get("verification_status") == "active"
-                    and r.get("is_recommended")
+                record["applies_to_models"] = sorted(
+                    {
+                        str(model.get("model_id", ""))
+                        for model in merged
+                        if model.get("provider_id") == "openrouter"
+                        and model.get("record_level") == "model"
+                        and model.get("offer_id") == record.get("offer_id")
+                        and model.get("verification_status") == "active"
+                        and model.get("is_recommended") is True
+                        and model.get("model_id")
+                    }
                 )
                 record["last_checked"] = checked
                 record["fetch_status"] = "ok"

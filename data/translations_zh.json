@@ -212,6 +212,7 @@
     "audio": "音频",
     "video": "视频",
     "pdf": "PDF",
+    "file": "文件",
     "embedding": "向量",
     "score": "相关性分数",
     "label": "类别标签"
