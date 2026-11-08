@@ -2,7 +2,7 @@
 
 An evidence-based directory of free LLM API providers, including zero-priced models, recurring allowances, new-user grants and limited-time promotions. Model eligibility and quota details follow the linked official source and account console.
 
-**Last reviewed: 2026-11-03** · [中文](README.md)
+**Last reviewed: 2026-11-08** · [中文](README.md)
 
 ## Catalog statistics
 
@@ -11,7 +11,7 @@ An evidence-based directory of free LLM API providers, including zero-priced mod
 | Monitored providers | 39 |
 | Providers with a verified free offer | 21 |
 | Core free LLMs (unique provider + Model ID) | 34 |
-| Related AI API extensions | 14 |
+| Related AI API extensions | 13 |
 | Core models explicitly priced at zero | 23 |
 
 Counts include active, recommended records backed by official sources at medium/high confidence. Each Model ID is counted once per provider. Free quotas and rate limits are shown separately.

@@ -1,6 +1,6 @@
 # Related AI API extensions
 
-These APIs support generation, retrieval, or safety tasks but are not core text/multimodal LLMs. They are listed separately and excluded from the README core model count. There are 14 verified extension model records.
+These APIs support generation, retrieval, or safety tasks but are not core text/multimodal LLMs. They are listed separately and excluded from the README core model count. There are 13 verified extension model records.
 
 | Provider | Exact Model ID | Extension type | Free type | Quota/scope | Rate limits | API Base | OpenAI compatible | Official source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -17,7 +17,6 @@ These APIs support generation, retrieval, or safety tasks but are not core text/
 | GroqCloud | whisper-large-v3-turbo | Speech recognition | Recurring free tier (usage/rate limits apply) | Free Plan API usage is available at no charge within per-model rate limits; no separate token grant is documented | RPM 20, RPD 2000, audio seconds/hour 7200, audio seconds/day 28800 | https://api.groq.com/openai/v1 | yes | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | OpenRouter | google/lyria-3-clip-preview | Music generation | Free router model | All reported model price dimensions are zero while listed as free | unknown | https://openrouter.ai/api/v1 | yes | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 | OpenRouter | google/lyria-3-pro-preview | Music generation | Free router model | All reported model price dimensions are zero while listed as free | unknown | https://openrouter.ai/api/v1 | yes | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter | nvidia/nemotron-3.5-content-safety:free | Content moderation | Free router model | All reported model price dimensions are zero while listed as free | unknown | https://openrouter.ai/api/v1 | yes | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 
 ## Input/output and capability details
 
@@ -34,8 +33,7 @@ These APIs support generation, retrieval, or safety tasks but are not core text/
 | GroqCloud / `openai/gpt-oss-safeguard-20b` | text | label | not confirmed | unknown | unknown | Card: unknown; identity check: unknown; region: unknown | No fixed end date stated; Free Plan terms and model availability may change | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | GroqCloud / `whisper-large-v3` | audio | text | not confirmed | unknown | unknown | Card: unknown; identity check: unknown; region: unknown | No fixed end date stated; Free Plan terms and model availability may change | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | GroqCloud / `whisper-large-v3-turbo` | audio | text | not confirmed | unknown | unknown | Card: unknown; identity check: unknown; region: unknown | No fixed end date stated; Free Plan terms and model availability may change | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
-| OpenRouter / `google/lyria-3-clip-preview` | image, text | audio, text | not confirmed | unknown | supported | Card: no; identity check: unknown; region: unknown | Model free status may change without notice | 2026-11-03 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter / `google/lyria-3-pro-preview` | image, text | audio, text | not confirmed | unknown | supported | Card: no; identity check: unknown; region: unknown | Model free status may change without notice | 2026-11-03 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter / `nvidia/nemotron-3.5-content-safety:free` | image, text | text | not confirmed | unknown | unknown | Card: no; identity check: unknown; region: unknown | Model free status may change without notice | 2026-11-03 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter / `google/lyria-3-clip-preview` | image, text | audio, text | not confirmed | unknown | supported | Card: no; identity check: unknown; region: unknown | Model free status may change without notice | 2026-11-08 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter / `google/lyria-3-pro-preview` | image, text | audio, text | not confirmed | unknown | supported | Card: no; identity check: unknown; region: unknown | Model free status may change without notice | 2026-11-08 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 
 An omitted model does not mean a provider lacks that API category. Include a record only when both the current free offer and model relationship have official evidence.

@@ -31,7 +31,7 @@
 | NVIDIA Build / API Catalog | nvidia-build | 待复核 | 0 | 0 | 0 | 无已确认方案 | 是 | https://integrate.api.nvidia.com/v1 | [NVIDIA NIM getting started](https://docs.nvidia.com/nim/large-language-models/latest/get-started/) |
 | Ollama Cloud | ollama-cloud | 已确认免费方案（按来源所述范围） | 1 | 0 | 0 | 长期免费层（有用量/速率限制） | 部分兼容 | https://ollama.com/api | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
 | OpenAI API (protocol reference) | openai-api | 未验证 | 0 | 0 | 0 | 无已确认方案 | 是 | https://api.openai.com/v1 | [OpenAI API reference](https://platform.openai.com/docs/api-reference) |
-| OpenRouter | openrouter | 已确认免费方案（按来源所述范围） | 1 | 13 | 3 | 免费路由模型 | 是 | https://openrouter.ai/api/v1 | [OpenRouter free models and rate limits](https://openrouter.ai/collections/free-models) |
+| OpenRouter | openrouter | 已确认免费方案（按来源所述范围） | 1 | 13 | 2 | 免费路由模型 | 是 | https://openrouter.ai/api/v1 | [OpenRouter free models and rate limits](https://openrouter.ai/collections/free-models) |
 | Reka AI Vision API | reka-ai | 已确认免费方案（按来源所述范围） | 1 | 0 | 0 | 一次性试用额度 | 否 | https://vision-agent.api.reka.ai | [Reka Vision API pricing](https://docs.reka.ai/vision/pricing) |
 | Replicate | replicate | 已确认免费方案（按来源所述范围） | 1 | 0 | 0 | 一次性试用额度 | 部分兼容 | https://api.replicate.com/v1 | [Replicate billing documentation](https://replicate.com/docs/topics/billing) |
 | SambaNova Cloud | sambanova-cloud | 已复核：当前未确认免费 API | 0 | 0 | 0 | 无已确认方案 | 是 | https://api.sambanova.ai/v1 | [SambaCloud plans and billing](https://cloud.sambanova.ai/plans) |
