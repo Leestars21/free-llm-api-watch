@@ -2,7 +2,7 @@
 
 An evidence-based directory of free LLM API providers, including zero-priced models, recurring allowances, new-user grants and limited-time promotions. Model eligibility and quota details follow the linked official source and account console.
 
-**Last reviewed: 2026-11-08** · [中文](README.md)
+**Last reviewed: 2026-11-09** · [中文](README.md)
 
 ## Catalog statistics
 
