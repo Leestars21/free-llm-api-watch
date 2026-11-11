@@ -33,7 +33,7 @@
 | GroqCloud / `openai/gpt-oss-safeguard-20b` | 文本 | 类别标签 | 未确认 | 未知 | 未知 | 绑卡：未知；实名：未知；地区：未知 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | GroqCloud / `whisper-large-v3` | 音频 | 文本 | 未确认 | 未知 | 未知 | 绑卡：未知；实名：未知；地区：未知 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | GroqCloud / `whisper-large-v3-turbo` | 音频 | 文本 | 未确认 | 未知 | 未知 | 绑卡：未知；实名：未知；地区：未知 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
-| OpenRouter / `google/lyria-3-clip-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-10 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter / `google/lyria-3-pro-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-10 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter / `google/lyria-3-clip-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-11 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter / `google/lyria-3-pro-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-11 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 
 未列型号不代表平台没有该类 API；只有当前免费方案和型号关系均有官方证据时才纳入本页。
