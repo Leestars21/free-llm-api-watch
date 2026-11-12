@@ -2,7 +2,7 @@
 
 整理国内外可通过 API 免费调用大语言模型的服务商，覆盖指定免费模型、周期性免费额度、新用户赠额和限时活动。模型资格与额度以官方来源和账号内显示为准。
 
-**最近核验：2026-11-11** · [English](README.en.md)
+**最近核验：2026-11-12** · [English](README.en.md)
 
 ## 目录统计
 
@@ -10,9 +10,9 @@
 | --- | ---: |
 | 监控提供商 | 39 |
 | 有已核实免费方案的平台 | 21 |
-| 核心免费 LLM（按平台 + Model ID 去重） | 33 |
+| 核心免费 LLM（按平台 + Model ID 去重） | 34 |
 | 相关 AI API 扩展 | 13 |
-| 核心模型明确列为零价格 | 22 |
+| 核心模型明确列为零价格 | 23 |
 
 只统计 `active`、有官方证据、可信度为中/高且标记推荐的记录。同一个平台上的一个 Model ID 只计一次。速率限制和免费总额度分开记录。
 
@@ -48,7 +48,7 @@
 | ModelScope Inference / 魔搭社区 | 长期免费层（有用量/速率限制） | 注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享；有效期 每日额度及累计积分有效期以当前积分规则为准 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 否；实名 未知；地区 未说明 | 是 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
 | Novita AI | 限时活动；指定免费模型；新用户赠额 / 免费使用上限 | 当前模型页显示输入和输出均为每百万 Token $0，属于上线促销；有效期 上线促销；已核对页面未注明结束日期；部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费；有效期 限时活动；已核对页面未注明结束日期；另有 2 个方案 | `apodex/apodex-1.1-mini`, `inclusionai/ling-3.0-flash-fin`, `inclusionai/ling-3.0-flash-sante`；另有 2 个（[全部](docs/free-models.md)） | 绑卡 未知；实名 未知；地区 未说明 | 是 | [Novita Apodex 1.1 Mini launch and pricing](https://blogs.novita.ai/apodex-1-1-mini-on-novita-ai-api-quickstart-pricing/) |
 | Ollama Cloud | 长期免费层（有用量/速率限制） | Free 方案每月包含部分云端模型的起步用量；额度数值未公开，在账号内显示；最多 1 个并发请求；有效期 每月额度；具体规则以账号页面为准 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 未知；实名 未知；地区 未说明 | 部分兼容 | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
-| OpenRouter | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理；有效期 模型的免费状态可能随时变化 | `cohere/north-mini-code:free`, `dots-studio/dots-3-note-preview:free`, `google/gemma-4-26b-a4b-it:free`；另有 9 个（[全部](docs/free-models.md)） | 绑卡 未知；实名 未知；地区 未说明 | 是 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
+| OpenRouter | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理；有效期 模型的免费状态可能随时变化 | `baidu/ernie-5.5-flash-preview:free`, `cohere/north-mini-code:free`, `dots-studio/dots-3-note-preview:free`；另有 10 个（[全部](docs/free-models.md)） | 绑卡 未知；实名 未知；地区 未说明 | 是 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
 | Reka AI Vision API | 一次性试用额度 | 符合条件的新用户可试用 180 分钟视频索引；有效期 注册时显示试用条款；已核对定价页未写明到期日 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 未知；实名 未知；地区 未说明 | 否 | [Reka Vision API pricing](https://docs.reka.ai/vision/pricing) |
 | Replicate | 一次性试用额度 | 部分模型可在短期评估期间免费运行；未公布统一额度；有效期 模型要求设置账单时，免费评估即结束 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 未知；实名 未知；地区 未说明 | 部分兼容 | [Replicate billing documentation](https://replicate.com/docs/topics/billing) |
 | SiliconFlow | 指定免费模型 | 实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额；有效期 型号资格随实时模型目录变化 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 未知；实名 是；地区 未说明 | 是 | [SiliconFlow rate limits and model gallery](https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation) |
@@ -76,7 +76,7 @@
 | ModelScope Inference / 魔搭社区 | 长期免费层（有用量/速率限制） | 注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享；有效期 每日额度及累计积分有效期以当前积分规则为准 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 否；实名 未知；地区 未说明 | 是 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
 | Novita AI | 指定免费模型 | 当前模型页显示输入和输出均为每百万 Token $0；有效期 价格可能变化；使用前请复核模型页 | `apodex/apodex-1.1-mini`, `inclusionai/ling-3.0-flash-fin`, `inclusionai/ling-3.0-flash-sante`；另有 2 个（[全部](docs/free-models.md)） | 绑卡 未知；实名 未知；地区 未说明 | 是 | [Novita Ling 3.1 Flash model details](https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing) |
 | Ollama Cloud | 长期免费层（有用量/速率限制） | Free 方案每月包含部分云端模型的起步用量；额度数值未公开，在账号内显示；最多 1 个并发请求；有效期 每月额度；具体规则以账号页面为准 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 未知；实名 未知；地区 未说明 | 部分兼容 | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
-| OpenRouter | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理；有效期 模型的免费状态可能随时变化 | `cohere/north-mini-code:free`, `dots-studio/dots-3-note-preview:free`, `google/gemma-4-26b-a4b-it:free`；另有 9 个（[全部](docs/free-models.md)） | 绑卡 未知；实名 未知；地区 未说明 | 是 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
+| OpenRouter | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理；有效期 模型的免费状态可能随时变化 | `baidu/ernie-5.5-flash-preview:free`, `cohere/north-mini-code:free`, `dots-studio/dots-3-note-preview:free`；另有 10 个（[全部](docs/free-models.md)） | 绑卡 未知；实名 未知；地区 未说明 | 是 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
 | SiliconFlow | 指定免费模型 | 实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额；有效期 型号资格随实时模型目录变化 | 具体型号需在平台目录或账号内确认；此处不推测 | 绑卡 未知；实名 是；地区 未说明 | 是 | [SiliconFlow rate limits and model gallery](https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation) |
 | Vercel AI Gateway | 长期免费层（有用量/速率限制） | 符合条件的 Free 团队账号每月有 $5 AI Gateway 额度；有效期 购买额度后不再享有免费月额度 | `inclusionai/ling-3.1-flash-1019`, `nvidia/nemotron-3.5-lightning-free` | 绑卡 是；实名 未知；地区 未说明 | 是 | [Vercel AI Gateway pricing and live model catalog](https://vercel.com/docs/ai-gateway/pricing) |
 | Zhipu BigModel / GLM | 指定免费模型 | 官方公告称 GLM-4.7-Flash API 输入和输出 Token 免费；公告未说明请求上限；有效期 公告未注明固定结束日期 | `glm-4.7-flash` | 绑卡 未知；实名 未知；地区 未说明 | 部分兼容 | [Zhipu GLM-4.7-Flash announcement](https://www.zhipuai.cn/zh/news/148) |
