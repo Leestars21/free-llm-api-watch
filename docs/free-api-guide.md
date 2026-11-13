@@ -1,6 +1,6 @@
 # 免費 API 使用指南
 
-最近證據核驗日期：2026-11-03
+最近一条证据核验日期：2026-11-03；各记录的核验日期可能不同。
 
 ## 免費方式
 
@@ -16,33 +16,33 @@
 
 ## 已确认方案
 
-| 平台 | 类型 | 额度 | 单位 | 适用范围 | 有效期 | 绑卡/实名/地区 | 官方来源 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| AI Horde / AI Horde OpenAI API | 社区志愿算力（动态排队） | 没有固定 Token / 请求赠额；匿名访问可使用社区志愿算力，排队优先级最低 | 志愿算力容量 | 平台共享 | 试运行服务，范围可能调整 | 绑卡 否；实名 未知；地区 未说明 | [AI Horde OpenAI API docs](https://oai.aihorde.net/) |
-| Alibaba Cloud Model Studio / Qwen | 新用户赠额 / 免费使用上限 | 符合条件的新账号通常每个模型获得约 100 万 Token；具体额度因模型而异 | Token/模型 | 按模型独立 | 按模型激活、发布或审批时间起算 90 天；以控制台为准 | 绑卡 未知；实名 是；地区 仅限中国北京地域且账号符合资格 | [Model Studio new-user free quota](https://help.aliyun.com/zh/model-studio/new-free-quota/) |
-| Baidu Qianfan / ERNIE | 新用户赠额 / 免费使用上限 | 新用户 20 元优惠券；官方产品页未列出具体免费 API 型号。 | 人民币 | 一次性 | 发放后一个月。 | 绑卡 未知；实名 是；地区 账号地区与手机号要求待核对。 | [Baidu Qianfan new-user coupon](https://cloud.baidu.com/doc/Qianfan/index.html) |
-| Cerebras Inference | 一次性试用额度 | 一次性 5 美元推广额度，有效 30 天；需有效支付方式，不会自动扣款；到期或用尽后 API 暂停，除非另购 PayGo。 | 美元抵扣额 | 一次性 | 激活后 30 天；定价页未公布单独活动截止日。 | 绑卡 是；实名 未知；地区 未知 | [Cerebras current pricing](https://www.cerebras.ai/pricing) |
-| Cloudflare Workers AI | 长期免费层（有用量/速率限制） | 每天 10,000 Neurons | Neurons/天 | 账号共享 | 官方未公布固定结束日期 | 绑卡 未知；实名 未知；地区 未说明 | [Workers AI pricing and changelog](https://developers.cloudflare.com/workers-ai/platform/pricing/) |
-| Cohere API | 每月免费评估额度 | 符合条件的评估 Key 每月最多 1,000 次 API 调用，多个端点共享；另有端点/型号 RPM 限制。 | 次模型调用/月 | 账号共享 | 评估 Key 资格；生产用途需申请 Production Key。 | 绑卡 未知；实名 未知；地区 未说明 | [Cohere rate limits and model access](https://docs.cohere.com/v2/docs/rate-limits) |
-| Google Gemini API / Google AI Studio | 长期免费层（有用量/速率限制） | 指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异 | 模型价格与账号速率限制 | 按模型独立 | 未公布固定结束日期；模型和地区资格可能变化 | 绑卡 否；实名 未知；地区 可用国家 / 地区因模型和账号而异 | [Gemini Developer API pricing and rate limits](https://ai.google.dev/gemini-api/docs/pricing) |
-| GroqCloud | 长期免费层（有用量/速率限制） | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 免费计划调用（受型号速率限制） | 账号共享 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 绑卡 未知；实名 未知；地区 未说明 | [Groq Free Plan rate limits and supported models](https://console.groq.com/docs/rate-limits) |
-| Hugging Face Inference Providers | 长期免费层（有用量/速率限制） | 免费账号每月共享 $0.10 推理额度；政策可能调整 | 美元额度/月 | 账号共享 | 按 Hugging Face 当前政策续发；各模型没有独立固定额度 | 绑卡 未知；实名 未知；地区 未说明 | [Inference Providers pricing](https://huggingface.co/docs/inference-providers/en/pricing) |
-| Mistral La Plateforme | 长期免费层（有用量/速率限制） | Free 模式提供账号级月度用量预算；公开文档没有给出统一数值 | 账号用量预算 | 账号共享 | 官方未公布固定结束日期 | 绑卡 否；实名 未知；地区 未说明 | [Mistral free mode and usage limits](https://docs.mistral.ai/admin/billing-usage/usage-limits) |
-| ModelScope Inference / 魔搭社区 | 长期免费层（有用量/速率限制） | 注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享。 | MoLi 积分/天 | 账号共享 | 每日额度及累计积分有效期以当前积分规则为准 | 绑卡 否；实名 未知；地区 未说明 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
-| Novita AI | 限时活动 | 当前模型页显示输入和输出均为每百万 Token $0，属于上线促销 | 美元/百万 Token | 按模型独立 | 上线促销；已核对页面未注明结束日期 | 绑卡 未知；实名 未知；地区 未说明 | [Novita Apodex 1.1 Mini launch and pricing](https://blogs.novita.ai/apodex-1-1-mini-on-novita-ai-api-quickstart-pricing/) |
-| Novita AI | 限时活动 | 部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费 | 美元/百万 Token | 按模型独立 | 限时活动；已核对页面未注明结束日期 | 绑卡 未知；实名 未知；地区 未说明 | [Novita Ling 3.0 model details](https://novita.ai/pricing) |
-| Novita AI | 指定免费模型 | 当前模型页显示输入和输出均为每百万 Token $0 | 美元/百万 Token | 按模型独立 | 价格可能变化；使用前请复核模型页 | 绑卡 未知；实名 未知；地区 未说明 | [Novita Ling 3.1 Flash model details](https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing) |
-| Novita AI | 新用户赠额 / 免费使用上限 | 成功邀请后，邀请人与受邀人各得 $10；邀请人奖励累计上限 $500 | 美元 | 按用户 | 已核对的邀请页面未说明条款和额度有效期 | 绑卡 未知；实名 未知；地区 未说明 | [Novita referral program](https://novita.ai/referral/) |
-| Ollama Cloud | 长期免费层（有用量/速率限制） | Free 方案每月包含部分云端模型的起步用量；额度数值未公开，在账号内显示；最多 1 个并发请求 | 额度积分（数值未公开） | 账号共享 | 每月额度；具体规则以账号页面为准 | 绑卡 未知；实名 未知；地区 未说明 | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
-| OpenRouter | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 模型价格 | 账号共享 | 模型的免费状态可能随时变化 | 绑卡 未知；实名 未知；地区 未说明 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
-| Reka AI Vision API | 一次性试用额度 | 符合条件的新用户可试用 180 分钟视频索引 | 视频分钟 | 一次性 | 注册时显示试用条款；已核对定价页未写明到期日 | 绑卡 未知；实名 未知；地区 未说明 | [Reka Vision API pricing](https://docs.reka.ai/vision/pricing) |
-| Replicate | 一次性试用额度 | 部分模型可在短期评估期间免费运行；未公布统一额度 | 未知 | 一次性 | 模型要求设置账单时，免费评估即结束 | 绑卡 未知；实名 未知；地区 未说明 | [Replicate billing documentation](https://replicate.com/docs/topics/billing) |
-| SiliconFlow | 指定免费模型 | 实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额 | 动态型号目录 | 按模型独立 | 型号资格随实时模型目录变化 | 绑卡 未知；实名 是；地区 未说明 | [SiliconFlow rate limits and model gallery](https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation) |
-| Tencent Cloud TokenHub | 限时活动 | 适用语言模型每个型号 100 万 Token；每个型号需冻结 10 美元账户余额/额度，删除端点后返还。 | Token/模型 | 按模型独立 | 领取后一年；活动截止 2026-12-31。 | 绑卡 未知；实名 未知；地区 账号地区及资格请在 TokenHub 控制台核对。 | [TokenHub free experience package terms](https://intl.cloud.tencent.com/zh/document/product/1300/80423) |
-| Tencent Cloud TokenHub | 一次性试用额度 | 公告未公布额度；仅符合条件的旧平台迁移用户可领取。 | 未知 | 一次性 | 公告称领取后 3 个月。 | 绑卡 未知；实名 未知；地区 以迁移用户账号资格为准。 | [Tencent Cloud migration announcement](https://cloud.tencent.com/announce/detail/2287) |
-| Vercel AI Gateway | 长期免费层（有用量/速率限制） | 符合条件的 Free 团队账号每月有 $5 AI Gateway 额度 | 美元额度/月 | 账号共享 | 购买额度后不再享有免费月额度 | 绑卡 是；实名 未知；地区 未说明 | [Vercel AI Gateway pricing and live model catalog](https://vercel.com/docs/ai-gateway/pricing) |
-| Volcengine Ark / Doubao | 新用户赠额 / 免费使用上限 | 符合条件的账号在安全体验模式下最多可用 500,000 Token；各模型另有额度 | Token/账号模式 | 账号共享 | 仅限此前未开通模型服务或未使用过安全体验模式的账号 | 绑卡 未知；实名 未知；地区 未说明 | [Ark Safe Experience mode](https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh) |
-| Zhipu BigModel / GLM | 指定免费模型 | 官方公告称 GLM-4.7-Flash API 输入和输出 Token 免费；公告未说明请求上限 | 模型价格 | 按模型独立 | 公告未注明固定结束日期 | 绑卡 未知；实名 未知；地区 未说明 | [Zhipu GLM-4.7-Flash announcement](https://www.zhipuai.cn/zh/news/148) |
+| 平台 | 类型 | 额度 | 单位 | 适用范围 | 有效期 | 绑卡/实名/地区 | 核验日期 | 官方来源 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| AI Horde / AI Horde OpenAI API | 社区志愿算力（动态排队） | 没有固定 Token / 请求赠额；匿名访问可使用社区志愿算力，排队优先级最低 | 志愿算力容量 | 平台共享 | 试运行服务，范围可能调整 | 绑卡 否；实名 未知；地区 未说明 | 2026-11-01 | [AI Horde OpenAI API docs](https://oai.aihorde.net/) |
+| Alibaba Cloud Model Studio / Qwen | 新用户赠额 / 免费使用上限 | 符合条件的新账号通常每个模型获得约 100 万 Token；具体额度因模型而异 | Token/模型 | 按模型独立 | 按模型激活、发布或审批时间起算 90 天；以控制台为准 | 绑卡 未知；实名 是；地区 仅限中国北京地域且账号符合资格 | 2026-11-01 | [Model Studio new-user free quota](https://help.aliyun.com/zh/model-studio/new-free-quota/) |
+| Baidu Qianfan / ERNIE | 新用户赠额 / 免费使用上限 | 新用户 20 元优惠券；官方产品页未列出具体免费 API 型号。 | 人民币 | 一次性 | 发放后一个月。 | 绑卡 未知；实名 是；地区 账号地区与手机号要求待核对。 | 2026-11-02 | [Baidu Qianfan new-user coupon](https://cloud.baidu.com/doc/Qianfan/index.html) |
+| Cerebras Inference | 一次性试用额度 | 一次性 5 美元推广额度，有效 30 天；需有效支付方式，不会自动扣款；到期或用尽后 API 暂停，除非另购 PayGo。 | 美元抵扣额 | 一次性 | 激活后 30 天；定价页未公布单独活动截止日。 | 绑卡 是；实名 未知；地区 未知 | 2026-11-02 | [Cerebras current pricing](https://www.cerebras.ai/pricing) |
+| Cloudflare Workers AI | 长期免费层（有用量/速率限制） | 每天 10,000 Neurons | Neurons/天 | 账号共享 | 官方未公布固定结束日期 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-02 | [Workers AI pricing and changelog](https://developers.cloudflare.com/workers-ai/platform/pricing/) |
+| Cohere API | 每月免费评估额度 | 符合条件的评估 Key 每月最多 1,000 次 API 调用，多个端点共享；另有端点/型号 RPM 限制。 | 次模型调用/月 | 账号共享 | 评估 Key 资格；生产用途需申请 Production Key。 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-02 | [Cohere rate limits and model access](https://docs.cohere.com/v2/docs/rate-limits) |
+| Google Gemini API / Google AI Studio | 长期免费层（有用量/速率限制） | 指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异 | 模型价格与账号速率限制 | 按模型独立 | 未公布固定结束日期；模型和地区资格可能变化 | 绑卡 否；实名 未知；地区 可用国家 / 地区因模型和账号而异 | 2026-11-02 | [Gemini Developer API pricing and rate limits](https://ai.google.dev/gemini-api/docs/pricing) |
+| GroqCloud | 长期免费层（有用量/速率限制） | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | 免费计划调用（受型号速率限制） | 账号共享 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Groq Free Plan rate limits and supported models](https://console.groq.com/docs/rate-limits) |
+| Hugging Face Inference Providers | 长期免费层（有用量/速率限制） | 免费账号每月共享 $0.10 推理额度；政策可能调整 | 美元额度/月 | 账号共享 | 按 Hugging Face 当前政策续发；各模型没有独立固定额度 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Inference Providers pricing](https://huggingface.co/docs/inference-providers/en/pricing) |
+| Mistral La Plateforme | 长期免费层（有用量/速率限制） | Free 模式提供账号级月度用量预算；公开文档没有给出统一数值 | 账号用量预算 | 账号共享 | 官方未公布固定结束日期 | 绑卡 否；实名 未知；地区 未说明 | 2026-11-01 | [Mistral free mode and usage limits](https://docs.mistral.ai/admin/billing-usage/usage-limits) |
+| ModelScope Inference / 魔搭社区 | 长期免费层（有用量/速率限制） | 注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享。 | MoLi 积分/天 | 账号共享 | 每日额度及累计积分有效期以当前积分规则为准 | 绑卡 否；实名 未知；地区 未说明 | 2026-11-02 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
+| Novita AI | 限时活动 | 当前模型页显示输入和输出均为每百万 Token $0，属于上线促销 | 美元/百万 Token | 按模型独立 | 上线促销；已核对页面未注明结束日期 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Novita Apodex 1.1 Mini launch and pricing](https://blogs.novita.ai/apodex-1-1-mini-on-novita-ai-api-quickstart-pricing/) |
+| Novita AI | 限时活动 | 部分 Ling 3.0 型号当前显示输入/输出 $0；目录将其标记为限时免费 | 美元/百万 Token | 按模型独立 | 限时活动；已核对页面未注明结束日期 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Novita Ling 3.0 model details](https://novita.ai/pricing) |
+| Novita AI | 指定免费模型 | 当前模型页显示输入和输出均为每百万 Token $0 | 美元/百万 Token | 按模型独立 | 价格可能变化；使用前请复核模型页 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Novita Ling 3.1 Flash model details](https://novita.ai/models/model-detail/inclusionai-ling-3.1-flash?from=pricing) |
+| Novita AI | 新用户赠额 / 免费使用上限 | 成功邀请后，邀请人与受邀人各得 $10；邀请人奖励累计上限 $500 | 美元 | 按用户 | 已核对的邀请页面未说明条款和额度有效期 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Novita referral program](https://novita.ai/referral/) |
+| Ollama Cloud | 长期免费层（有用量/速率限制） | Free 方案每月包含部分云端模型的起步用量；额度数值未公开，在账号内显示；最多 1 个并发请求 | 额度积分（数值未公开） | 账号共享 | 每月额度；具体规则以账号页面为准 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
+| OpenRouter | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 模型价格 | 账号共享 | 模型的免费状态可能随时变化 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [OpenRouter free model rate limits](https://openrouter.ai/collections/free-models) |
+| Reka AI Vision API | 一次性试用额度 | 符合条件的新用户可试用 180 分钟视频索引 | 视频分钟 | 一次性 | 注册时显示试用条款；已核对定价页未写明到期日 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Reka Vision API pricing](https://docs.reka.ai/vision/pricing) |
+| Replicate | 一次性试用额度 | 部分模型可在短期评估期间免费运行；未公布统一额度 | 未知 | 一次性 | 模型要求设置账单时，免费评估即结束 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Replicate billing documentation](https://replicate.com/docs/topics/billing) |
+| SiliconFlow | 指定免费模型 | 实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额 | 动态型号目录 | 按模型独立 | 型号资格随实时模型目录变化 | 绑卡 未知；实名 是；地区 未说明 | 2026-11-01 | [SiliconFlow rate limits and model gallery](https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation) |
+| Tencent Cloud TokenHub | 限时活动 | 适用语言模型每个型号 100 万 Token；每个型号需冻结 10 美元账户余额/额度，删除端点后返还。 | Token/模型 | 按模型独立 | 领取后一年；活动截止 2026-12-31。 | 绑卡 未知；实名 未知；地区 账号地区及资格请在 TokenHub 控制台核对。 | 2026-11-02 | [TokenHub free experience package terms](https://intl.cloud.tencent.com/zh/document/product/1300/80423) |
+| Tencent Cloud TokenHub | 一次性试用额度 | 公告未公布额度；仅符合条件的旧平台迁移用户可领取。 | 未知 | 一次性 | 公告称领取后 3 个月。 | 绑卡 未知；实名 未知；地区 以迁移用户账号资格为准。 | 2026-11-01 | [Tencent Cloud migration announcement](https://cloud.tencent.com/announce/detail/2287) |
+| Vercel AI Gateway | 长期免费层（有用量/速率限制） | 符合条件的 Free 团队账号每月有 $5 AI Gateway 额度 | 美元额度/月 | 账号共享 | 购买额度后不再享有免费月额度 | 绑卡 是；实名 未知；地区 未说明 | 2026-11-01 | [Vercel AI Gateway pricing and live model catalog](https://vercel.com/docs/ai-gateway/pricing) |
+| Volcengine Ark / Doubao | 新用户赠额 / 免费使用上限 | 符合条件的账号在安全体验模式下最多可用 500,000 Token；各模型另有额度 | Token/账号模式 | 账号共享 | 仅限此前未开通模型服务或未使用过安全体验模式的账号 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Ark Safe Experience mode](https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh) |
+| Zhipu BigModel / GLM | 指定免费模型 | 官方公告称 GLM-4.7-Flash API 输入和输出 Token 免费；公告未说明请求上限 | 模型价格 | 按模型独立 | 公告未注明固定结束日期 | 绑卡 未知；实名 未知；地区 未说明 | 2026-11-01 | [Zhipu GLM-4.7-Flash announcement](https://www.zhipuai.cn/zh/news/148) |
 
 ## 核心 LLM
 

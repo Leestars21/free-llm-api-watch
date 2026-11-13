@@ -465,7 +465,7 @@ def provider_overview_rows(
         provider = entries["provider"][0] if entries["provider"] else {}
         active_offers = [
             row for row in entries["offer"]
-            if row.get("is_recommended") and row.get("verification_status") == "active"
+            if row in recommended(records)
             and (selected_free_types is None or row.get("free_type") in selected_free_types)
         ]
         if not active_offers:
@@ -499,6 +499,7 @@ def provider_overview_rows(
         modes = list(dict.fromkeys(FREE_TYPE_ZH.get(str(row.get("free_type")), str(row.get("free_type"))) if language == "zh" else FREE_TYPE_EN.get(str(row.get("free_type")), str(row.get("free_type"))) for row in active_offers))
         rows.append({
             "provider": provider.get("provider", provider_id),
+            "provider_id": provider_id,
             "free_type": ("；" if language == "zh" else "; ").join(modes),
             "quota": shorten(("；" if language == "zh" else "; ").join(quota_items), 155, language),
             "models": model_ids_for(provider_id, entries, language),
@@ -626,6 +627,7 @@ def offer_rows(records: list[dict[str, Any]], language: str = "zh") -> list[dict
             "eligibility": eligibility_summary(row, language),
             "scope": QUOTA_SCOPE_ZH.get(str(row.get("quota_scope", "unknown")), "未知") if language == "zh" else row.get("quota_scope", "unknown"),
             "limits": formatted_rate_limits(row, language),
+            "verified_at": row.get("verified_at") or row.get("last_checked") or "unknown",
             "source": official_link(row),
         }
         for row in selected
@@ -656,137 +658,48 @@ def candidate_rows(records: list[dict[str, Any]], language: str = "zh") -> list[
     return rows
 
 
+def featured_rows(records: list[dict[str, Any]], language: str) -> list[dict[str, Any]]:
+    """Show a small, evidence-backed selection; omit unavailable offers."""
+    names = ("Google Gemini API", "GroqCloud", "Cloudflare Workers AI", "OpenRouter")
+    eligible = provider_overview_rows(records, language, {"stable_free_tier", "free_router"})
+    rows = [row for name in names for row in eligible if name in str(row["provider"])][:4]
+    for row in rows:
+        offer_ids = {part.strip() for part in str(row["offer_ids"]).replace("；", ";").split(";")}
+        dates = sorted({str(offer.get("verified_at") or offer.get("last_checked") or "unknown")
+                        for offer in recommended(records)
+                        if offer.get("record_level") == "offer"
+                        and offer.get("provider_id") == row["provider_id"]
+                        and str(offer.get("offer_id", "")) in offer_ids})
+        row["verified_at"] = ", ".join(dates) or "unknown"
+    return rows
+
+
 def render_readme(records: list[dict[str, Any]]) -> str:
-    counts = free_counts(records)
-    date_checked = latest_date(recommended(records))
-    overview = provider_overview_rows(records, "zh")
-    models = model_rows(records, "zh")
-    long_term = provider_overview_rows(
-        records, "zh", {"stable_free_tier", "monthly_evaluation_tier", "free_model", "free_router", "community_volunteer"}
-    )
-    new_user = provider_overview_rows(records, "zh", {"new_user_credit", "trial_credit"})
-    limited = provider_overview_rows(records, "zh", {"limited_time_promotion"})
-    use_cases = use_case_rows(records, "zh")
-    named_models = [
-        row for row in models
-        if any(token in str(row["model_id"]).lower() for token in ("qwen", "glm", "gemini", "deepseek"))
-    ]
+    rows = featured_rows(records, "zh")
+    table = md_table(rows, [("平台", "provider"), ("免费方式", "free_type"), ("额度与限制", "quota"), ("核验日期", "verified_at"), ("官方来源", "source")])
     return f"""# Free LLM API Watch
 
-整理国内外可通过 API 免费调用大语言模型的服务商，覆盖指定免费模型、周期性免费额度、新用户赠额和限时活动。模型资格与额度以官方来源和账号内显示为准。
+[English](README.en.md) · 项目主页：[Leestars21/free-llm-api-watch](https://github.com/Leestars21/free-llm-api-watch)
 
-**最近核验：{date_checked}** · [English](README.en.md)
+查找可以免费调用的大语言模型 API：这里整理平台、免费方式、模型和官方来源，覆盖免费层、新用户额度与限时活动。
 
-## 目录统计
+## 从这里开始
 
-| 指标 | 数量 |
-| --- | ---: |
-| 监控提供商 | {counts['monitored_providers']} |
-| 有已核实免费方案的平台 | {counts['confirmed_providers']} |
-| 核心免费 LLM（按平台 + Model ID 去重） | {counts['core_llm_models']} |
-| 相关 AI API 扩展 | {counts['related_ai_models']} |
-| 核心模型明确列为零价格 | {counts['zero_price_models']} |
+{table}
 
-只统计 `active`、有官方证据、可信度为中/高且标记推荐的记录。同一个平台上的一个 Model ID 只计一次。速率限制和免费总额度分开记录。
+以上仅是少量入口，并非排名或完整清单。免费范围、模型、地区及账号资格随时可能变化；请查看官方来源与账号控制台后再使用。各条记录的核验日期见完整目录，不应把最新日期理解为全部条目均在当天核验。
 
-## 快速导航
+- **[查看全部平台和免费方案](docs/free-api-guide.md)**：比较额度、资格、有效期与官方来源。
+- **[查看全部免费 LLM 型号](docs/free-models.md)**：精确 Model ID、API 地址、限制与逐条核验日期。
+- [平台对比](docs/provider-comparison.md) · [其他 AI API](docs/related-ai-apis.md) · [候补与历史记录](docs/candidate-sources.md)
 
-- [免费 API 平台速查](#free-api-quick-lookup)
-- [长期免费与周期额度](#recurring-free-api)
-- [新用户赠额与一次性试用](#new-user-credits)
-- [限时活动](#limited-time-offers)
-- [按用途寻找模型](#find-by-use-case)
-- [按 Qwen、GLM、Gemini、DeepSeek 查找](#find-by-model-family)
-- [API 接入示例](#api-setup)
-- [全部核心模型](docs/free-models.md) · [相关 AI API 扩展](docs/related-ai-apis.md)
-- [数据更新和来源](#data-and-sources)
+免费层受用量和速率限制；新用户赠额与限时活动不代表长期免费。模型出现在 API 列表中也不代表调用免费。
 
-<a id="free-api-quick-lookup"></a>
-## 免费 API 平台速查
+## 数据与更新
 
-每家平台一行；型号只列最多 3 个已核实的核心 LLM。没有公开具体型号的动态/账号内目录会明确说明，不用平台级额度推测模型资格。
+目录结合官方来源和自动更新；更新失败时不会将旧数据当作最新核验。[查看更新工作流](.github/workflows/update-catalog.yml)、[变更记录](docs/changelog.md)和[隐私与风险](docs/privacy-and-risk.md)。使用前请核实条款，勿公开 API 密钥或敏感数据。
 
-{overview_table(overview, "zh")}
-
-免费网页聊天、开源模型权重、模型 API 可见和免费 API 调用是不同概念。赠额不等于永久免费；免费层也可能有调用限制、实名、信用卡或地区要求。使用前请查看“条件”和官方详情。
-
-<a id="recurring-free-api"></a>
-## 长期免费与周期额度
-
-包含零价格型号、持续免费层、每日积分和按月评估额度。平台级额度不保证所有目录型号都免费。
-
-{overview_table(long_term, "zh")}
-
-<a id="new-user-credits"></a>
-## 新用户赠额与一次性试用
-
-这类额度通常有资格、领取期限或有效期；请把它与长期免费方案分开看。
-
-{overview_table(new_user, "zh")}
-
-<a id="limited-time-offers"></a>
-## 限时活动
-
-活动结束时间和可用范围会变化；过期记录不会进入推荐表。
-
-{overview_table(limited, "zh")}
-
-<a id="find-by-use-case"></a>
-## 按用途寻找模型
-
-下表只依据模型记录中的官方能力字段、模态和上下文长度筛选；不提供未经验证的性能排名。长上下文筛选阈值为已记录的上下文窗口至少 100K Token。
-
-{md_table(use_cases, [('用途','use_case'),('已核实候选','candidates')])}
-
-<a id="find-by-model-family"></a>
-## 按 Qwen、GLM、Gemini、DeepSeek 查找
-
-这里只列当前免费关系已核实的对应模型；名字相似或第三方可调用不表示免费。
-
-{md_table(named_models, [('平台','provider'),('精确 Model ID','model_id'),('模型类型','model_type'),('免费类型','free_type'),('免费范围','quota'),('官方来源','source')])}
-
-<a id="api-setup"></a>
-## OpenAI-Compatible API 配置示例
-
-具体模型的 API Base、兼容性、模态、工具调用、速率限制和官方来源见[完整核心模型目录](docs/free-models.md)。仅对标记为“是”的端点直接套用；“部分兼容”可能不支持全部 OpenAI 参数。
-
-```python
-import os
-from openai import OpenAI
-
-client = OpenAI(
-    api_key=os.environ["LLM_API_KEY"],
-    base_url=os.environ["LLM_BASE_URL"],
-)
-
-response = client.chat.completions.create(
-    model=os.environ["LLM_MODEL_ID"],
-    messages=[{{"role": "user", "content": "用两句话介绍不确定性量化。"}}],
-)
-print(response.choices[0].message.content)
-```
-
-每家服务商都需使用自己的 API Key、Base URL 和精确 Model ID。不要将密钥写入仓库。完整请求参数见[API 使用指南](docs/free-api-guide.md)。
-
-<a id="data-and-sources"></a>
-## 数据更新与来源
-
-- [完整核心免费模型目录](docs/free-models.md)：精确 ID、免费方案、限速、上下文、输入/输出模态、能力、API Base、来源和核验日期。
-- [相关 AI API 扩展](docs/related-ai-apis.md)：Embedding、Rerank、ASR、TTS、内容审核及图像/视频/音乐生成，不计入核心 LLM 数量。
-- [平台对比](docs/provider-comparison.md) · [候补与历史来源](docs/candidate-sources.md) · [变更记录](docs/changelog.md) · [API 使用指南](docs/free-api-guide.md)
-- `data/manual_catalog.json` 保留人工核实的政策与型号；`data/free_api_catalog.json` 是合并后的输出。模型清单 API 只证明型号存在，不证明免费。
-- 网络更新失败会保留旧自动记录并标记待复核；仅在成功完整响应确认下架或变为付费后撤销自动推荐。自动抓取不会刷新人工政策核验日期。
-- [GitHub Actions 工作流](.github/workflows/update-catalog.yml) 每日 UTC 00:00 执行更新、验证、评分、文档生成和测试；来源检查失败时不会自动提交变更。
-
-## 免责声明与隐私提醒
-
-免费额度、价格、模型路由、可用区域、速率限制、服务条款和数据处理方式都可能变化。生产调用前请打开来源链接复核。不要将个人数据、私有代码、密钥或受限数据发送给不了解的数据处理方；不要绕过服务条款、访问控制、速率限制、实名要求或地区限制。
-
-本目录不是法律、安全、采购、隐私或合规建议。详见 [免责声明](docs/disclaimer.md)、[隐私与风险说明](docs/privacy-and-risk.md) 和 [免费 API 指南](docs/free-api-guide.md)。
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
+发现问题欢迎提交 Issue 或 Pull Request。MIT 许可，见 [LICENSE](LICENSE)。
 """
 
 
@@ -809,135 +722,31 @@ def overview_table(rows: list[dict[str, Any]], language: str = "zh") -> str:
 
 
 def render_readme_en(records: list[dict[str, Any]]) -> str:
-    counts = free_counts(records)
-    date_checked = latest_date(recommended(records))
-    overview = provider_overview_rows(records, "en")
-    models = model_rows(records, "en")
-    long_term = provider_overview_rows(
-        records, "en", {"stable_free_tier", "monthly_evaluation_tier", "free_model", "free_router", "community_volunteer"}
-    )
-    new_user = provider_overview_rows(records, "en", {"new_user_credit", "trial_credit"})
-    limited = provider_overview_rows(records, "en", {"limited_time_promotion"})
-    use_cases = use_case_rows(records, "en")
-    named_models = [
-        row for row in models
-        if any(token in str(row["model_id"]).lower() for token in ("qwen", "glm", "gemini", "deepseek"))
-    ]
+    rows = featured_rows(records, "en")
+    table = md_table(rows, [("Provider", "provider"), ("Free offer", "free_type"), ("Allowance and limits", "quota"), ("Verified", "verified_at"), ("Official source", "source")])
     return f"""# Free LLM API Watch
 
-An evidence-based directory of free LLM API providers, including zero-priced models, recurring allowances, new-user grants and limited-time promotions. Model eligibility and quota details follow the linked official source and account console.
+[中文](README.md) · Project: [Leestars21/free-llm-api-watch](https://github.com/Leestars21/free-llm-api-watch)
 
-**Last reviewed: {date_checked}** · [中文](README.md)
+Find LLM APIs with free access. This directory tracks providers, free offers, models and official evidence, including recurring tiers, new-user credits and promotions.
 
-## Catalog statistics
+## Start here
 
-| Metric | Count |
-| --- | ---: |
-| Monitored providers | {counts['monitored_providers']} |
-| Providers with a verified free offer | {counts['confirmed_providers']} |
-| Core free LLMs (unique provider + Model ID) | {counts['core_llm_models']} |
-| Related AI API extensions | {counts['related_ai_models']} |
-| Core models explicitly priced at zero | {counts['zero_price_models']} |
+{table}
 
-Counts include active, recommended records backed by official sources at medium/high confidence. Each Model ID is counted once per provider. Free quotas and rate limits are shown separately.
+These are selected starting points, not a ranking or a complete list. Offers, models, regions and account eligibility can change; check the official source and your account. Review dates are recorded per entry in the full directory; the latest date does not mean every entry was reviewed then.
 
-## Quick navigation
+- **[All providers and free offers](docs/free-api-guide.md)**: allowances, eligibility, expiry and official sources.
+- **[All free LLM models](docs/free-models.en.md)**: exact Model IDs, API endpoints, limits and individual review dates.
+- [Provider comparison](docs/provider-comparison.md) · [Other AI APIs](docs/related-ai-apis.en.md) · [Candidate and historical records](docs/candidate-sources.md)
 
-- [Free API provider lookup](#free-api-quick-lookup)
-- [Recurring free API and periodic allowances](#recurring-free-api)
-- [New-user credits and one-time trials](#new-user-credits)
-- [Limited-time offers](#limited-time-offers)
-- [Find models by use case](#find-by-use-case)
-- [Find Qwen, GLM, Gemini, and DeepSeek](#find-by-model-family)
-- [API setup example](#api-setup)
-- [All core models](docs/free-models.en.md) · [Related AI API extensions](docs/related-ai-apis.en.md)
-- [Updates and sources](#data-and-sources)
+Free tiers have usage and rate limits. New-user credits and promotions are not permanent free access; a model appearing in an API list does not prove free use. The offers guide and provider comparison are currently in Chinese.
 
-<a id="free-api-quick-lookup"></a>
-## Free API provider lookup
+## Data and updates
 
-One row per provider; at most three verified core LLMs are shown. If a provider uses a dynamic or account-only model catalog, the table says so instead of guessing a free model ID.
+The catalog combines official sources and automated updates; failed checks do not refresh old evidence. See the [update workflow](.github/workflows/update-catalog.yml), [changelog](docs/changelog.md) and [privacy and risk](docs/privacy-and-risk.md). Verify terms before use and never publish API keys or sensitive data.
 
-{overview_table(overview, "en")}
-
-Free web chat, open model weights, API model visibility, and free API inference are different things. A credit is not a permanent free tier. Free plans can require rate limits, identity verification, a payment card, or regional eligibility. Check the conditions and official source before use.
-
-<a id="recurring-free-api"></a>
-## Recurring free API and periodic allowances
-
-This group includes zero-priced models, recurring free tiers, daily points, and monthly evaluation allowances. A provider-level allowance does not prove every catalog model is free.
-
-{overview_table(long_term, "en")}
-
-<a id="new-user-credits"></a>
-## New-user credits and one-time trials
-
-These offers may have eligibility rules, claim periods, or expiry dates. Keep them separate from recurring free access.
-
-{overview_table(new_user, "en")}
-
-<a id="limited-time-offers"></a>
-## Limited-time offers
-
-Campaign end dates and eligible models can change. Expired records are removed from recommendations.
-
-{overview_table(limited, "en")}
-
-<a id="find-by-use-case"></a>
-## Find models by use case
-
-Candidates are filtered using recorded official capability fields, modalities, and context windows. This is not a performance ranking. The long-context filter requires a documented context window of at least 100K tokens.
-
-{md_table(use_cases, [('Use case','use_case'),('Verified candidates','candidates')])}
-
-<a id="find-by-model-family"></a>
-## Find Qwen, GLM, Gemini, and DeepSeek
-
-Only models with a confirmed current free-access relationship appear here. Similar names or third-party availability do not establish free access.
-
-{md_table(named_models, [('Provider','provider'),('Exact Model ID','model_id'),('Model type','model_type'),('Free method','free_type'),('Free scope','quota'),('Official source','source')])}
-
-<a id="api-setup"></a>
-## OpenAI-compatible API example
-
-The [full core model directory](docs/free-models.en.md) lists exact API bases, compatibility, modalities, tool support, rate limits, and sources. Use the OpenAI SDK directly only where compatibility is marked “yes”; “partial” may not support every parameter.
-
-```python
-import os
-from openai import OpenAI
-
-client = OpenAI(
-    api_key=os.environ["LLM_API_KEY"],
-    base_url=os.environ["LLM_BASE_URL"],
-)
-response = client.chat.completions.create(
-    model=os.environ["LLM_MODEL_ID"],
-    messages=[{{"role": "user", "content": "Explain uncertainty quantification in two sentences."}}],
-)
-print(response.choices[0].message.content)
-```
-
-Use each provider's own API key, base URL, and exact Model ID. Never commit API keys. See the [API setup guide](docs/free-api-guide.md) for more details.
-
-<a id="data-and-sources"></a>
-## Updates and sources
-
-- [Full core free model list](docs/free-models.en.md): exact IDs, access terms, rate limits, context, input/output modalities, capabilities, API base, sources, and review date.
-- [Related AI API extensions](docs/related-ai-apis.en.md): embeddings, reranking, ASR, TTS, moderation, and image/video/music generation; excluded from core LLM counts.
-- [Provider comparison](docs/provider-comparison.md) · [Candidate and historical sources](docs/candidate-sources.md) · [Changelog](docs/changelog.md) · [API guide](docs/free-api-guide.md)
-- `data/manual_catalog.json` stores manually verified policy and model evidence; `data/free_api_catalog.json` is generated. A model-list endpoint proves existence, not free access.
-- Failed updates retain automatic records for review and do not refresh manual policy dates. Automatic recommendations are withdrawn only after a successful complete response confirms removal or a paid price.
-- [GitHub Actions workflow](.github/workflows/update-catalog.yml) runs updates, validation, scoring, documentation generation, and tests daily at 00:00 UTC. It skips automatic commits if any source check fails.
-
-## Disclaimer and privacy
-
-Prices, quotas, model routing, regions, rate limits, terms and data processing can change. Recheck the linked source before production use. Do not send sensitive material to a provider whose data practices you have not reviewed, and do not bypass terms, access controls, limits, identity checks or regional restrictions.
-
-This catalog is not legal, security, procurement, privacy or compliance advice. See [privacy and risk](docs/privacy-and-risk.md), [disclaimer](docs/disclaimer.md), and the [free API guide](docs/free-api-guide.md).
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
+Issues and pull requests are welcome. MIT license; see [LICENSE](LICENSE).
 """
 
 
@@ -946,7 +755,7 @@ def render_free_guide(records: list[dict[str, Any]]) -> str:
     models = model_rows(records)
     return f"""# 免費 API 使用指南
 
-最近證據核驗日期：{latest_date(recommended(records))}
+最近一条证据核验日期：{latest_date(recommended(records))}；各记录的核验日期可能不同。
 
 ## 免費方式
 
@@ -962,7 +771,7 @@ def render_free_guide(records: list[dict[str, Any]]) -> str:
 
 ## 已确认方案
 
-{md_table(offers, [('平台','provider'),('类型','type'),('额度','quota'),('单位','quota_unit'),('适用范围','scope'),('有效期','expires'),('绑卡/实名/地区','eligibility'),('官方来源','source')])}
+{md_table(offers, [('平台','provider'),('类型','type'),('额度','quota'),('单位','quota_unit'),('适用范围','scope'),('有效期','expires'),('绑卡/实名/地区','eligibility'),('核验日期','verified_at'),('官方来源','source')])}
 
 ## 核心 LLM
 

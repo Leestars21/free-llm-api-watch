@@ -12,25 +12,30 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from catalog_schema import load_catalog  # noqa: E402
-from render_docs import free_counts, render_readme, render_readme_en  # noqa: E402
+from render_docs import featured_rows, free_counts, render_readme, render_readme_en  # noqa: E402
 
 
 class RenderedDocsTests(unittest.TestCase):
+    def test_featured_entries_exclude_withdrawn_and_low_confidence_offers(self) -> None:
+        records = copy.deepcopy(load_catalog())
+        before = featured_rows(records, "zh")
+        self.assertTrue(before)
+        selected = before[0]
+        ids = set(selected["offer_ids"].replace("；", ";").split(";"))
+        for record in records:
+            if record.get("record_level") == "offer" and record.get("offer_id") in ids:
+                record["verification_status"] = "withdrawn"
+        self.assertNotIn(selected["provider"], [row["provider"] for row in featured_rows(records, "zh")])
+
     def test_readme_is_navigation_not_a_full_model_dump(self) -> None:
         readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("#free-api-quick-lookup", readme)
-        self.assertIn("#recurring-free-api", readme)
-        self.assertIn("#new-user-credits", readme)
-        self.assertIn("#limited-time-offers", readme)
-        self.assertIn("#find-by-use-case", readme)
-        self.assertIn("#find-by-model-family", readme)
         self.assertNotIn("whisper-large-v3", readme)
         self.assertNotIn("rerank-v4.0-fast", readme)
         self.assertNotIn("embed-v4.0", readme)
         self.assertNotIn("。；有效期", readme)
         self.assertIn("docs/related-ai-apis.md", readme)
         self.assertIn("docs/free-models.md", readme)
-        self.assertLess(len(readme.splitlines()), 250)
+        self.assertLess(len(readme.splitlines()), 60)
 
     def test_all_local_readme_links_and_anchors_resolve(self) -> None:
         for readme_path in (PROJECT_ROOT / "README.md", PROJECT_ROOT / "README.en.md"):
@@ -53,15 +58,10 @@ class RenderedDocsTests(unittest.TestCase):
 
     def test_readme_statistics_match_core_and_extension_records(self) -> None:
         records = load_catalog()
-        counts = free_counts(records)
         readme_zh = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
         readme_en = (PROJECT_ROOT / "README.en.md").read_text(encoding="utf-8")
-        self.assertIn(f"| 核心免费 LLM（按平台 + Model ID 去重） | {counts['core_llm_models']} |", readme_zh)
-        self.assertIn(f"| 相关 AI API 扩展 | {counts['related_ai_models']} |", readme_zh)
-        self.assertIn(f"| Core free LLMs (unique provider + Model ID) | {counts['core_llm_models']} |", readme_en)
-        self.assertIn(f"| Related AI API extensions | {counts['related_ai_models']} |", readme_en)
-        self.assertIn("每月免费评估额度", readme_zh)
-        self.assertIn("Monthly free evaluation allowance", readme_en)
+        self.assertEqual(readme_zh, render_readme(records))
+        self.assertEqual(readme_en, render_readme_en(records))
 
     def test_bilingual_navigation_and_full_model_directories_match(self) -> None:
         readme_zh = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
@@ -70,8 +70,8 @@ class RenderedDocsTests(unittest.TestCase):
         core_en = (PROJECT_ROOT / "docs" / "free-models.en.md").read_text(encoding="utf-8")
         extensions_zh = (PROJECT_ROOT / "docs" / "related-ai-apis.md").read_text(encoding="utf-8")
         extensions_en = (PROJECT_ROOT / "docs" / "related-ai-apis.en.md").read_text(encoding="utf-8")
-        self.assertIn("#free-api-quick-lookup", readme_zh)
-        self.assertIn("#free-api-quick-lookup", readme_en)
+        self.assertIn("docs/free-models.md", readme_zh)
+        self.assertIn("docs/free-models.en.md", readme_en)
         for record in load_catalog():
             if record.get("record_level") != "model" or not record.get("is_recommended"):
                 continue
