@@ -1,6 +1,6 @@
 # 相关 AI API 扩展资源
 
-这些 API 可用于生成、检索或安全任务，但不是核心文本/多模态 LLM。它们单独列出，不计入 README 的核心模型数量。当前有 14 个已核实的扩展型号。
+这些 API 可用于生成、检索或安全任务，但不是核心文本/多模态 LLM。它们单独列出，不计入 README 的核心模型数量。当前有 13 个已核实的扩展型号。
 
 | 平台 | 精确 Model ID | 扩展类型 | 免费类型 | 额度/范围 | 速率限制 | API Base | OpenAI 兼容 | 官方来源 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -17,7 +17,6 @@
 | GroqCloud | whisper-large-v3-turbo | 语音识别 | 长期免费层（有用量/速率限制） | Free Plan 内可免费调用列出的模型，但受每个模型的速率上限约束；没有单独赠送 Token 包 | RPM 20，RPD 2000，音频秒/小时 7200，音频秒/日 28800 | https://api.groq.com/openai/v1 | 是 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | OpenRouter | google/lyria-3-clip-preview | 音乐生成 | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 | OpenRouter | google/lyria-3-pro-preview | 音乐生成 | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter | nvidia/nemotron-3.5-content-safety:free | 内容安全 / 审核 | 免费路由模型 | 没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理 | 免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度 | https://openrouter.ai/api/v1 | 是 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 
 ## 输入/输出与能力详情
 
@@ -34,8 +33,7 @@
 | GroqCloud / `openai/gpt-oss-safeguard-20b` | 文本 | 类别标签 | 未确认 | 未知 | 未知 | 绑卡：未知；实名：未知；地区：未知 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | GroqCloud / `whisper-large-v3` | 音频 | 文本 | 未确认 | 未知 | 未知 | 绑卡：未知；实名：未知；地区：未知 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
 | GroqCloud / `whisper-large-v3-turbo` | 音频 | 文本 | 未确认 | 未知 | 未知 | 绑卡：未知；实名：未知；地区：未知 | 未公布固定结束日期；免费计划条款和模型可用性可能变化 | 2026-11-01 | [Groq Free Plan limits and supported models](https://console.groq.com/docs/rate-limits) |
-| OpenRouter / `google/lyria-3-clip-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-03 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter / `google/lyria-3-pro-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-03 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
-| OpenRouter / `nvidia/nemotron-3.5-content-safety:free` | 图像, 文本 | 文本 | 未确认 | 未知 | 未知 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-03 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter / `google/lyria-3-clip-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-13 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
+| OpenRouter / `google/lyria-3-pro-preview` | 图像, 文本 | 音频, 文本 | 未确认 | 未知 | 支持 | 绑卡：否；实名：未知；地区：未知 | 模型的免费状态可能随时变化 | 2026-11-13 | [OpenRouter models API](https://openrouter.ai/api/v1/models) |
 
 未列型号不代表平台没有该类 API；只有当前免费方案和型号关系均有官方证据时才纳入本页。
