@@ -1,16 +1,16 @@
 [
   {
     "source_url": "https://openrouter.ai/api/v1/models",
-    "fetched_at": "2026-11-13",
+    "fetched_at": "2026-11-14",
     "http_status": 200,
     "page_title": "OpenRouter Models API",
     "relevant_excerpt": "Official API response summarized; raw response body is not stored.",
     "extracted_fields": {
-      "total_model_count": 475,
-      "free_model_count": 18,
+      "total_model_count": 471,
+      "free_model_count": 17,
       "selection_rule": "prompt and completion exactly zero; every returned pricing value parses to zero"
     },
-    "hash": "4ae3f416527955a0b9426fb2ca08f83db526fa4fa7ad97a14aa30b2dc3f9ad38",
+    "hash": "56a80fab43597a7515c2fca9e8676d505e4ab913b96666a51e1c3b1e0d4df658",
     "parser_status": "ok"
   }
 ]
