@@ -21,6 +21,20 @@ These are selected starting points, not a ranking or a complete list. Offers, mo
 
 Free tiers have usage and rate limits. New-user credits and promotions are not permanent free access; a model appearing in an API list does not prove free use. The offers guide and provider comparison are currently in Chinese.
 
+### 🤖 Let AI help you find a free API
+
+Share this repository and your use case with an AI assistant such as ChatGPT, Claude or Gemini. It can help you filter and compare options for your needs, saving you from checking each provider's models, allowances and API documentation yourself. Copy and adapt this prompt:
+
+```text
+Please read the README, free API guide, free models list and provider comparison at https://github.com/Leestars21/free-llm-api-watch.
+
+I need a free API to summarize academic papers in a Zotero plugin. I would like a long context window and, ideally, OpenAI API compatibility. Please find suitable options for this use case and compare their free allowances, model capabilities, context lengths, rate limits, registration requirements and OpenAI API compatibility.
+
+Where possible, consult official provider documentation to verify current free policies and model availability. Give the exact Model ID, API endpoint and sign-up link for each recommended model. Distinguish recurring free access, new-user credits and limited-time promotions; do not treat historical free offers as currently available. Clearly identify anything you cannot verify, and do not invent allowances or availability.
+```
+
+AI recommendations are for reference only. Actual availability should be confirmed against the provider's official documentation, account console and API test results.
+
 ## Data and updates
 
 The catalog combines official sources and automated updates; failed checks do not refresh old evidence. See the [update workflow](.github/workflows/update-catalog.yml), [changelog](docs/changelog.md) and [privacy and risk](docs/privacy-and-risk.md). Verify terms before use and never publish API keys or sensitive data.
