@@ -695,6 +695,20 @@ def render_readme(records: list[dict[str, Any]]) -> str:
 
 免费层受用量和速率限制；新用户赠额与限时活动不代表长期免费。模型出现在 API 列表中也不代表调用免费。
 
+### 🤖 让 AI 帮你找免费 API
+
+将本仓库链接和你的使用场景发给 ChatGPT、Claude、Gemini 等 AI 助手，让它根据你的需求筛选和比较方案，省去逐个平台查看模型、额度和接口文档的时间。复制并修改下面的提示词即可：
+
+```text
+请阅读 https://github.com/Leestars21/free-llm-api-watch 的 README、免费 API 指南、免费模型清单和供应商对比文档。
+
+我需要一个免费 API，用于 Zotero 插件中的学术论文总结，希望支持长上下文，最好兼容 OpenAI API。请根据这一用途筛选合适的方案，比较免费额度、模型能力、上下文长度、速率限制、注册条件和 OpenAI API 兼容性。
+
+请尽可能访问供应商官方文档，核实最新免费政策和模型可用情况，并给出推荐模型的准确 Model ID、API 地址和申请入口。区分长期免费、新用户赠额和限时活动，不要将历史免费记录当作当前可用方案。无法核实的信息请明确说明，不要编造额度或可用状态。
+```
+
+AI 的推荐仅供参考；实际可用性以供应商官方文档、账号控制台及 API 测试结果为准。
+
 ## 数据与更新
 
 目录结合官方来源和自动更新；更新失败时不会将旧数据当作最新核验。[查看更新工作流](.github/workflows/update-catalog.yml)、[变更记录](docs/changelog.md)和[隐私与风险](docs/privacy-and-risk.md)。使用前请核实条款，勿公开 API 密钥或敏感数据。
@@ -741,6 +755,20 @@ These are selected starting points, not a ranking or a complete list. Offers, mo
 - [Provider comparison](docs/provider-comparison.md) · [Other AI APIs](docs/related-ai-apis.en.md) · [Candidate and historical records](docs/candidate-sources.md)
 
 Free tiers have usage and rate limits. New-user credits and promotions are not permanent free access; a model appearing in an API list does not prove free use. The offers guide and provider comparison are currently in Chinese.
+
+### 🤖 Let AI help you find a free API
+
+Share this repository and your use case with an AI assistant such as ChatGPT, Claude or Gemini. It can help you filter and compare options for your needs, saving you from checking each provider's models, allowances and API documentation yourself. Copy and adapt this prompt:
+
+```text
+Please read the README, free API guide, free models list and provider comparison at https://github.com/Leestars21/free-llm-api-watch.
+
+I need a free API to summarize academic papers in a Zotero plugin. I would like a long context window and, ideally, OpenAI API compatibility. Please find suitable options for this use case and compare their free allowances, model capabilities, context lengths, rate limits, registration requirements and OpenAI API compatibility.
+
+Where possible, consult official provider documentation to verify current free policies and model availability. Give the exact Model ID, API endpoint and sign-up link for each recommended model. Distinguish recurring free access, new-user credits and limited-time promotions; do not treat historical free offers as currently available. Clearly identify anything you cannot verify, and do not invent allowances or availability.
+```
+
+AI recommendations are for reference only. Actual availability should be confirmed against the provider's official documentation, account console and API test results.
 
 ## Data and updates
 
