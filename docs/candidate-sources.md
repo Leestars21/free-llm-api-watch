@@ -15,10 +15,10 @@
 | GitHub Models (retired service) | 已停止 / 已下架 | [GitHub Models documentation](https://docs.github.com/en/github-models) | GitHub Models 已于 2026-07-30 停止；保留此条仅作历史记录。 |
 | Hyperbolic | 待复核 | [Hyperbolic follow-up review](https://docs.hyperbolic.xyz/) | 当前官方资料中未找到免费托管 API 额度、试用金额或免费模型名单。 |
 | iFlytek Spark API | 待复核 | [iFlytek Spark follow-up review](https://www.xfyun.cn/doc/spark/Web.html) | 本轮未能确认当前 API 免费额度、适用模型 ID 或有效期。 |
+| Meituan LongCat | 已复核：当前未确认免费 API | [LongCat pay-as-you-go pricing and token packages](https://longcat.chat/platform/docs/zh/api-pay-as-you-go) | 当前 LongCat-2.5 API 和资源包按付费价格提供；文档提到活动或邀请赠额，但本次未确认通用新用户赠额的金额、资格和有效期。 |
 | MiniMax API | 待复核 | [MiniMax API follow-up review](https://platform.minimaxi.com/document/) | 本轮未能从当前官方页面确认 API 价格和免费赠额；资格可能随地区或账号变化。 |
 | Moonshot / Kimi API | 已复核：当前未确认免费 API | [Moonshot API pricing](https://platform.moonshot.cn/docs/pricing/chat) | 当前官方 API 按模型和 Token 计费；未确认通用免费 API 赠额。 |
 | Nebius AI Studio | 待复核 | [Nebius AI Studio follow-up review](https://dev.nebius.com/) | 有开发者计划优惠的线索，但未找到当前 API 赠额金额、资格、有效期和适用模型。 |
-| NVIDIA Build / API Catalog | 待复核 | [NVIDIA NIM getting started](https://docs.nvidia.com/nim/large-language-models/latest/get-started/) | 官方资料支持试用托管 NIM，但未确认特定模型可用的稳定免费 API 额度；免费开发者会员和自行部署不计入。 |
 | OpenAI API (protocol reference) | 未验证 | [OpenAI API reference](https://platform.openai.com/docs/api-reference) | 此项仅作为 API 协议参考；本目录未确认 OpenAI API 的通用免费额度。 |
 | SambaNova Cloud | 已复核：当前未确认免费 API | [SambaCloud plans and billing](https://cloud.sambanova.ai/plans) | 当前 Free 方案可浏览控制台，但调用 API 需要添加付款方式并购买额度；不计作免费推理。 |
 | Tencent Cloud Hunyuan API (legacy platform) | 历史记录 | [Tencent Cloud migration announcement](https://cloud.tencent.com/announce/detail/2287) | 旧混元 API 平台已于 2026-09-30 停止；迁移用户可领取独立的 TokenHub 体验额度。 |
@@ -36,12 +36,12 @@
 | Cerebras Inference | 一次性试用额度 | 一次性 5 美元推广额度，有效 30 天；需有效支付方式，不会自动扣款；到期或用尽后 API 暂停，除非另购 PayGo。 | 绑卡 是；实名 未知；地区 未知 | [Cerebras current pricing](https://www.cerebras.ai/pricing) |
 | Hugging Face Inference Providers | 长期免费层（有用量/速率限制） | 免费账号每月共享 $0.10 推理额度；政策可能调整 | 绑卡 未知；实名 未知；地区 未说明 | [Inference Providers pricing](https://huggingface.co/docs/inference-providers/en/pricing) |
 | Mistral La Plateforme | 长期免费层（有用量/速率限制） | Free 模式提供账号级月度用量预算；公开文档没有给出统一数值 | 绑卡 否；实名 未知；地区 未说明 | [Mistral free mode and usage limits](https://docs.mistral.ai/admin/billing-usage/usage-limits) |
-| ModelScope Inference / 魔搭社区 | 长期免费层（有用量/速率限制） | 注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享。 | 绑卡 否；实名 未知；地区 未说明 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
+| ModelScope Inference / 魔搭社区 | 长期免费层（有用量/速率限制） | 每日登录领取 200 魔粒；绑定阿里云账号后每日再领 50，多种平台任务共享 | 绑卡 否；实名 未知；地区 未说明 | [ModelScope MoLi points announcement](https://www.modelscope.cn/posts/435591) |
 | Ollama Cloud | 长期免费层（有用量/速率限制） | Free 方案每月包含部分云端模型的起步用量；额度数值未公开，在账号内显示；最多 1 个并发请求 | 绑卡 未知；实名 未知；地区 未说明 | [Ollama Cloud pricing](https://www.ollama.com/pricing) |
 | Reka AI Vision API | 一次性试用额度 | 符合条件的新用户可试用 180 分钟视频索引 | 绑卡 未知；实名 未知；地区 未说明 | [Reka Vision API pricing](https://docs.reka.ai/vision/pricing) |
 | Replicate | 一次性试用额度 | 部分模型可在短期评估期间免费运行；未公布统一额度 | 绑卡 未知；实名 未知；地区 未说明 | [Replicate billing documentation](https://replicate.com/docs/topics/billing) |
 | SiliconFlow | 指定免费模型 | 实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额 | 绑卡 未知；实名 是；地区 未说明 | [SiliconFlow rate limits and model gallery](https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation) |
-| Volcengine Ark / Doubao | 新用户赠额 / 免费使用上限 | 符合条件的账号在安全体验模式下最多可用 500,000 Token；各模型另有额度 | 绑卡 未知；实名 未知；地区 未说明 | [Ark Safe Experience mode](https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh) |
+| Volcengine Ark / Doubao | 新用户赠额 / 免费使用上限 | 新用户按模型获得免费在线推理额度，具体 Token 余额和有效期在控制台查看 | 绑卡 未知；实名 未知；地区 未说明 | [Ark free inference quota and Safe Experience mode](https://docs.volcengine.com/docs/ark/free-inference-quota?lang=zh) |
 
 ## 复核规则
 

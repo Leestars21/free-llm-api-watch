@@ -691,6 +691,7 @@ def render_readme(records: list[dict[str, Any]]) -> str:
 
 - **[查看全部平台和免费方案](docs/free-api-guide.md)**：比较额度、资格、有效期与官方来源。
 - **[查看全部免费 LLM 型号](docs/free-models.md)**：精确 Model ID、API 地址、限制与逐条核验日期。
+- [free-newapi 官方平台核验对照](docs/reference-platform-review.md)：16 个平台的当前政策、差异与来源。
 - [平台对比](docs/provider-comparison.md) · [其他 AI API](docs/related-ai-apis.md) · [候补与历史记录](docs/candidate-sources.md)
 
 免费层受用量和速率限制；新用户赠额与限时活动不代表长期免费。模型出现在 API 列表中也不代表调用免费。
@@ -752,6 +753,7 @@ These are selected starting points, not a ranking or a complete list. Offers, mo
 
 - **[All providers and free offers](docs/free-api-guide.md)**: allowances, eligibility, expiry and official sources.
 - **[All free LLM models](docs/free-models.en.md)**: exact Model IDs, API endpoints, limits and individual review dates.
+- [Official platform review from free-newapi](docs/reference-platform-review.en.md): current policies, differences and sources for 16 platforms.
 - [Provider comparison](docs/provider-comparison.md) · [Other AI APIs](docs/related-ai-apis.en.md) · [Candidate and historical records](docs/candidate-sources.md)
 
 Free tiers have usage and rate limits. New-user credits and promotions are not permanent free access; a model appearing in an API list does not prove free use. The offers guide and provider comparison are currently in Chinese.
@@ -772,7 +774,7 @@ AI recommendations are for reference only. Actual availability should be confirm
 
 ## Data and updates
 
-The catalog combines official sources and automated updates; failed checks do not refresh old evidence. See the [update workflow](.github/workflows/update-catalog.yml), [changelog](docs/changelog.md) and [privacy and risk](docs/privacy-and-risk.md). Verify terms before use and never publish API keys or sensitive data.
+The catalog combines official sources and automated updates; failed checks do not refresh old evidence. See the [update workflow](.github/workflows/update-catalog.yml), [changelog](docs/changelog.en.md) and [privacy and risk](docs/privacy-and-risk.md). Verify terms before use and never publish API keys or sensitive data.
 
 Issues and pull requests are welcome. MIT license; see [LICENSE](LICENSE).
 """
@@ -782,6 +784,8 @@ def render_free_guide(records: list[dict[str, Any]]) -> str:
     offers = offer_rows(records)
     models = model_rows(records)
     return f"""# 免費 API 使用指南
+
+[官方平台核验对照](reference-platform-review.md) · [免费 LLM 型号](free-models.md)
 
 最近一条证据核验日期：{latest_date(recommended(records))}；各记录的核验日期可能不同。
 

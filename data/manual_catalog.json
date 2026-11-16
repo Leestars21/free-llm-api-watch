@@ -31,14 +31,17 @@
       "free_type": "stable_free_tier",
       "source_type": "official_pricing",
       "source_name": "Gemini Developer API pricing",
-      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
-      "evidence_summary": "The official pricing page marks selected models as Free Tier with $0 input/output token pricing. Per-project limits are model-specific and visible in AI Studio. Free-tier prompts may be used to improve Google products.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_url": "https://aistudio.google.com/docs/pricing",
+      "evidence_summary": "The current Standard Free Tier tables mark selected models, including gemini-4-hydrogen and gemini-3.8-flash, with free input/output. Search and Maps grounding are unavailable on these free tiers. Quotas depend on project/model and account eligibility.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official pricing lists currently free models; confirm account region and current quotas in AI Studio."
+      "recommendation_reason": "Use models marked Free Tier in current official pricing and verify project quotas and data-use terms in AI Studio.",
+      "error_summary": "",
+      "data_training_policy": "yes",
+      "privacy_notes": "Free-tier content may be used to improve Google products."
     },
     {
       "provider_id": "groqcloud",
@@ -52,13 +55,14 @@
       "source_type": "official_docs",
       "source_name": "GroqCloud models and rate limits",
       "source_url": "https://console.groq.com/docs/rate-limits",
-      "evidence_summary": "Groq documents a no-cost developer/free tier with model-specific request and token rate limits. The current model inventory and eligible models are account/API-list dependent; limits on the model page are tier-specific.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
-      "confidence": "medium",
+      "evidence_summary": "Official docs list ten Free Plan model IDs with per-model request/token or audio-second limits. Limits apply to the organization and model; optional separate input/output token limits can also apply.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official documentation confirms a free API tier; verify eligible models and per-model limits in the current account."
+      "recommendation_reason": "Current Free Plan table confirms model eligibility and limits; check the organization's console for effective limits.",
+      "error_summary": ""
     },
     {
       "provider_id": "cerebras",
@@ -73,13 +77,14 @@
       "source_name": "Cerebras current pricing",
       "source_url": "https://www.cerebras.ai/pricing",
       "evidence_summary": "Current public pricing describes a one-time $5 promotion for 30 days, requires a valid payment method, and says there is no automatic billing; older inference docs still describe a $0 Free tier, leaving model eligibility unresolved.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
       "recommendation_reason": "Current developer pricing describes a one-time $5 promotion; an older Free Tier page conflicts, so no current model ID is assumed.",
-      "is_recommended": true
+      "is_recommended": true,
+      "error_summary": ""
     },
     {
       "provider_id": "cloudflare-workers-ai",
@@ -94,12 +99,13 @@
       "source_name": "Workers AI pricing",
       "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
       "evidence_summary": "The current pricing page includes a daily free allocation of 10,000 Neurons, resetting at 00:00 UTC. Some model IDs require a paid plan or prepaid AI Gateway credits; the model catalog and paid-only list can change.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official pricing confirms a daily Workers AI allocation; check that the selected model is still eligible for the free allocation."
+      "recommendation_reason": "Official pricing confirms a daily Workers AI allocation; check that the selected model is still eligible for the free allocation.",
+      "error_summary": ""
     },
     {
       "provider_id": "alibaba-model-studio",
@@ -113,13 +119,14 @@
       "source_type": "official_docs",
       "source_name": "Model Studio new-user free quota",
       "source_url": "https://help.aliyun.com/zh/model-studio/new-free-quota/",
-      "evidence_summary": "Official help says eligible newly activated/approved accounts in Beijing receive model-specific free quotas (typically 1,000,000 tokens per model) expiring 90 days after the applicable activation/release/approval date. Primary and RAM accounts share quota; exact model eligibility must be checked in console.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "Eligible users with real-name verification receive model-specific new-user quotas in the Beijing region, typically 1,000,000 tokens per model. Each model's primary/RAM users share the quota. Validity is 90 days from the latest applicable activation, model release or approval date. Stop-on-exhaustion is disabled by default.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official help confirms a conditional, per-model new-user token grant; it is not a permanent free tier."
+      "recommendation_reason": "Official help confirms a conditional, per-model new-user token grant; it is not a permanent free tier.",
+      "error_summary": ""
     },
     {
       "provider_id": "tencent-tokenhub-hunyuan",
@@ -171,15 +178,16 @@
       "official": true,
       "free_type": "new_user_credit",
       "source_type": "official_docs",
-      "source_name": "Ark free inference quota and safe experience mode",
-      "source_url": "https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh",
-      "evidence_summary": "Official Ark docs describe model-specific new-user inference quotas and a Safe Experience mode with a 500,000-token usage cap. Eligibility is restricted to accounts that have not activated the model service or used the mode before; applicable models and plugin/knowledge-base exclusions are listed in account/console docs.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "source_name": "Ark free inference quota and Safe Experience mode",
+      "source_url": "https://docs.volcengine.com/docs/ark/free-inference-quota?lang=zh",
+      "evidence_summary": "Official docs confirm new-user free online inference quotas calculated separately for each model and shared by the primary/subaccounts and that model's base/fine-tuned variants. Exact grants are shown in console; the 500,000-token figures on the quota page are calculation examples. Safe Experience mode is an account setting that pauses requests at the free balance.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official docs confirm a conditional 500,000-token cap and separate model-specific quotas; exact model grants vary."
+      "recommendation_reason": "Verify each model's actual grant and expiry in console; Safe Experience mode consumes the same grant and is not an additional token pool.",
+      "error_summary": ""
     },
     {
       "provider_id": "zhipu-bigmodel",
@@ -190,16 +198,17 @@
       "openai_compatible": "partial",
       "official": true,
       "free_type": "free_model",
-      "source_type": "official_announcement",
-      "source_name": "Zhipu GLM-4.7-Flash announcement",
-      "source_url": "https://www.zhipuai.cn/zh/news/148",
-      "evidence_summary": "Zhipu's official announcement says glm-4.7-flash API is available free on BigModel and replaces glm-4.5-flash. The older glm-4.5-flash was scheduled for retirement on 2026-01-30 and is not listed as current.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_type": "official_pricing",
+      "source_name": "BigModel current API pricing and free model guides",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+      "evidence_summary": "Current pricing lists free input/output for GLM-4.7-Flash and GLM-4.6V-Flash; their official guides provide exact API IDs and capabilities. Historical pricing entries alone do not establish availability; the retired glm-4.5-flash remains excluded.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official announcement names a current no-cost API model; confirm service status and limits before production use."
+      "recommendation_reason": "Current pricing and model-specific guides jointly confirm the recorded free models; check console concurrency limits.",
+      "error_summary": ""
     },
     {
       "provider_id": "baidu-qianfan",
@@ -214,13 +223,14 @@
       "source_name": "Baidu Qianfan product documentation",
       "source_url": "https://cloud.baidu.com/doc/Qianfan/index.html",
       "evidence_summary": "Current Qianfan product docs list a 20 RMB new-user coupon after real-name verification, valid for one month. The reviewed offer page does not name a currently eligible free model ID.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
       "recommendation_reason": "Current official product docs list a new-user coupon; the reviewed source names no specific eligible free API model.",
-      "is_recommended": true
+      "is_recommended": true,
+      "error_summary": ""
     },
     {
       "provider_id": "siliconflow",
@@ -234,13 +244,14 @@
       "source_type": "official_docs",
       "source_name": "SiliconFlow rate limits and free-model documentation",
       "source_url": "https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation",
-      "evidence_summary": "Official docs confirm free model calls are billed at zero after real-name verification. The current model gallery is the source of exact free model IDs. Published rate-limit ranges vary by model type and are limits, not free-token grants.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "evidence_summary": "Official docs confirm zero-cost calls for models marked free after real-name verification. Limits apply per account and model, not per API key. Free models without dynamic limiting have fixed model limits; dynamically limited models follow load-dependent limits that supersede fixed/tier tables.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official docs confirm free model calls and real-name requirements; exact free model IDs must be read from the live model gallery."
+      "recommendation_reason": "Resolve exact free IDs and effective limits in the live model gallery; dynamic limits cannot be replaced by a universal RPM/TPM claim.",
+      "error_summary": ""
     },
     {
       "provider_id": "modelscope",
@@ -254,13 +265,14 @@
       "source_type": "official_announcement",
       "source_name": "ModelScope MoLi points announcement",
       "source_url": "https://www.modelscope.cn/posts/435591",
-      "evidence_summary": "ModelScope's official platform post describes 200 MoLi points granted daily per registered account and an additional 50 points/day for binding an Alibaba Cloud account. API-Inference usage consumes roughly 0.5/1/2 points per call by model size; points are shared with other inference/training uses. The available model list is dynamic.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
-      "confidence": "medium",
+      "evidence_summary": "The official post updated 2026-11-12 grants 200 MoLi points on daily login and another 50/day after Alibaba Cloud binding. Profile completion, including email verification, is required before spending. Short-term points expire after 24 hours and long-term points after 90 days; API cost is defined on each model's detail page.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official platform post documents daily shared points; exact call count depends on model size and current account balance."
+      "recommendation_reason": "Claim daily-login points and check point type, expiry and per-model usage cost before estimating calls.",
+      "error_summary": ""
     },
     {
       "provider_id": "huggingface-inference-providers",
@@ -315,12 +327,13 @@
       "source_name": "Cohere API rate limits",
       "source_url": "https://docs.cohere.com/v2/docs/rate-limits",
       "evidence_summary": "Eligible Cohere evaluation keys have up to 1,000 calls/month shared across endpoints; model-specific RPM limits also apply. This is a monthly allowance, not a one-time trial.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Official docs specify a recurring monthly evaluation allowance and separate rate limits."
+      "recommendation_reason": "Official docs specify a recurring monthly evaluation allowance and separate rate limits.",
+      "error_summary": ""
     },
     {
       "provider_id": "vercel-ai-gateway",
@@ -550,17 +563,21 @@
       "api_base": "https://integrate.api.nvidia.com/v1",
       "openai_compatible": "yes",
       "official": true,
-      "free_type": "not_free_or_unverified",
+      "free_type": "stable_free_tier",
       "source_type": "official_docs",
-      "source_name": "NVIDIA NIM getting started",
-      "source_url": "https://docs.nvidia.com/nim/large-language-models/latest/get-started/",
-      "evidence_summary": "Official docs support trying hosted NIM services through NVIDIA Build, but reviewed documentation did not establish a stable hosted free quota for a specific model. Free Developer membership/self-hosting is not counted as hosted API quota.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
-      "confidence": "low",
-      "verification_status": "pending",
-      "fetch_status": "pending",
-      "recommendation_reason": "Hosted free API amount and model eligibility remain unverified."
+      "source_name": "NVIDIA NIM General FAQ and hosted endpoint catalog",
+      "source_url": "https://docs.api.nvidia.com/nim/docs/product",
+      "evidence_summary": "NVIDIA Developer Program members have free access to hosted NIM API endpoints for prototyping, research, development and testing. Reviewed Build pages explicitly label two exact models Free Endpoint Available. No universal hosted token grant or numeric rate limit was established.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "recommendation_reason": "Free hosted developer endpoints are documented; use only within developer-program purpose and endpoint eligibility.",
+      "error_summary": "",
+      "privacy_notes": "The reviewed hosted endpoints record input/output data and use it to improve NVIDIA products and AI models.",
+      "data_training_policy": "yes",
+      "terms_risk": "Developer access is for prototyping, research, development and testing. Production use requires a separate NVIDIA AI Enterprise license."
     },
     {
       "provider_id": "ollama-cloud",
@@ -595,12 +612,13 @@
       "source_name": "SambaCloud plans and billing",
       "source_url": "https://cloud.sambanova.ai/plans",
       "evidence_summary": "Current Free plan lets users explore the dashboard, but official plan terms say they must add a payment method and purchase credits to run requests. This is not a free inference quota.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "fetch_status": "manual",
-      "recommendation_reason": "Reviewed current plan: API requests require purchased credits and a payment method; no free API offer confirmed."
+      "recommendation_reason": "Reviewed current plan: API requests require purchased credits and a payment method; no free API offer confirmed.",
+      "error_summary": ""
     },
     {
       "provider_id": "ai21-labs",
@@ -782,6 +800,51 @@
       "verification_status": "unverified",
       "fetch_status": "manual",
       "recommendation_reason": "protocol reference only; no verified free API quota"
+    },
+    {
+      "provider_id": "meituan-longcat",
+      "provider": "Meituan LongCat",
+      "channel_type": "official_model_vendor",
+      "country_or_region": "China; account availability varies",
+      "api_base": "https://api.longcat.chat/openai/v1",
+      "openai_compatible": "yes",
+      "anthropic_compatible": "yes",
+      "official": true,
+      "free_type": "not_free_or_unverified",
+      "source_type": "official_pricing",
+      "source_name": "LongCat pay-as-you-go pricing and token packages",
+      "source_url": "https://longcat.chat/platform/docs/zh/api-pay-as-you-go",
+      "evidence_summary": "Current standard LongCat-2.5 pricing is paid: discounted input CNY 2, cached input CNY 0.04 and output CNY 8 per million tokens. Token packs are purchased and expire after 30 days. Official docs mention promotional/referral balances but do not establish a general signup grant with amount, eligibility and validity.",
+      "recommendation_reason": "Reviewed current paid API pricing; a generally available free grant remains unconfirmed.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": false
+    },
+    {
+      "provider_id": "sensenova",
+      "provider": "SenseNova / SenseTime",
+      "channel_type": "official_model_vendor",
+      "country_or_region": "China; registration uses phone verification",
+      "api_base": "https://token.sensenova.cn/v1",
+      "openai_compatible": "yes",
+      "anthropic_compatible": "yes",
+      "official": true,
+      "free_type": "limited_time_promotion",
+      "source_type": "official_pricing",
+      "source_name": "SenseNova Token Plan public beta and points rules",
+      "source_url": "https://www.sensenova.cn/token-plan",
+      "evidence_summary": "The public Token Plan page states that the beta is fully free at CNY 0/month, with paid plans coming later. API docs define a general points pool and a separate Flash-Lite pool, both constrained by rolling five-hour and weekly windows. Beta benefits can change; the end date is unpublished.",
+      "recommendation_reason": "Use the current public-beta points allowance and verify both rolling windows and supported models in console.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": ""
     }
   ],
   "offers": [
@@ -791,7 +854,7 @@
       "free_type": "free_router",
       "free_quota": "No token grant; models listed with zero prompt/completion prices are free while listed",
       "free_quota_unit": "model_pricing",
-      "quota_reset": "Free-model rate limits are account based; see current documentation",
+      "quota_reset": "Request windows: 20 RPM; 50 RPD below the qualifying credit-purchase threshold",
       "expires": "Model free status may change without notice",
       "requires_card": "unknown",
       "quota_scope": "account_shared",
@@ -799,18 +862,23 @@
       "rate_limits": {
         "requests_per_minute": 20,
         "requests_per_day": 50,
-        "scope": "free_model_account"
+        "scope": "free_model_account",
+        "qualifying_credit_purchase_usd": 10,
+        "requests_per_day_after_qualifying_purchase": 1000,
+        "details": "Official FAQ allows threshold rounding from 9 credits; inspect the key endpoint for effective limits."
       },
       "source_type": "official_docs",
-      "source_name": "OpenRouter free model rate limits",
-      "source_url": "https://openrouter.ai/collections/free-models",
-      "evidence_summary": "The public collection documents free-model request limits; purchasing credits changes the daily cap, so paid-credit limits are not counted as free quota.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_name": "OpenRouter free model limits",
+      "source_url": "https://openrouter.ai/docs/api-reference/limits",
+      "evidence_summary": "Official limits state 20 RPM for free models, 50 RPD for accounts with less than 10 purchased credits and 1,000 RPD after qualifying purchases. FAQ documents rounding from 9 credits; this paid-purchase condition is not an extra free token grant.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "A model is included only when the current OpenRouter API reports exact zero prompt and completion prices and all other reported price dimensions are zero."
+      "recommendation_reason": "A model is included only when the current OpenRouter API reports exact zero prompt and completion prices and all other reported price dimensions are zero.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "google-gemini",
@@ -828,7 +896,9 @@
         "gemini-3.1-flash-lite",
         "gemini-3.5-flash-lite",
         "gemini-3.8-flash-lite-tts",
-        "gemini-3.8-flash-tts"
+        "gemini-3.8-flash-tts",
+        "gemini-3.8-flash",
+        "gemini-4-hydrogen"
       ],
       "rate_limits": {
         "scope": "project_and_model",
@@ -836,14 +906,18 @@
       },
       "source_type": "official_pricing",
       "source_name": "Gemini Developer API pricing and rate limits",
-      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
-      "evidence_summary": "Free-tier token prices are $0 only for the models and endpoints marked free. Search grounding and other tools may have separate limits or prices; free-tier data may be used to improve Google products.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "source_url": "https://aistudio.google.com/docs/pricing",
+      "evidence_summary": "Current Standard Free Tier tables confirm zero input/output for gemini-4-hydrogen, gemini-3.8-flash, gemini-3.5-flash-lite, gemini-3.1-flash-lite and gemini-3.8-flash-tts. Search and Maps grounding are unavailable on the reviewed text-model free tiers; free-tier content is used to improve products. Existing model entries retain their individual review dates.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Use the exact model IDs below and recheck AI Studio quotas, region eligibility, tool pricing and data-use terms."
+      "recommendation_reason": "Use the exact model IDs below and recheck AI Studio quotas, region eligibility, tool pricing and data-use terms.",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "data_training_policy": "yes",
+      "privacy_notes": "Content submitted to the Free Tier is used to improve Google products."
     },
     {
       "provider_id": "cerebras",
@@ -892,13 +966,15 @@
       "source_type": "official_pricing",
       "source_name": "Workers AI pricing and changelog",
       "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
-      "evidence_summary": "Daily allocation is in Neurons, not tokens or requests. Official changelog says some named frontier models have lost free-tier access; verify each model's current pricing entry.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "evidence_summary": "Current official pricing grants 10,000 Neurons per day, reset at 00:00 UTC. The allowance is not a fixed token or request count. The same page lists models restricted to paid plans or prepaid AI Gateway credits.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "The exact model IDs are present in the official catalog and eligible for the current free allocation at verification; recheck model pricing."
+      "recommendation_reason": "The exact model IDs are present in the official catalog and eligible for the current free allocation at verification; recheck model pricing.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "alibaba-model-studio",
@@ -907,10 +983,10 @@
       "free_quota": "Typically 1,000,000 tokens per eligible model; exact amount varies by model",
       "free_quota_unit": "tokens/model",
       "quota_reset": "One-time grant per eligible model/account; primary and RAM accounts share the quota",
-      "expires": "90 days from the applicable model activation/release/approval date; see console",
+      "expires": "90 days from the latest of applicable service activation, model release or quota approval dates; see console",
       "requires_card": "unknown",
       "requires_identity_verification": "yes",
-      "requires_phone_region": "Beijing region in China; verify the identity wording in the account console because the localized pages differ",
+      "requires_phone_region": "Documented grant is limited to the Beijing region; eligible account and real-name verification required",
       "quota_scope": "per_model",
       "applies_to_models": [
         "qwen3.8-max"
@@ -922,13 +998,15 @@
       "source_type": "official_docs",
       "source_name": "Model Studio new-user free quota",
       "source_url": "https://help.aliyun.com/zh/model-studio/new-free-quota/",
-      "evidence_summary": "The official page uses qwen3.8-max as a model example, describes per-model grant and 90-day expiry, and limits this specific free quota to the Beijing region. Confirm model eligibility before use.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "Current official help documents model-specific Beijing-region new-user quotas, usually 1,000,000 tokens per eligible model, shared by primary/RAM accounts and expiring after 90 days. Stop-on-exhaustion is disabled by default; check the selected model's grant, expiry and setting in console.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Conditional new-user credit; exact quota and expiry for the selected model are shown in the account console."
+      "recommendation_reason": "Conditional new-user credit; exact quota and expiry for the selected model are shown in the account console.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "tencent-tokenhub",
@@ -957,37 +1035,39 @@
       "provider_id": "volcengine-ark",
       "offer_id": "ark-safe-experience-mode",
       "free_type": "new_user_credit",
-      "free_quota": "Up to 500,000 free tokens as a usage cap in Safe Experience mode; separate model grants may differ",
-      "free_quota_unit": "tokens/account_mode",
-      "quota_reset": "One-time eligible account mode; pauses when cap is exhausted",
-      "expires": "Eligibility is limited to accounts that have not activated the model service or used Safe Experience mode before",
+      "free_quota": "Model-specific new-user free online inference grants; actual token balances and validity are shown in console",
+      "free_quota_unit": "tokens/model; amount varies",
+      "quota_reset": "Model-specific grants shared by the primary/subaccounts and base/fine-tuned variants; mode is an account setting",
+      "expires": "Grant validity is shown in console. Once Safe Experience mode is disabled it cannot be enabled again",
       "requires_card": "unknown",
       "requires_identity_verification": "unknown",
-      "quota_scope": "account_shared",
+      "quota_scope": "per_model",
       "applies_to_models": [],
       "rate_limits": {
         "scope": "account_and_model",
-        "details": "Separate model rate limits apply"
+        "details": "Safe Experience mode pauses at the free balance. Token credits exclude plugins, knowledge bases, batch inference and cache storage; mode eligibility/exclusions are documented separately."
       },
       "source_type": "official_docs",
-      "source_name": "Ark Safe Experience mode",
-      "source_url": "https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh",
-      "evidence_summary": "500,000 is a safety-mode usage cap, not an additional grant for each model. Plugins, knowledge bases and batch features can have separate costs; applicable models are account/console specific.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_name": "Ark free inference quota and Safe Experience mode",
+      "source_url": "https://docs.volcengine.com/docs/ark/free-inference-quota?lang=zh",
+      "evidence_summary": "Free quotas are calculated independently per model and shared by the primary/subaccounts and base/fine-tuned variants. Safe Experience mode only consumes those quotas; it is not a separate grant. The quota page's 500,000-token examples do not promise a universal allowance.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Use only if the account is eligible for Safe Experience mode; verify model-specific quota and exclusions in Ark."
+      "recommendation_reason": "Use each model's actual console balance; enable Safe Experience mode if eligible and review costs outside token-based online inference.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "zhipu-bigmodel",
       "offer_id": "bigmodel-glm-4.7-flash-free",
       "free_type": "free_model",
-      "free_quota": "API input and output token pricing reported as free for glm-4.7-flash; request limits are not specified in the announcement",
+      "free_quota": "GLM-4.7-Flash input, output and cache-hit token prices are free; account concurrency limits still apply",
       "free_quota_unit": "model_pricing",
-      "quota_reset": "No numeric reset period stated",
-      "expires": "No fixed end date stated in announcement",
+      "quota_reset": "Zero token prices; no universal numeric request allowance stated",
+      "expires": "No fixed end date stated in current pricing",
       "requires_card": "unknown",
       "quota_scope": "per_model",
       "applies_to_models": [
@@ -997,16 +1077,18 @@
         "scope": "account_and_model",
         "details": "Check BigModel console for current limits"
       },
-      "source_type": "official_announcement",
-      "source_name": "Zhipu GLM-4.7-Flash announcement",
-      "source_url": "https://www.zhipuai.cn/zh/news/148",
-      "evidence_summary": "Announcement links to the official model guide and says this API model is free; older glm-4.5-flash is retired and should not be recommended.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_type": "official_pricing",
+      "source_name": "BigModel GLM-4.7-Flash pricing",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+      "evidence_summary": "The current text-model pricing table marks GLM-4.7-Flash input/output and cache hits free. Its model guide confirms the exact ID, 200K context, thinking, tools and structured output. Retired glm-4.5-flash is excluded.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Official model announcement identifies this exact free API model; check current account rate limits."
+      "recommendation_reason": "Current pricing and the exact model guide confirm free token use; check account concurrency and separate tool charges.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "siliconflow",
@@ -1022,47 +1104,48 @@
       "applies_to_models": [],
       "rate_limits": {
         "scope": "account_and_model",
-        "chat": "1000-10000 RPM; 50000-5000000 TPM",
-        "embedding": "2000-10000 RPM; 500000-10000000 TPM",
-        "reranker": "2000 RPM; 500000 TPM",
-        "image": "2 IPM; 400 IPD"
+        "details": "Free models without dynamic limiting have fixed model-specific limits. Dynamically limited models vary with load and supersede fixed/tier tables. Effective limits are shown in the model gallery."
       },
       "source_type": "official_docs",
       "source_name": "SiliconFlow rate limits and model gallery",
       "source_url": "https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation",
-      "evidence_summary": "Rates are category ranges, not a promised per-account quota. Exact model IDs and limits are shown in the live gallery; do not treat example app integrations as direct free API offers.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "Zero-priced free models require real-name verification. Each account/model has its own limit, shared by all API keys. Dynamic limits override fixed/tier ranges; no universal free-model RPM/TPM or token grant is promised.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Official docs confirm zero-cost free model calls after real-name verification; resolve exact IDs from the live gallery before configuring an API client."
+      "recommendation_reason": "Official docs confirm zero-cost free model calls after real-name verification; resolve exact IDs from the live gallery before configuring an API client.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "modelscope",
       "offer_id": "modelscope-daily-moli-points",
       "free_type": "stable_free_tier",
-      "free_quota": "200 MoLi points/day per registered account; points are shared across platform usage",
+      "free_quota": "200 MoLi points per daily login; an additional 50/day after Alibaba Cloud account binding; shared across platform usage",
       "free_quota_unit": "MoLi points/day",
-      "quota_reset": "Daily grant; usage balance shared with other inference/training activities",
-      "expires": "Daily grant; accumulated balance/expiration terms can vary",
+      "quota_reset": "Daily login is required to claim points; inference/training/API usage shares the account balance",
+      "expires": "Short-term points: 24 hours; long-term points: 90 days from activation. Check grant type and expiry in account",
       "requires_card": "no",
       "quota_scope": "account_shared",
       "applies_to_models": [],
       "rate_limits": {
         "scope": "account_and_model",
-        "details": "Typical API-Inference call consumes about 0.5/1/2 MoLi points by model size; other tasks share points"
+        "details": "API-Inference point cost follows each model's detail page; other inference/training tasks share the same balance."
       },
       "source_type": "official_announcement",
       "source_name": "ModelScope MoLi points announcement",
       "source_url": "https://www.modelscope.cn/posts/435591",
-      "evidence_summary": "Official announcement describes 200 MoLi points per registered account per day. API-Inference calls consume approximately 0.5/1/2 points by model size; exact models and costs are dynamic.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "evidence_summary": "The 2026-11-12 official update confirms daily-login grants of 200 points plus 50 after Alibaba binding, profile/email completion before spending, 24-hour/90-day point validity and per-model API costs. Older approximate points-per-call figures are not stated in the current post.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "A daily account points grant is documented; check live balance and per-model MoLi costs before estimating calls."
+      "recommendation_reason": "Claim points on login, complete the profile/email requirements and inspect model-specific cost and expiring balances.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "huggingface-inference-providers",
@@ -1141,12 +1224,14 @@
       "source_name": "Cohere rate limits and model access",
       "source_url": "https://docs.cohere.com/v2/docs/rate-limits",
       "evidence_summary": "Official rate-limit docs describe an evaluation allowance of 1,000 calls/month shared across endpoints with per-endpoint RPM limits. This is a recurring monthly allowance, not a one-time trial.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "A documented evaluation key offers 1,000 monthly calls; respect the separate endpoint/model rate limits."
+      "recommendation_reason": "A documented evaluation key offers 1,000 monthly calls; respect the separate endpoint/model rate limits.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider_id": "vercel-ai-gateway",
@@ -1465,13 +1550,15 @@
       "source_type": "official_docs",
       "source_name": "Groq Free Plan rate limits and supported models",
       "source_url": "https://console.groq.com/docs/rate-limits",
-      "evidence_summary": "The current Groq documentation exposes a Free Plan Limits table with exact model IDs and per-model RPM/RPD/TPM/TPD or audio-second limits. The supported-models page lists the same IDs and says active models are available through the authenticated Models API. Free-plan access is not a token grant; limits cap usage and may be account-specific.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "evidence_summary": "The current Free Plan table confirms the recorded ten exact IDs and their RPM/RPD/TPM/TPD or audio-second limits. Limits apply per organization/model and can include separate input/output token constraints; console limits may differ. Free access is not a separate token grant.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Official current Free Plan limit rows name these exact models; check the account limits page because organization limits and availability may differ."
+      "recommendation_reason": "Official current Free Plan limit rows name these exact models; check the account limits page because organization limits and availability may differ.",
+      "fetch_status": "manual",
+      "error_summary": ""
     },
     {
       "provider": "Cerebras Inference",
@@ -1523,14 +1610,14 @@
       "source_name": "Cerebras current pricing",
       "source_url": "https://www.cerebras.ai/pricing",
       "evidence_summary": "Current self-service developer pricing describes a one-time $5 promotional credit valid for 30 days and requires a valid payment method. It says users are not automatically billed and API access pauses unless they separately buy PayGo. Current API model IDs are not listed on the pricing page.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "data_origin": "manual",
       "is_recommended": true,
       "recommendation_reason": "Current official pricing supports this one-time promotion; no model IDs are inferred.",
-      "fetch_status": "pending",
+      "fetch_status": "manual",
       "error_summary": ""
     },
     {
@@ -1583,14 +1670,14 @@
       "source_name": "Baidu Qianfan new-user coupon",
       "source_url": "https://cloud.baidu.com/doc/Qianfan/index.html",
       "evidence_summary": "Current official Qianfan product documentation lists a 20 RMB coupon for newly verified users with one-month validity. It does not give an exact model ID or model-level free API eligibility.",
-      "last_checked": "2026-11-02",
-      "verified_at": "2026-11-02",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "data_origin": "manual",
       "is_recommended": true,
       "recommendation_reason": "The current provider-level coupon is documented; no specific free model is inferred.",
-      "fetch_status": "pending",
+      "fetch_status": "manual",
       "error_summary": ""
     },
     {
@@ -1655,6 +1742,138 @@
       "recommendation_reason": "Current official terms cover language models; these exact IDs are verified in Tencent model documentation.",
       "fetch_status": "pending",
       "error_summary": ""
+    },
+    {
+      "provider_id": "zhipu-bigmodel",
+      "offer_id": "bigmodel-glm-4.6v-flash-free",
+      "free_type": "free_model",
+      "free_quota": "GLM-4.6V-Flash input/output token prices are free; account concurrency limits apply",
+      "free_quota_unit": "model_pricing",
+      "quota_reset": "Zero token prices; no universal numeric request allowance stated",
+      "expires": "No fixed end date stated in current pricing",
+      "requires_card": "unknown",
+      "requires_identity_verification": "unknown",
+      "quota_scope": "per_model",
+      "applies_to_models": [
+        "glm-4.6v-flash"
+      ],
+      "rate_limits": {
+        "scope": "account_and_model",
+        "details": "Check BigModel console for current concurrency and tool/service charges."
+      },
+      "source_type": "official_pricing",
+      "source_name": "BigModel GLM-4.6V-Flash pricing and model guide",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+      "evidence_summary": "Current vision-model pricing marks GLM-4.6V-Flash input/output free; its official guide identifies glm-4.6v-flash, 128K context, text/image/video/file input, text output, thinking and function calling.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact model guide and current pricing both confirm this free vision model."
+    },
+    {
+      "provider_id": "nvidia-build",
+      "offer_id": "nvidia-hosted-developer-endpoints",
+      "free_type": "stable_free_tier",
+      "free_quota": "Free hosted NIM endpoints for eligible Developer Program members for prototyping, research, development and testing; no universal numeric grant stated",
+      "free_quota_unit": "developer_endpoint_access",
+      "quota_reset": "Account/endpoint-specific limits; no universal reset window or numeric limit confirmed",
+      "expires": "Developer membership and endpoint availability required; no fixed hosted free-access end date published",
+      "requires_card": "unknown",
+      "requires_identity_verification": "unknown",
+      "quota_scope": "account_shared",
+      "applies_to_models": [
+        "deepseek-ai/deepseek-v4.1-flash",
+        "nvidia/nemotron-3.5-lightning-30b-a3b"
+      ],
+      "rate_limits": {
+        "scope": "account_and_endpoint",
+        "details": "Use effective endpoint/account limits. No universal 40 RPM or unlimited quota was established from the reviewed official sources."
+      },
+      "source_type": "official_docs",
+      "source_name": "NVIDIA NIM General FAQ",
+      "source_url": "https://docs.api.nvidia.com/nim/docs/product",
+      "evidence_summary": "Developer Program members have free hosted API endpoint access for prototyping, research, development and testing. Two reviewed Build model pages explicitly label Free Endpoint Available. Production use requires a separate enterprise license.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Documented free developer endpoints with exact model pages; verify membership, purpose and endpoint availability."
+    },
+    {
+      "provider_id": "sensenova",
+      "offer_id": "sensenova-beta-general-points",
+      "free_type": "limited_time_promotion",
+      "free_quota": "Public-beta general pool: 120,000 points per rolling 5-hour window and 1,200,000 per rolling week; both windows constrain usage",
+      "free_quota_unit": "points/rolling_window",
+      "quota_reset": "Rolling 5-hour and weekly windows apply simultaneously; points vary by model and usage",
+      "expires": "Public-beta benefit; end date unpublished and terms may change",
+      "requires_card": "unknown",
+      "requires_identity_verification": "unknown",
+      "requires_phone_region": "Phone verification required at registration; this does not establish government-ID verification",
+      "quota_scope": "account_shared",
+      "applies_to_models": [
+        "sensenova-6.8-flash",
+        "sensenova-6.8-flash-lite"
+      ],
+      "rate_limits": {
+        "scope": "account_and_points_pool",
+        "rolling_5_hour_points": 120000,
+        "rolling_week_points": 1200000,
+        "details": "Both windows apply; do not add them or convert points into a fixed token grant."
+      },
+      "source_type": "official_docs",
+      "source_name": "SenseNova public-beta points pool rules",
+      "source_url": "https://platform.sensenova.cn/docs",
+      "evidence_summary": "Official API docs define a 120,000-point rolling five-hour general pool and 1,200,000-point rolling weekly limit. Flash-Lite can fall back to this general pool when its dedicated pool is exhausted. These are public-beta benefits, not fixed token credits.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Confirmed current public-beta API points pool; check both rolling windows and model-specific deductions."
+    },
+    {
+      "provider_id": "sensenova",
+      "offer_id": "sensenova-beta-flash-lite-points",
+      "free_type": "limited_time_promotion",
+      "free_quota": "Public-beta Flash-Lite dedicated pool: 60,000 points per rolling 5-hour window and 600,000 per rolling week; eligible requests can fall back to the general pool",
+      "free_quota_unit": "points/rolling_window",
+      "quota_reset": "Rolling 5-hour and weekly limits apply simultaneously; separate from the general pool",
+      "expires": "Public-beta benefit; end date unpublished. Flash-Lite consumption rebates ended 2026-10-27",
+      "requires_card": "unknown",
+      "requires_identity_verification": "unknown",
+      "requires_phone_region": "Phone verification required at registration; government-ID verification not established",
+      "quota_scope": "account_shared",
+      "applies_to_models": [
+        "sensenova-6.8-flash-lite"
+      ],
+      "rate_limits": {
+        "scope": "account_and_points_pool",
+        "rolling_5_hour_points": 60000,
+        "rolling_week_points": 600000,
+        "details": "After the dedicated pool is exhausted, available general points can be used. Consumption rebates ended 2026-10-27; previously granted rebates retain original expiry."
+      },
+      "source_type": "official_docs",
+      "source_name": "SenseNova Flash-Lite public-beta dedicated pool",
+      "source_url": "https://platform.sensenova.cn/docs",
+      "evidence_summary": "Official docs define a separate 60,000-point rolling five-hour / 600,000-point rolling weekly Flash-Lite pool, with general-pool fallback. The 2026-10-27 adjustment ended consumption rebates; existing rebate balances retain their original validity.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "A separate current Flash-Lite beta pool is documented; use both rolling limits and account balance rather than a fixed token estimate."
     }
   ],
   "models": [
@@ -1900,9 +2119,9 @@
       "offer_id": "bigmodel-glm-4.7-flash-free",
       "model_id": "glm-4.7-flash",
       "model_name": "GLM-4.7-Flash",
-      "model_type": "chat",
+      "model_type": "text_llm",
       "model_family": "GLM 4.7",
-      "context_window": null,
+      "context_window": 200000,
       "modalities": [
         "text"
       ],
@@ -1912,16 +2131,35 @@
         "currency": "CNY",
         "basis": "official_free_model"
       },
-      "source_type": "official_announcement",
-      "source_name": "Zhipu GLM-4.7-Flash announcement",
-      "source_url": "https://www.zhipuai.cn/zh/news/148",
-      "evidence_summary": "Official announcement identifies glm-4.7-flash as a free BigModel API model; model guide is linked from the announcement.",
-      "last_checked": "2026-11-01",
-      "verified_at": "2026-11-01",
+      "source_type": "official_docs",
+      "source_name": "GLM-4.7-Flash model guide and current pricing",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash",
+      "evidence_summary": "The current guide documents glm-4.7-flash with text input/output, 200K context and up to 128K output, thinking, function calling and structured output. Current pricing marks input/output/cache-hit tokens free.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
       "confidence": "high",
       "verification_status": "active",
       "is_recommended": true,
-      "recommendation_reason": "Exact model ID and free API status are confirmed by Zhipu's official announcement."
+      "recommendation_reason": "Current model guide and pricing confirm the exact free text model and its documented capabilities.",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "model_scope": "core_llm",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "capabilities": [
+        "agent_workflows",
+        "code_generation",
+        "long_context",
+        "reasoning"
+      ],
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "capabilities_source_url": "https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash"
     },
     {
       "provider_id": "alibaba-model-studio",
@@ -2759,6 +2997,360 @@
       "data_origin": "manual",
       "is_recommended": true,
       "recommendation_reason": "The exact ID appears in Tencent TokenHub model docs; the current free package applies to language models."
+    },
+    {
+      "provider_id": "google-gemini",
+      "offer_id": "gemini-api-free-tier",
+      "model_id": "gemini-3.8-flash",
+      "model_name": "Gemini 3.8 Flash",
+      "model_type": "multimodal_llm",
+      "model_family": "Gemini 3.8",
+      "model_scope": "core_llm",
+      "context_window": 1048576,
+      "modalities": [
+        "audio",
+        "image",
+        "pdf",
+        "text",
+        "video"
+      ],
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "pdf"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "unit": "USD per token",
+        "basis": "documented_free_access"
+      },
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "web_search": "unsupported",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "data_training_policy": "yes",
+      "privacy_notes": "Free-tier content is used to improve Google products; Search/Maps grounding is unavailable in this tier.",
+      "capabilities_source_url": "https://aistudio.google.com/docs/models/gemini-3.8-flash",
+      "source_type": "official_docs",
+      "source_name": "Gemini 3.8 Flash model guide and linked free offer",
+      "source_url": "https://aistudio.google.com/docs/models/gemini-3.8-flash",
+      "evidence_summary": "Official guide gives gemini-3.8-flash, 1,048,576 input tokens and 65,536 output tokens, text/image/audio/video/PDF input, text output, tools, structured output and thinking. The Standard Free Tier has free input/output; Search/Maps grounding is unavailable.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
+    },
+    {
+      "provider_id": "google-gemini",
+      "offer_id": "gemini-api-free-tier",
+      "model_id": "gemini-4-hydrogen",
+      "model_name": "Gemini 4 Hydrogen",
+      "model_type": "multimodal_llm",
+      "model_family": "Gemini 4",
+      "model_scope": "core_llm",
+      "context_window": 1048576,
+      "modalities": [
+        "audio",
+        "image",
+        "pdf",
+        "text",
+        "video"
+      ],
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "pdf"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "unit": "USD per token",
+        "basis": "documented_free_access"
+      },
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "web_search": "unsupported",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "data_training_policy": "yes",
+      "privacy_notes": "Free-tier content is used to improve Google products. Input and output share the 1,048,576-token context; default synchronous max output is 65,536.",
+      "capabilities_source_url": "https://aistudio.google.com/docs/models/gemini-4-hydrogen",
+      "source_type": "official_docs",
+      "source_name": "Gemini 4 Hydrogen model guide and linked free offer",
+      "source_url": "https://aistudio.google.com/docs/models/gemini-4-hydrogen",
+      "evidence_summary": "Official guide gives gemini-4-hydrogen with a unified 1,048,576-token input/output context, default synchronous output limit 65,536, text/image/audio/video/PDF input, tools, structured output and thinking. Standard free input/output and implicit caching are confirmed; Search/Maps grounding is unavailable.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
+    },
+    {
+      "provider_id": "zhipu-bigmodel",
+      "offer_id": "bigmodel-glm-4.6v-flash-free",
+      "model_id": "glm-4.6v-flash",
+      "model_name": "GLM-4.6V-Flash",
+      "model_type": "multimodal_llm",
+      "model_family": "GLM 4.6",
+      "model_scope": "core_llm",
+      "context_window": 128000,
+      "modalities": [
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "input": 0,
+        "output": 0,
+        "currency": "CNY",
+        "basis": "official_free_model"
+      },
+      "tool_calling": "supported",
+      "reasoning": "supported",
+      "structured_output": "unknown",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "capabilities_source_url": "https://docs.bigmodel.cn/cn/guide/models/free/glm-4.6v-flash",
+      "source_type": "official_docs",
+      "source_name": "GLM-4.6V-Flash model guide and linked free offer",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/models/free/glm-4.6v-flash",
+      "evidence_summary": "The guide identifies glm-4.6v-flash with a published 128K context (nominal token count), text/image/video/file input, text output, thinking and function calling. Files, video and images cannot be understood simultaneously in one request. Current vision pricing confirms free input/output.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
+    },
+    {
+      "provider_id": "nvidia-build",
+      "offer_id": "nvidia-hosted-developer-endpoints",
+      "model_id": "deepseek-ai/deepseek-v4.1-flash",
+      "model_name": "DeepSeek V4.1 Flash on NVIDIA",
+      "model_type": "multimodal_llm",
+      "model_family": "DeepSeek V4.1",
+      "model_scope": "core_llm",
+      "context_window": 1000000,
+      "modalities": [
+        "image",
+        "text"
+      ],
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "billing_unit": "developer_endpoint_access",
+        "free_allocation_applies": true
+      },
+      "tool_calling": "supported",
+      "reasoning": "supported",
+      "structured_output": "unknown",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "data_training_policy": "yes",
+      "capabilities_source_url": "https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash",
+      "source_type": "official_docs",
+      "source_name": "DeepSeek V4.1 Flash on NVIDIA model guide and linked free offer",
+      "source_url": "https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash",
+      "evidence_summary": "The official Build page labels Free Endpoint Available, shows the exact model ID, publishes a rounded 1M context, text/image input and text output, function calling and reasoning. Free access is subject to Developer Program purpose and endpoint/account limits.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
+    },
+    {
+      "provider_id": "nvidia-build",
+      "offer_id": "nvidia-hosted-developer-endpoints",
+      "model_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "model_name": "NVIDIA Nemotron 3.5 Lightning 30B A3B",
+      "model_type": "text_llm",
+      "model_family": "Nemotron 3.5",
+      "model_scope": "core_llm",
+      "context_window": 1000000,
+      "modalities": [
+        "text"
+      ],
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "billing_unit": "developer_endpoint_access",
+        "free_allocation_applies": true
+      },
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "capabilities": [
+        "agent_workflows",
+        "long_context",
+        "reasoning"
+      ],
+      "data_training_policy": "yes",
+      "capabilities_source_url": "https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b",
+      "source_type": "official_docs",
+      "source_name": "NVIDIA Nemotron 3.5 Lightning 30B A3B model guide and linked free offer",
+      "source_url": "https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b",
+      "evidence_summary": "The Build page labels Free Endpoint Available and supplies this exact model ID, a rounded 1M context, text input/output, tools, structured output and reasoning. Hosted input/output are recorded for product/model improvement; developer-purpose terms apply.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
+    },
+    {
+      "provider_id": "sensenova",
+      "offer_id": "sensenova-beta-general-points",
+      "model_id": "sensenova-6.8-flash",
+      "model_name": "SenseNova 6.8 Flash",
+      "model_type": "multimodal_llm",
+      "model_family": "SenseNova 6.8",
+      "model_scope": "core_llm",
+      "context_window": 1000000,
+      "modalities": [
+        "image",
+        "text"
+      ],
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "billing_unit": "points",
+        "free_allocation_applies": true
+      },
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding",
+        "long_context",
+        "reasoning"
+      ],
+      "capabilities_source_url": "https://platform.sensenova.cn/docs",
+      "source_type": "official_docs",
+      "source_name": "SenseNova 6.8 Flash model guide and linked free offer",
+      "source_url": "https://platform.sensenova.cn/docs",
+      "evidence_summary": "Official API examples identify sensenova-6.8-flash with text/image input, text output, tools, JSON output, thinking and published 1M context. The public-beta general pool has rolling five-hour and weekly point limits; points are not a fixed token grant.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
+    },
+    {
+      "provider_id": "sensenova",
+      "offer_id": "sensenova-beta-flash-lite-points",
+      "model_id": "sensenova-6.8-flash-lite",
+      "model_name": "SenseNova 6.8 Flash Lite",
+      "model_type": "multimodal_llm",
+      "model_family": "SenseNova 6.8",
+      "model_scope": "core_llm",
+      "context_window": null,
+      "modalities": [
+        "image",
+        "text"
+      ],
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "model_pricing": {
+        "billing_unit": "points",
+        "free_allocation_applies": true
+      },
+      "tool_calling": "supported",
+      "structured_output": "unknown",
+      "reasoning": "unknown",
+      "capabilities": [
+        "agent_workflows",
+        "image_understanding"
+      ],
+      "capabilities_source_url": "https://platform.sensenova.cn/docs",
+      "source_type": "official_docs",
+      "source_name": "SenseNova 6.8 Flash Lite model guide and linked free offer",
+      "source_url": "https://platform.sensenova.cn/docs",
+      "evidence_summary": "Official API examples identify sensenova-6.8-flash-lite with text/image input, text output and function calling. The beta Flash-Lite pool has rolling five-hour/weekly limits with general-pool fallback. Context size and additional capability fields remain unclaimed.",
+      "last_checked": "2026-11-16",
+      "verified_at": "2026-11-16",
+      "confidence": "high",
+      "verification_status": "active",
+      "fetch_status": "manual",
+      "error_summary": "",
+      "is_recommended": true,
+      "recommendation_reason": "Exact API model ID and free eligibility are confirmed by the model guide and linked official offer."
     }
   ]
 }

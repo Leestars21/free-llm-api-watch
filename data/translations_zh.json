@@ -9,9 +9,9 @@
     "model-studio-new-user-model-quota": {
       "free_quota": "符合条件的新账号通常每个模型获得约 100 万 Token；具体额度因模型而异",
       "quota_reset": "符合资格后按模型发放一次；主账号与 RAM 子账号共享",
-      "expires": "按模型激活、发布或审批时间起算 90 天；以控制台为准",
+      "expires": "从适用的开通、模型发布、额度审批日期中的最晚日期起算 90 天；以控制台为准",
       "requires_phone_region": "仅限中国北京地域且账号符合资格",
-      "rate_limits": "速率限制与赠送 Token 分开；请在控制台查看"
+      "rate_limits": "速率限制独立；额度用完即停默认关闭，使用前请检查控制台设置"
     },
     "cerebras-free-tier": {
       "free_quota": "旧官方文档称 0 元 Free Tier，但与当前开发者定价页的试用方案冲突，暂不推荐。",
@@ -32,11 +32,11 @@
       "rate_limits": "聊天模型常见限制为 20 RPM；实际端点与型号限制以官方表格为准。"
     },
     "gemini-api-free-tier": {
-      "free_quota": "指定模型输入/输出价格为 $0；每个项目的免费层限额按模型和账号而异",
+      "free_quota": "指定模型输入/输出 Token 免费；每个项目的免费层限额按模型和账号设置",
       "quota_reset": "按 AI Studio 项目和模型设置限速；没有适用于全部模型的统一数字额度",
       "expires": "未公布固定结束日期；模型和地区资格可能变化",
       "requires_phone_region": "可用国家 / 地区因模型和账号而异",
-      "rate_limits": "RPM / TPM / RPD 依项目与模型而变；请查 AI Studio 控制台"
+      "rate_limits": "RPM / TPM / RPD 依项目与模型而变；本次核验的文本模型免费层不提供 Google Search / Maps grounding"
     },
     "hf-monthly-inference-credit": {
       "free_quota": "免费账号每月共享 $0.10 推理额度；政策可能调整",
@@ -51,10 +51,10 @@
       "rate_limits": "月度预算之外还会受组织与模型级限制"
     },
     "modelscope-daily-moli-points": {
-      "free_quota": "注册账号每日 200 MoLi 积分，平台内多种推理/训练任务共享。",
-      "quota_reset": "每日发放；积分按模型大小和任务消耗。",
-      "expires": "每日额度及累计积分有效期以当前积分规则为准",
-      "rate_limits": "API-Inference 每次通常消耗约 0.5 / 1 / 2 分；可用型号和具体消耗动态变化。"
+      "free_quota": "每日登录领取 200 魔粒；绑定阿里云账号后每日再领 50，多种平台任务共享",
+      "quota_reset": "需每日登录领取；推理、训练和 API 调用共享账号余额",
+      "expires": "短期魔粒生效后 24 小时、长期魔粒 90 天；查看账号内积分类型与到期时间",
+      "rate_limits": "使用前需完善个人信息并完成邮箱验证；API-Inference 消耗以模型详情页规则为准"
     },
     "novita-apodex-1-1-mini-launch-promotion": {
       "free_quota": "当前模型页显示输入和输出均为每百万 Token $0，属于上线促销",
@@ -94,9 +94,9 @@
     },
     "openrouter-free-model-route": {
       "free_quota": "没有 Token 赠额；仅当前 API 返回所有价格维度均为零的模型按免费路由处理",
-      "quota_reset": "免费账号通常为 20 RPM / 50 RPD；实时规则可能调整",
+      "quota_reset": "免费模型 20 RPM；未达累计购买门槛的账号 50 RPD",
       "expires": "模型的免费状态可能随时变化",
-      "rate_limits": "免费账号当前通常为 20 RPM、50 RPD；累计购买额度满 $10 的账号适用更高每日额度"
+      "rate_limits": "20 RPM；累计购买少于 10 credits 为 50 RPD，达门槛后 1,000 RPD；官方 FAQ 说明从 9 credits 可按取整宽限生效，以 Key 返回的限额为准"
     },
     "reka-vision-new-user-trial": {
       "free_quota": "符合条件的新用户可试用 180 分钟视频索引",
@@ -114,7 +114,7 @@
       "free_quota": "实时模型广场中部分型号调用价为零；没有统一的平台 Token 赠额",
       "quota_reset": "不是赠额；免费型号有各自的账号速率限制",
       "expires": "型号资格随实时模型目录变化",
-      "rate_limits": "官方范围：聊天 1,000–10,000 RPM / 50,000–5,000,000 TPM；Embedding 2,000–10,000 RPM / 500,000–10,000,000 TPM；重排 2,000 RPM / 500,000 TPM；图像 2 IPM / 400 IPD"
+      "rate_limits": "按账号和模型限流，多个 Key 共享；未启用动态限流的免费模型为固定限值，动态模型随负载变化，以模型广场为准"
     },
     "tokenhub-migration-experience-credit": {
       "free_quota": "公告未公布额度；仅符合条件的旧平台迁移用户可领取。",
@@ -130,16 +130,16 @@
       "rate_limits": "上游服务商和模型自身的免费层速率限制仍然适用"
     },
     "ark-safe-experience-mode": {
-      "free_quota": "符合条件的账号在安全体验模式下最多可用 500,000 Token；各模型另有额度",
-      "quota_reset": "符合条件的账号一次性启用；达到上限后暂停",
-      "expires": "仅限此前未开通模型服务或未使用过安全体验模式的账号",
-      "rate_limits": "模型另有独立速率限制；插件、知识库、批处理可能另行计费"
+      "free_quota": "新用户按模型获得免费在线推理额度，具体 Token 余额和有效期在控制台查看",
+      "quota_reset": "各模型独立计算，主/子账号及基础/精调模型共享该模型额度；安心体验模式是账号级开关",
+      "expires": "赠额有效期见控制台；安心体验模式关闭后无法再次开启",
+      "rate_limits": "额度不抵扣插件、知识库、批量推理和缓存存储；安心体验模式达到免费余额后暂停"
     },
     "bigmodel-glm-4.7-flash-free": {
-      "free_quota": "官方公告称 GLM-4.7-Flash API 输入和输出 Token 免费；公告未说明请求上限",
-      "quota_reset": "公告未说明数字额度或重置周期",
-      "expires": "公告未注明固定结束日期",
-      "rate_limits": "当前请求限制请在 BigModel 控制台查看"
+      "free_quota": "GLM-4.7-Flash 输入、输出和缓存命中 Token 免费；仍受账号并发限制",
+      "quota_reset": "Token 单价为零；未公布统一请求赠额或重置周期",
+      "expires": "当前定价未注明固定结束日期",
+      "rate_limits": "当前并发限制和单独工具费用请在 BigModel 控制台查看"
     },
     "cerebras-developer-intro-promotion": {
       "free_quota": "一次性 5 美元推广额度，有效 30 天；需有效支付方式，不会自动扣款；到期或用尽后 API 暂停，除非另购 PayGo。",
@@ -161,6 +161,32 @@
       "expires": "发放后一个月。",
       "requires_phone_region": "账号地区与手机号要求待核对。",
       "rate_limits": "优惠券不属于速率限制；具体 API 限速见千帆控制台。"
+    },
+    "bigmodel-glm-4.6v-flash-free": {
+      "free_quota": "GLM-4.6V-Flash 输入和输出 Token 免费；仍受账号并发限制",
+      "quota_reset": "Token 单价为零；未公布统一请求赠额或重置周期",
+      "expires": "当前定价未注明固定结束日期",
+      "rate_limits": "在 BigModel 控制台查看当前并发限制及工具/服务费用"
+    },
+    "nvidia-hosted-developer-endpoints": {
+      "free_quota": "开发者会员可免费调用指定托管 NIM 端点，用于原型、研究、开发和测试；未公布统一数字赠额",
+      "quota_reset": "限额按账号和端点设置，未确认统一周期或数字",
+      "expires": "需开发者会员资格及端点仍开放；未公布固定结束日期",
+      "rate_limits": "以账号和端点实际限制为准；当前来源未确认统一 40 RPM 或无限额度"
+    },
+    "sensenova-beta-general-points": {
+      "free_quota": "公测通用池：滚动 5 小时 120,000 积分、滚动周 1,200,000 积分；两层上限同时生效",
+      "quota_reset": "滚动 5 小时和周窗口同时限制，按模型及实际用量扣分",
+      "expires": "公测权益，结束时间未公布，后续可能调整",
+      "requires_phone_region": "注册需手机号验证；本次未确认政府身份实名认证要求",
+      "rate_limits": "通用池两层上限同时约束；不能相加或换算为固定 Token 赠额"
+    },
+    "sensenova-beta-flash-lite-points": {
+      "free_quota": "Flash-Lite 专属池：滚动 5 小时 60,000 积分、滚动周 600,000 积分；用完后可消耗可用通用积分",
+      "quota_reset": "滚动 5 小时和周窗口同时限制，独立于通用池",
+      "expires": "公测权益，结束时间未公布；消费返赠活动已于 2026-10-27 下线",
+      "requires_phone_region": "注册需手机号验证；本次未确认政府身份实名认证要求",
+      "rate_limits": "专属池用完可回退到通用池；旧返赠积分保留原有效期，当前消费不再返赠"
     }
   },
   "providers": {
@@ -178,7 +204,7 @@
     "minimax": "本轮未能从当前官方页面确认 API 价格和免费赠额；资格可能随地区或账号变化。",
     "moonshot-kimi": "当前官方 API 按模型和 Token 计费；未确认通用免费 API 赠额。",
     "nebius-ai": "有开发者计划优惠的线索，但未找到当前 API 赠额金额、资格、有效期和适用模型。",
-    "nvidia-build": "官方资料支持试用托管 NIM，但未确认特定模型可用的稳定免费 API 额度；免费开发者会员和自行部署不计入。",
+    "nvidia-build": "官方确认开发者会员可免费调用托管端点，用于原型、研究、开发和测试；生产使用需另行许可，统一数字额度未公布。",
     "openai-api": "此项仅作为 API 协议参考；本目录未确认 OpenAI API 的通用免费额度。",
     "sambanova-cloud": "当前 Free 方案可浏览控制台，但调用 API 需要添加付款方式并购买额度；不计作免费推理。",
     "tencent-tokenhub-hunyuan": "旧混元 API 平台已于 2026-09-30 停止；迁移用户可领取独立的 TokenHub 体验额度。",
@@ -187,7 +213,10 @@
     "cerebras": "当前定价页描述 5 美元、30 天的一次性推广额度且需有效支付方式；旧推理文档仍称 0 元 Free Tier，模型资格存在官方资料冲突。",
     "cohere": "符合条件的评估 Key 每月最多共享 1,000 次 API 调用，属于按月额度，不是一次性试用。",
     "tencent-tokenhub": "TokenHub 当前活动按语言模型发放 100 万 Token，领取后有效一年；每个模型冻结 10 美元余额，活动截止 2026-12-31。迁移用户方案另列。",
-    "modelscope": "官方公告记录注册账号每日 200 MoLi 积分；实际模型和每次调用消耗随型号及账号动态变化。"
+    "modelscope": "每日登录领取 200 魔粒，绑定阿里云再加 50；使用前需完善信息并验证邮箱，API 消耗以模型详情页为准。",
+    "meituan-longcat": "当前 LongCat-2.5 API 和资源包按付费价格提供；文档提到活动或邀请赠额，但本次未确认通用新用户赠额的金额、资格和有效期。",
+    "sensenova": "Token Plan 公测免费，通用池和 Flash-Lite 专属池均有滚动 5 小时与周上限；属于公测权益，结束时间未公布。",
+    "siliconflow": "实名后可调用实时广场中的免费模型；限速按账号和模型设置，动态限流模型随负载调整。"
   },
   "model_types": {
     "chat": "旧分类（文本交互）",

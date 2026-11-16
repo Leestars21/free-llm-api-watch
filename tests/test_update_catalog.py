@@ -174,9 +174,10 @@ class UpdateCatalogTests(unittest.TestCase):
                         return records, status
 
                     with patch.dict(os.environ, {"GITHUB_OUTPUT": str(output_path)}):
+                        # Isolate persistence because the writer also targets the repository CSV.
                         with patch.object(update_catalog, "update_openrouter", side_effect=keep_records), patch.object(
                             update_catalog, "update_optional_model_inventories", return_value=warnings
-                        ):
+                        ), patch.object(update_catalog, "write_catalog"):
                             self.assertEqual(
                                 update_catalog.main(["--catalog", str(catalog_path)]),
                                 0,

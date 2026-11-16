@@ -18,7 +18,7 @@ providers:
     name: Google Gemini API / Google AI Studio
     status: free_offer_confirmed
     model_list_api: https://generativelanguage.googleapis.com/v1beta/models
-    policy_source: https://ai.google.dev/gemini-api/docs/pricing
+    policy_source: https://aistudio.google.com/docs/pricing
     notes: Optional inventory check uses GEMINI_API_KEY header; free tier and limits vary by model/project/region.
   - provider_id: groqcloud
     name: GroqCloud
@@ -43,7 +43,7 @@ providers:
     status: free_offer_confirmed
     model_list_api: https://help.aliyun.com/zh/model-studio/models
     policy_source: https://help.aliyun.com/zh/model-studio/new-free-quota/
-    notes: New-user grants are per-model, region-limited and time-limited; exact amounts vary in console.
+    notes: Beijing-region grants require eligible verified accounts; typically 1M tokens/model, valid 90 days from the latest applicable activation/release/approval date. Primary/RAM users share each model's grant; stop-on-exhaustion is disabled by default.
   - provider_id: tencent-tokenhub-hunyuan
     name: Tencent Cloud Hunyuan API (legacy platform)
     status: historical
@@ -60,14 +60,14 @@ providers:
     name: Volcengine Ark / Doubao
     status: free_offer_confirmed
     model_list_api: https://docs.volcengine.com/docs/ark/model-reference
-    policy_source: https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh
-    notes: Safe Experience mode has eligibility restrictions and a 500,000-token cap; model grants vary.
+    policy_source: https://docs.volcengine.com/docs/ark/free-inference-quota?lang=zh
+    notes: Grants are per-model and shared by primary/subaccounts and base/fine-tuned variants; exact amounts/expiry are in console. Safe Experience mode is an account setting using the same grants; 500,000-token calculations are examples, not a universal allowance.
   - provider_id: zhipu-bigmodel
     name: Zhipu BigModel / GLM
     status: free_offer_confirmed
     model_list_api: https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash
-    policy_source: https://www.zhipuai.cn/zh/news/148
-    notes: GLM-4.7-Flash is documented as a free API model; GLM-4.5-Flash is historical/retired.
+    policy_source: https://docs.bigmodel.cn/cn/guide/start/pricing
+    notes: Current pricing and model guides confirm GLM-4.7-Flash and GLM-4.6V-Flash free input/output. Historical prices alone do not prove availability; GLM-4.5-Flash remains retired/excluded.
   - provider_id: baidu-qianfan
     name: Baidu Qianfan / ERNIE
     status: free_offer_confirmed
@@ -79,13 +79,25 @@ providers:
     status: free_offer_confirmed
     model_list_api: https://api.siliconflow.cn/v1/models
     policy_source: https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation
-    notes: Optional inventory check uses SILICONFLOW_API_KEY; current free model IDs are displayed in the live gallery; real-name verification is required.
+    notes: Optional SILICONFLOW_API_KEY inventory proves existence only. Free models require real-name verification; limits are per account/model, shared by keys. Dynamic limits vary with load and supersede fixed/tier tables; use the live gallery.
   - provider_id: modelscope
     name: ModelScope Inference / 魔搭社区
     status: free_offer_confirmed
     model_list_api: https://api-inference.modelscope.cn/v1/models
     policy_source: https://www.modelscope.cn/posts/435591
-    notes: Official source documents 200 MoLi points/day per registered account; API-Inference costs vary by model size and the exact free model inventory is dynamic, so no specific model is claimed.
+    notes: Daily login grants 200 MoLi points plus 50 after Alibaba Cloud binding; profile/email completion is required before spending. Short-term points last 24h, long-term points 90 days; API cost and exact IDs follow model detail pages.
+  - provider_id: meituan-longcat
+    name: Meituan LongCat
+    status: reviewed_no_current_free_offer
+    model_list_api: https://longcat.chat/platform/docs/zh
+    policy_source: https://longcat.chat/platform/docs/zh/api-pay-as-you-go
+    notes: Standard LongCat-2.5 API and 30-day purchased packs are paid. General signup/promotional grant amount, eligibility and validity remain unconfirmed; do not infer free API access from the web chat.
+  - provider_id: sensenova
+    name: SenseNova / SenseTime
+    status: free_offer_confirmed
+    model_list_api: https://platform.sensenova.cn/docs
+    policy_source: https://www.sensenova.cn/token-plan
+    notes: Public beta is free with general and Flash-Lite points pools; rolling five-hour and weekly limits both apply. Flash-Lite can fall back to the general pool; consumption rebates ended 2026-10-27. Beta end date is unpublished.
   - provider_id: huggingface-inference-providers
     name: Hugging Face Inference Providers
     status: free_offer_confirmed
@@ -178,10 +190,10 @@ providers:
     notes: Current model-level free credits and account eligibility need verification.
   - provider_id: nvidia-build
     name: NVIDIA Build / API Catalog
-    status: pending
+    status: free_offer_confirmed
     model_list_api: https://build.nvidia.com/
-    policy_source: https://docs.nvidia.com/nim/large-language-models/latest/get-started/
-    notes: Hosted free API amount/model eligibility not established; self-hosting is not counted.
+    policy_source: https://docs.api.nvidia.com/nim/docs/product
+    notes: Free hosted developer endpoints are confirmed for exact reviewed model pages and developer purposes. Production requires a separate license; no universal numeric quota/RPM was established. Hosted input/output are recorded for product/model improvement.
   - provider_id: ollama-cloud
     name: Ollama Cloud
     status: free_offer_confirmed

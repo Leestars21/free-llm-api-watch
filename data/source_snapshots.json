@@ -12,5 +12,567 @@
     },
     "hash": "ce2d9256a42068ce36d9bc251b3874d96ca8157a3d525e6380bdc8c8dc9748a3",
     "parser_status": "ok"
+  },
+  {
+    "source_url": "https://longcat.chat/platform/docs/zh/api-pay-as-you-go",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "API按量付费 | LongCat API Docs",
+    "relevant_excerpt": "当前 LongCat-2.5 标准 API 按量付费；限时价格输入 2 元、缓存输入 0.04 元、输出 8 元/百万 Token。",
+    "extracted_fields": {
+      "provider_id": "meituan-longcat",
+      "standard_api_paid": true,
+      "model": "LongCat-2.5",
+      "discounted_cny_per_million_tokens": {
+        "input": 2,
+        "cached_input": 0.04,
+        "output": 8
+      },
+      "general_free_grant_confirmed": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "c280ab40e79dc5e76ddd1a9ca26443dca49803ec8ad2755b030adf09a20f3d3b",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://longcat.chat/platform/docs/zh/token-pack",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Token资源包 | LongCat API Docs",
+    "relevant_excerpt": "官方资源包需购买，购买后 30 天有效；活动赠额的通用金额和资格未确认。",
+    "extracted_fields": {
+      "provider_id": "meituan-longcat",
+      "packages_paid": true,
+      "package_validity_days": 30,
+      "general_free_grant_confirmed": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "ed61c65e7776cde528a3805cf8789ab87fc522ec080f35d0af861f5067e86d13",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://longcat.chat/platform/docs/zh",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "快速开始 | LongCat API Docs",
+    "relevant_excerpt": "官方示例使用 LongCat-2.5；OpenAI REST 路径为 /openai/v1/chat/completions，另有 Anthropic Messages 接口。",
+    "extracted_fields": {
+      "provider_id": "meituan-longcat",
+      "model_ids_checked": [
+        "LongCat-2.5"
+      ],
+      "api_base": "https://api.longcat.chat/openai/v1",
+      "anthropic_messages_endpoint": "https://api.longcat.chat/anthropic/v1/messages",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "53a78f4da98f9b5d576a8fc16f7f7c2aee4a10cf81cf90e14f9d944cb72b567a",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://www.sensenova.cn/token-plan",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "日日新 - 商汤科技大模型平台 | SenseNova",
+    "relevant_excerpt": "公测期完全免费开放，付费档位即将上线。Free · 公测，¥ 0/月。",
+    "extracted_fields": {
+      "provider_id": "sensenova",
+      "free_type": "limited_time_promotion",
+      "monthly_cny": 0,
+      "beta_end_date": null,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "d5071460414d1322a02a5927c34365d164b5ae3b77632412748f217a2035af28",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://platform.sensenova.cn/docs",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "SenseNova · LLM API 服务平台",
+    "relevant_excerpt": "公测通用池：滚动 5 小时 120,000 积分、滚动周 1,200,000 积分。Flash-Lite 专属池分别为 60,000 和 600,000；两层周期同时限制，用完可消耗通用池。",
+    "extracted_fields": {
+      "provider_id": "sensenova",
+      "api_base": "https://token.sensenova.cn/v1",
+      "model_ids_checked": [
+        "sensenova-6.8-flash",
+        "sensenova-6.8-flash-lite"
+      ],
+      "general_pool": {
+        "rolling_5_hour_points": 120000,
+        "rolling_week_points": 1200000
+      },
+      "flash_lite_pool": {
+        "rolling_5_hour_points": 60000,
+        "rolling_week_points": 600000
+      },
+      "flash_lite_general_pool_fallback": true,
+      "consumption_rebate_ended": "2026-10-27",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "a5ea4b0455b4c92ef3f8e141bff19f28193ae15eab57e77c633dfb5b40f0a606",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.api.nvidia.com/nim/docs/product",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "General FAQ",
+    "relevant_excerpt": "Members of the NVIDIA Developer Program have free access to NIM API endpoints for prototyping. Developer access is for prototyping, research, development and testing; production requires an enterprise license.",
+    "extracted_fields": {
+      "provider_id": "nvidia-build",
+      "free_hosted_developer_access": true,
+      "purposes": [
+        "prototyping",
+        "research",
+        "development",
+        "testing"
+      ],
+      "production_requires_enterprise_license": true,
+      "universal_numeric_rate_limit_confirmed": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "076d7cdb57f491b2bd79cd826371d87fbd5429424afbb16d91f506a003e81200",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.api.nvidia.com/nim/docs/api-quickstart",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "API Catalog Quickstart Guide",
+    "relevant_excerpt": "NVIDIA API Catalog quickstart documents hosted model API access through integrate.api.nvidia.com.",
+    "extracted_fields": {
+      "provider_id": "nvidia-build",
+      "api_base": "https://integrate.api.nvidia.com/v1",
+      "hosted_api": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "aaf11904eb7c86737b86d570e0c34e1a82461f3cab343f9fcc91a1d1006843d8",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "deepseek-v4.1-flash Model by Deepseek-ai | NVIDIA NIM",
+    "relevant_excerpt": "Free Endpoint Available; Context Length 1M; Text, Image → Text; Function Calling and Reasoning Supported.",
+    "extracted_fields": {
+      "provider_id": "nvidia-build",
+      "model_id": "deepseek-ai/deepseek-v4.1-flash",
+      "free_endpoint_available": true,
+      "context_published": "1M",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "tool_calling": "supported",
+      "reasoning": "supported",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "92d8636014726d33b1791e9c7d0e9d23e02c0f9c3fa0fc721db486d9123fe0da",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "nemotron-3.5-lightning-30b-a3b Model by NVIDIA | NVIDIA NIM",
+    "relevant_excerpt": "Free Endpoint Available; Context Length 1M; Text → Text; Function Calling, Structured Output and Reasoning Supported.",
+    "extracted_fields": {
+      "provider_id": "nvidia-build",
+      "model_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "free_endpoint_available": true,
+      "context_published": "1M",
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "hosted_data_used_for_improvement": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "bd48a26c57cbafdb85cca1ebed3de09c8e616677bbecb17a33b30ef5eeb0278e",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://aistudio.google.com/docs/pricing",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Gemini Developer API pricing - Gemini API | Google AI Studio",
+    "relevant_excerpt": "Standard Free Tier: Gemini 4 Hydrogen and Gemini 3.8 Flash input/output are Free of charge; Google Search and Maps grounding are Not available; Used to improve our products: Yes.",
+    "extracted_fields": {
+      "provider_id": "google-gemini",
+      "standard_free_model_ids_checked": [
+        "gemini-4-hydrogen",
+        "gemini-3.8-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-3.1-flash-lite",
+        "gemini-3.8-flash-tts"
+      ],
+      "input_output_free": true,
+      "search_maps_grounding_free_tier": "not_available",
+      "free_data_used_to_improve_products": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "367c09b9609cd6b01ab05cbfe2379d7da741e1213e0870ae0aa7d568c6d64a62",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://aistudio.google.com/docs/models/gemini-3.8-flash",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Gemini 3.8 Flash - Gemini API | Google AI Studio",
+    "relevant_excerpt": "Model ID gemini-3.8-flash; input token limit 1,048,576; output token limit 65,536. Text/image/video/audio/PDF input and text output; tools, structured output and thinking supported.",
+    "extracted_fields": {
+      "provider_id": "google-gemini",
+      "model_id": "gemini-3.8-flash",
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "df44590404e5920885827b66424ccbab29fdc3165795f7cdeae3c4544c0b0c90",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://aistudio.google.com/docs/models/gemini-4-hydrogen",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Gemini 4 Hydrogen - Gemini API | Google AI Studio",
+    "relevant_excerpt": "Model ID gemini-4-hydrogen; unified 1,048,576-token context shared by input and output; default synchronous maximum output 65,536. Tools, structured output and thinking supported.",
+    "extracted_fields": {
+      "provider_id": "google-gemini",
+      "model_id": "gemini-4-hydrogen",
+      "shared_input_output_context": 1048576,
+      "default_synchronous_output_limit": 65536,
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "8a835ccf4e1e9167807b9eed76a49df27c362ca5cdc98e066a0f6498946d0272",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "API 定价 - 智谱AI开放文档",
+    "relevant_excerpt": "当前文本和视觉价格表列出多款输入/输出免费的 Flash 型号。历史定价条目仍保留，免费价格需结合当前模型指南及可用状态判断。",
+    "extracted_fields": {
+      "provider_id": "zhipu-bigmodel",
+      "free_priced_model_names_checked": [
+        "GLM-4.7-Flash",
+        "GLM-4-Flash-250414",
+        "GLM-4.6V-Flash",
+        "GLM-4V-Flash",
+        "GLM-4.1V-Thinking-Flash"
+      ],
+      "pricing_alone_not_availability": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "3396f305da476cbdd8ff588afb11fb5a3f67a6109695421daf17c814547870ed",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "GLM-4.7-Flash - 智谱AI开放文档",
+    "relevant_excerpt": "GLM-4.7-Flash：文本输入/输出，上下文窗口 200K，最大输出 128K，支持思考模式、Function Calling、结构化输出。",
+    "extracted_fields": {
+      "provider_id": "zhipu-bigmodel",
+      "model_id": "glm-4.7-flash",
+      "context_published": "200K",
+      "max_output_published": "128K",
+      "tool_calling": "supported",
+      "structured_output": "supported",
+      "reasoning": "supported",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "7151ad3a5ac0924f63eb208bc4df712ced43aa58e7c2952f83d785ec57741d77",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.bigmodel.cn/cn/guide/models/free/glm-4.6v-flash",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "GLM-4.6V-Flash - 智谱AI开放文档",
+    "relevant_excerpt": "GLM-4.6V-Flash 是免费版本；API 示例 model 为 glm-4.6v-flash。上下文 128K，支持文本/图像/视频/文件输入、文本输出、思考和工具调用。",
+    "extracted_fields": {
+      "provider_id": "zhipu-bigmodel",
+      "model_id": "glm-4.6v-flash",
+      "context_published": "128K",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "tool_calling": "supported",
+      "reasoning": "supported",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_main_text_sha256"
+    },
+    "hash": "fb23e3d36238c8fb352568accfd7d6f34b701af639bc041acd3c0606e9cd9c3a",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://www.modelscope.cn/posts/435591",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "魔搭社区「魔粒体系」正式上线！ · 课程/文章",
+    "relevant_excerpt": "每日登录领取 200 魔粒，绑定阿里云后每日额外 50。使用前需完善个人信息，包括邮箱验证；短期魔粒 24 小时、长期 90 天，API 消耗以模型详情页为准。",
+    "extracted_fields": {
+      "provider_id": "modelscope",
+      "source_updated": "2026-11-12",
+      "daily_login_points": 200,
+      "alibaba_bound_daily_bonus_points": 50,
+      "profile_and_email_required": true,
+      "short_term_validity_hours": 24,
+      "long_term_validity_days": 90,
+      "api_cost_source": "model_detail_page",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "d248b6306869633b59ac15d77609e0deb4dc9c3f946bcc4bec6c103642358953",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Rate Limits",
+    "relevant_excerpt": "实名后使用免费模型，调用消耗为 0；限流按用户账户和模型设置。未开启动态限流的免费模型为固定值，动态模型随负载调整且不适用固定/等级表。",
+    "extracted_fields": {
+      "provider_id": "siliconflow",
+      "free_models_zero_cost": true,
+      "real_name_required": true,
+      "limit_scope": "account_and_model",
+      "dynamic_limits_override_fixed_or_tier_tables": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "c5f38409345fe04ab1c4ac0e6453b00057bb818b6360f61d42cec555da2ddeec",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://help.aliyun.com/zh/model-studio/new-free-quota/",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "新人免费额度获取及用完即停开关规则-大模型服务平台百炼(Model Studio)-阿里云帮助中心",
+    "relevant_excerpt": "北京地域符合条件的新用户通常每模型获得 100 万 Token，有效期 90 天；同一模型主账号与 RAM 用户共享额度，额度用完即停默认关闭。",
+    "extracted_fields": {
+      "provider_id": "alibaba-model-studio",
+      "region": "Beijing",
+      "real_name_required": true,
+      "typical_tokens_per_model": 1000000,
+      "validity_days": 90,
+      "expiry_basis": "latest applicable activation/release/approval",
+      "primary_ram_users_share_per_model": true,
+      "stop_on_exhaustion_default": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "b6dbbdf49cda8a001d4dbccba6d0b974d43772fc9323192e077dfc5da34eef30",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://cloud.baidu.com/doc/Qianfan/index.html",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "百度千帆·大模型服务及Agent开发平台 -百度智能云",
+    "relevant_excerpt": "新用户实名认证后领取 20 元代金券，有效期一个月；本次未从该方案确认适用模型 ID。",
+    "extracted_fields": {
+      "provider_id": "baidu-qianfan",
+      "coupon_cny": 20,
+      "validity": "one month",
+      "real_name_required": true,
+      "eligible_model_ids_confirmed": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "c0475153a6368e9032e1ae1f123d07f012c4c7264c51e5b86ced2663947343d9",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.volcengine.com/docs/ark/free-inference-quota?lang=zh",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "免费推理额度 - 火山方舟 - 火山引擎",
+    "relevant_excerpt": "免费推理额度按模型分别计算，主账号下共享，基础模型与精调后模型共享该模型额度。仅抵扣按 Token 的在线推理费用；具体余额在控制台查看。",
+    "extracted_fields": {
+      "provider_id": "volcengine-ark",
+      "quota_scope": "per_model",
+      "exact_grant_amount": "see console",
+      "primary_subaccounts_share": true,
+      "base_finetuned_models_share": true,
+      "excluded_costs": [
+        "plugins",
+        "knowledge_bases",
+        "batch_inference",
+        "cache_storage"
+      ],
+      "safe_mode_additional_grant": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "629e80cf3afbeb80f710bfdcc7188b91e9560ccbccdbc86a9d7735aa2f2926d4",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "安心体验模式细则说明 - 火山方舟 - 火山引擎",
+    "relevant_excerpt": "安心体验模式是账号维度的配置，在线推理仅消耗免费额度，超出后暂停；关闭后无法再次开启。当前模式说明未确认统一 50 万 Token 上限。",
+    "extracted_fields": {
+      "provider_id": "volcengine-ark",
+      "mode_scope": "account",
+      "universal_500000_token_cap_confirmed": false,
+      "pauses_at_free_balance": true,
+      "can_reenable_after_disabling": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "cb6f4c07b1b910b10f081e87014b5a54c172ce510b38a9037b32e634a6ee4011",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://www.cerebras.ai/pricing",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Cerebras Inference Pricing | API and Enterprise Plans",
+    "relevant_excerpt": "One-time $5 developer promotional credit, valid for 30 days; a valid payment method is required. No automatic billing; access pauses after expiry or exhaustion unless PayGo is separately purchased.",
+    "extracted_fields": {
+      "provider_id": "cerebras",
+      "one_time_credit_usd": 5,
+      "validity_days": 30,
+      "valid_payment_method_required": true,
+      "automatic_billing": false,
+      "exact_current_free_model_ids_confirmed": false,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_main_or_body_text_sha256"
+    },
+    "hash": "e25af06bdba74a987765e94cb7dcc95206be3a7bc67b59971e6847836e013f2e",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://docs.cohere.com/v2/docs/rate-limits",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Different Types of API Keys and Rate Limits | Cohere",
+    "relevant_excerpt": "Evaluation keys have a shared 1,000 API calls/month allowance; documented chat endpoints have 20 RPM limits. Production keys have different terms.",
+    "extracted_fields": {
+      "provider_id": "cohere",
+      "evaluation_calls_per_month": 1000,
+      "scope": "shared across endpoints",
+      "documented_chat_rpm": 20,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_main_or_body_text_sha256"
+    },
+    "hash": "832fb6097ec6270f4a4b7eef39adc6d1ae7d981685fa086acd1fd9369c399723",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://console.groq.com/docs/rate-limits",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Rate Limits - GroqDocs",
+    "relevant_excerpt": "The current Free Plan table lists ten exact model IDs and per-model RPM/RPD/TPM/TPD or audio-second limits. Limits apply per organization and model.",
+    "extracted_fields": {
+      "provider_id": "groqcloud",
+      "free_plan_model_count": 10,
+      "limit_scope": "organization_and_model",
+      "model_ids_checked": [
+        "canopylabs/orpheus-arabic-saudi",
+        "canopylabs/orpheus-v1-english",
+        "meta-llama/llama-prompt-guard-2-22m",
+        "meta-llama/llama-prompt-guard-2-86m",
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "openai/gpt-oss-safeguard-20b",
+        "qwen/qwen3.8-27b",
+        "whisper-large-v3",
+        "whisper-large-v3-turbo"
+      ],
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_main_or_body_text_sha256"
+    },
+    "hash": "2530e557627cedc6d81e58a697624a95b22079ac25bba5e1da8689394ba6f5f9",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Pricing · Cloudflare Workers AI docs",
+    "relevant_excerpt": "Workers AI provides 10,000 Neurons/day, resetting at 00:00 UTC. Some models are restricted to paid plans or prepaid AI Gateway credits.",
+    "extracted_fields": {
+      "provider_id": "cloudflare-workers-ai",
+      "daily_neurons": 10000,
+      "reset_utc": "00:00",
+      "some_models_paid_only": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_main_or_body_text_sha256"
+    },
+    "hash": "8a8573ae931b536d8680df53de48393ab1ceb95783c43b6b48151f79e96b90f8",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://openrouter.ai/docs/api-reference/limits",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "API Credit & Rate Limits - Handle 402 and 429 Errors",
+    "relevant_excerpt": "Free model limits: 20 RPM; accounts below 10 purchased credits have 50 RPD, qualifying purchases allow 1,000 RPD. The FAQ permits rounding from 9 credits; effective limits are returned by the key endpoint.",
+    "extracted_fields": {
+      "provider_id": "openrouter",
+      "free_model_rpm": 20,
+      "baseline_rpd": 50,
+      "qualifying_purchased_credits": 10,
+      "rpd_after_qualifying_purchase": 1000,
+      "faq_rounding_from_credits": 9,
+      "model_inventory_date_preserved": "2026-11-16",
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "96c5e79efa4c2bd3ffcf6138112f3c7185a02306e97fba8bb8434b912d3c442c",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://cloud.sambanova.ai/plans",
+    "fetched_at": "2026-11-16T14:14:45Z",
+    "http_status": 200,
+    "page_title": "Plans",
+    "relevant_excerpt": "The current Free plan allows dashboard exploration; API requests require a payment method and purchased credits.",
+    "extracted_fields": {
+      "provider_id": "sambanova-cloud",
+      "general_free_inference_confirmed": false,
+      "payment_method_required": true,
+      "purchased_credits_required": true,
+      "verification_method": "manual_public_page_review",
+      "hash_basis": "visible_body_text_sha256"
+    },
+    "hash": "3c2bee65fd16eb8a78e0d4a847be024dfa8bd4e3f99e0bacef05b31f9f85a58e",
+    "parser_status": "ok"
   }
 ]

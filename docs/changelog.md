@@ -1,4 +1,18 @@
-# Changelog
+# 变更记录
+
+[English](changelog.en.md)
+
+## 2026-11-16
+
+- 依据当前官方资料复核 free-newapi 中的 16 个官方平台，新增中英文核验对照，并同步 README 与免费 API 指南的导航。
+- 新增美团 LongCat，记录当前付费 API 和尚未确认的通用免费赠额；新增商汤 SenseNova 通用池、Flash-Lite 专属池及两层滚动积分限制，保留回退规则和消费返赠已结束的条件。
+- 确认 NVIDIA 开发者会员的免费托管端点，新增 DeepSeek V4.1 Flash 与 Nemotron 3.5 Lightning 的精确 ID，并记录用途限制和托管数据使用条款。
+- 新增 Gemini 4 Hydrogen、Gemini 3.8 Flash、GLM-4.6V-Flash 与两个商汤模型；补齐 GLM-4.7-Flash 上下文和能力。注明 Google 免费层不提供 Search/Maps grounding，以及 Hydrogen 输入/输出共享上下文。
+- 修正火山方舟按模型计算、同模型主/子账号及基础/精调模型共享的额度范围；安心体验模式消耗同一赠额，移除来自计算示例的统一 50 万 Token 说法。
+- 更新魔搭每日登录领取、阿里云绑定增额、资料/邮箱要求及 24 小时/90 天积分有效期；移除过时的每次调用积分估算。同步硅基动态限流、阿里百炼有效期起算日和额度用完即停的默认状态。
+- 复核 Groq、Cerebras、Cohere、Cloudflare、OpenRouter、百度和 SambaNova。SambaNova API 仍需购买额度，Cerebras 旧 Free Tier 型号仍不推荐；已有型号和 OpenRouter 2026-11-16 快照日期保持独立。
+- 新增 27 份官方页面来源摘要、核验字段及文本哈希，重新生成目录和说明；未使用真实账号执行推理调用。
+- 隔离自动提交门槛测试的目录写入，避免临时测试结果写回正式 CSV。
 
 ## 2026-11-02
 
