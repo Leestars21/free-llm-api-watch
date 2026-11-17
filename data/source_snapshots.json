@@ -1,19 +1,5 @@
 [
   {
-    "source_url": "https://openrouter.ai/api/v1/models",
-    "fetched_at": "2026-11-16",
-    "http_status": 200,
-    "page_title": "OpenRouter Models API",
-    "relevant_excerpt": "Official API response summarized; raw response body is not stored.",
-    "extracted_fields": {
-      "total_model_count": 468,
-      "free_model_count": 17,
-      "selection_rule": "prompt and completion exactly zero; every returned pricing value parses to zero"
-    },
-    "hash": "ce2d9256a42068ce36d9bc251b3874d96ca8157a3d525e6380bdc8c8dc9748a3",
-    "parser_status": "ok"
-  },
-  {
     "source_url": "https://longcat.chat/platform/docs/zh/api-pay-as-you-go",
     "fetched_at": "2026-11-16T14:14:45Z",
     "http_status": 200,
@@ -573,6 +559,20 @@
       "hash_basis": "visible_body_text_sha256"
     },
     "hash": "3c2bee65fd16eb8a78e0d4a847be024dfa8bd4e3f99e0bacef05b31f9f85a58e",
+    "parser_status": "ok"
+  },
+  {
+    "source_url": "https://openrouter.ai/api/v1/models",
+    "fetched_at": "2026-11-17",
+    "http_status": 200,
+    "page_title": "OpenRouter Models API",
+    "relevant_excerpt": "Official API response summarized; raw response body is not stored.",
+    "extracted_fields": {
+      "total_model_count": 470,
+      "free_model_count": 17,
+      "selection_rule": "prompt and completion exactly zero; every returned pricing value parses to zero"
+    },
+    "hash": "7b05db659915e6aada0e65d3f0fedeef1e936e5f791ba682a8092bac23db21ff",
     "parser_status": "ok"
   }
 ]
